@@ -1,5 +1,9 @@
 # Refactor Speaking: English for web developers
 
+#### `Design file:` [figma](<https://www.figma.com/file/HXzcUc836uJYMdbf2efLcU/Bahasaku-(Community)?node-id=0%3A1>)
+
+#### `UI design credit:` [Angzai](https://www.figma.com/@angzai)
+
 ## `Features`
 
 1. realtime audio calling
