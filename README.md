@@ -10,4 +10,3 @@
 4. chatting with other learners
 5. post learning experience or materials
 
-### `technology will be used`: ts, react, react native express, mongodb, socket.io, web3.0, microservice
