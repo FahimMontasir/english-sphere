@@ -1,0 +1,9 @@
+{
+  "jwtPrivateKey": "ese_shop_jwtKey",
+  "db_name": "ese_shop_dbName",
+  "db_user": "ese_shop_dbUser",
+  "db_pass": "ese_shop_dbPass",
+  "db_port": "ese_shop_dbPort",
+  "db_ip": "ese_shop_dbIp",
+  "node_env": "NODE_ENV"
+}

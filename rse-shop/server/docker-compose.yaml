@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  server-rse-shop:
+    build: .
+    ports:
+      - '4000:4000'
+    environment:
+      - PORT=4000
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=fahim
+      - MONGO_INITDB_ROOT_PASSWORD=fahimkhan
+    volumes:
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:
+# important configs for docker configs:
+# 1. docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d
+# 2. docker compose stop
+# others
+# 1. docker logs [c-name] -f
+# for mongo
+# 1. docker exec -it [mongo-c-name] /bin/sh
+# 2. mongo -u "fahim" -p "fahimkhan" //to connect mongo instance
+# 3. db //to see databases

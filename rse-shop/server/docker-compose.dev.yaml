@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  server-rse-shop:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./:/server-ese-shop
+      - /server-ese-shop/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm start

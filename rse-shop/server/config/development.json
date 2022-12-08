@@ -1,0 +1,9 @@
+{
+  "jwtPrivateKey": "abc*",
+  "db_name": "ese_shop",
+  "test_db_name": "test_ese_shop",
+  "db_user": "fahim",
+  "db_pass": "fahimkhan",
+  "db_port": "27017",
+  "db_ip": "mongo"
+}
