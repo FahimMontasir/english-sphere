@@ -1,9 +1,42 @@
+import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
 import Head from 'next/head';
 import Image from 'next/image';
+import {
+  CreateUserMutation,
+  CreateUserMutationVariables,
+  GetAllUserQuery,
+  GetUserQuery,
+  GetUserQueryVariables
+} from '../graphql/generated/types';
+import {
+  MUTATION_CREATE_USER,
+  QUERY_ALL_DATA,
+  QUERY_USER
+} from '../graphql/user';
+
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  const hello = 0;
+  const { data, loading, error } = useQuery<GetAllUserQuery>(QUERY_ALL_DATA);
+  const [fetchUser, { data: fetchedData }] = useLazyQuery<
+    GetUserQuery,
+    GetUserQueryVariables
+  >(QUERY_USER);
+  console.log(fetchedData);
+
+  // mutation
+  const [createUser, { data: newData }] = useMutation<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >(MUTATION_CREATE_USER);
+
+  if (loading) {
+    return <h1>loading</h1>;
+  }
+  if (error) {
+    return <h1>error</h1>;
+  }
+  console.log(data?.users, error);
   return (
     <div className={styles.container}>
       <Head>
@@ -13,48 +46,38 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="text-red-900 text-8xl">
+        <h1 className="text-8xl text-red-900">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        {data?.users.__typename == 'UserSuccessResult' &&
+          data?.users?.map(u => {
+            return <h1>{u.username}</h1>;
+          })}
+        <button
+          onClick={() => fetchUser({ variables: { userId: '1' } })}
+          className="btn-circle btn text-clip text-left font-serif"
+        >
+          hello
+        </button>
+        {fetchedData?.user.name}
 
-        <button className="btn btn-circle">hello</button>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <button
+          onClick={() =>
+            createUser({
+              variables: {
+                input: {
+                  name: 'fahim',
+                  username: 'kil',
+                  age: 15,
+                  nationality: 'bangladeshi'
+                }
+              }
+            })
+          }
+        >
+          mutation
+        </button>
+        {newData?.createUser.name}
       </main>
 
       <footer className={styles.footer}>

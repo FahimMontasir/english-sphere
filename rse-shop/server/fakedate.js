@@ -1,31 +1,31 @@
 const UserList = [
   {
     id: 1,
-    name: "john",
-    username: "john",
+    name: 'john',
+    username: 'john',
     age: 20,
-    nationality: "canada",
+    nationality: 'canada',
   },
   {
     id: 2,
-    name: "fahim",
-    username: "fahim",
+    name: 'fahim',
+    username: 'fahim',
     age: 30,
-    nationality: "bangladeshi",
+    nationality: 'bangladeshi',
   },
   {
     id: 3,
-    name: "jubael",
-    username: "jubael",
+    name: 'jubael',
+    username: 'jubael',
     age: 20,
-    nationality: "canada",
+    nationality: 'canada',
   },
   {
     id: 4,
-    name: "riad",
-    username: "riad",
+    name: 'riad',
+    username: 'riad',
     age: 20,
-    nationality: "canada",
+    nationality: 'canada',
   },
 ];
 

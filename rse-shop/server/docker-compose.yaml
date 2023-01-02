@@ -23,8 +23,9 @@ volumes:
 # 1. docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d
 # 2. docker compose stop
 # others
-# 1. docker logs [c-name] -f
+# 1. docker logs server-server-rse-shop-1 -f
 # for mongo
 # 1. docker exec -it [mongo-c-name] /bin/sh
 # 2. mongo -u "fahim" -p "fahimkhan" //to connect mongo instance
 # 3. db //to see databases
+# cat filename //to see inside

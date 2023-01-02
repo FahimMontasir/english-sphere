@@ -9,6 +9,10 @@ const Demo = mongoose.model(
       required: true,
       minlength: 5,
       maxlength: 50,
+      validate: {
+        validator: (value) => /^[aA-zZ\s]+$/.test(value),
+        message: 'Only alpha-characters are allowed',
+      },
     },
     category: {
       type: String,

@@ -1,3 +1,8 @@
 22:38:40 [31merror[39m: getaddrinfo EAI_AGAIN mongo
 22:39:34 [31merror[39m: getaddrinfo EAI_AGAIN mongo
 22:40:32 [31merror[39m: getaddrinfo EAI_AGAIN mongo
+17:10:16 [31merror[39m: Demo validation failed: category: Path `category` is required., name: Only alpha-characters are allowed
+17:12:04 [31merror[39m: Demo validation failed: category: Path `category` is required., name: Only alpha-characters are allowed
+17:12:10 [31merror[39m: Demo validation failed: category: Path `category` is required.
+17:18:54 [31merror[39m: Demo validation failed: name: Only alpha-characters are allowed
+17:23:15 [31merror[39m: Demo validation failed: name: Only alpha-characters are allowed

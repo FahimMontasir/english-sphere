@@ -11,7 +11,7 @@ module.exports = function (app) {
   app.use(cors());
   app.use(express.json());
   app.use(helmet());
-  app.use('/demo', demo);
+  app.use('/api/demo', demo);
 
   // positioned last
   app.use(error);
