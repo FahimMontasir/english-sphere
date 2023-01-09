@@ -3,9 +3,9 @@ services:
   server-rse-shop:
     build: .
     ports:
-      - '4000:4000'
+      - '1000:1000'
     environment:
-      - PORT=4000
+      - PORT=1000
     depends_on:
       - mongo
 
@@ -29,3 +29,4 @@ volumes:
 # 2. mongo -u "fahim" -p "fahimkhan" //to connect mongo instance
 # 3. db //to see databases
 # cat filename //to see inside
+# https://studio.apollographql.com/sandbox/explorer

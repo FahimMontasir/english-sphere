@@ -1,6 +1,6 @@
-const { UserList, Movies } = require('../fakedate');
+const { UserList, Movies } = require('../../fakedata');
 
-const resolvers = {
+const boilerplateResolver = {
   Query: {
     users: () => {
       if (UserList) return { users: UserList };
@@ -59,4 +59,4 @@ const resolvers = {
   },
 };
 
-module.exports = { resolvers };
+module.exports = boilerplateResolver;

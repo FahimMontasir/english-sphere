@@ -5,8 +5,8 @@ const {
 } = require('@apollo/server/plugin/drainHttpServer');
 const logger = require('../logger');
 
-const { typeDefs } = require('../schema-delete/type-defs');
-const { resolvers } = require('../schema-delete/resolvers');
+const typeDefs = require('../graphql/schemas');
+const resolvers = require('../graphql/resolvers');
 
 // Set up Apollo Server
 module.exports = function (app, httpServer) {

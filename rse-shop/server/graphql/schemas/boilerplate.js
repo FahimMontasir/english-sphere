@@ -1,4 +1,4 @@
-const typeDefs = `#graphql
+const boilerplateSchema = `#graphql
   type Movie {
     id: ID!
     name: String!
@@ -47,4 +47,4 @@ const typeDefs = `#graphql
   }
 `;
 
-module.exports = { typeDefs };
+module.exports = boilerplateSchema;

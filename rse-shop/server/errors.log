@@ -6,3 +6,47 @@
 17:12:10 [31merror[39m: Demo validation failed: category: Path `category` is required.
 17:18:54 [31merror[39m: Demo validation failed: name: Only alpha-characters are allowed
 17:23:15 [31merror[39m: Demo validation failed: name: Only alpha-characters are allowed
+12:36:09 [31merror[39m: uncaughtException: Cannot find module '../fakedate'
+Require stack:
+- /server-ese-shop/schema-delete/resolvers.js
+- /server-ese-shop/start/gqlServer.js
+- /server-ese-shop/index.js
+Error: Cannot find module '../fakedate'
+Require stack:
+- /server-ese-shop/schema-delete/resolvers.js
+- /server-ese-shop/start/gqlServer.js
+- /server-ese-shop/index.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:995:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:841:27)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/server-ese-shop/schema-delete/resolvers.js:1:30)
+    at Module._compile (node:internal/modules/cjs/loader:1165:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+12:42:33 [31merror[39m: uncaughtException: typeDefs must contain only strings, documents, schemas, or functions, got object
+Error: typeDefs must contain only strings, documents, schemas, or functions, got object
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:58:19)
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:40:17)
+    at mergeGraphQLTypes (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:66:22)
+    at mergeTypeDefs (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:13:22)
+    at makeExecutableSchema (/server-ese-shop/node_modules/@graphql-tools/schema/cjs/makeExecutableSchema.js:72:58)
+    at Function.constructSchema (/server-ese-shop/node_modules/@apollo/server/dist/cjs/ApolloServer.js:315:50)
+    at new ApolloServer (/server-ese-shop/node_modules/@apollo/server/dist/cjs/ApolloServer.js:89:49)
+    at module.exports (/server-ese-shop/start/gqlServer.js:13:18)
+    at Object.<anonymous> (/server-ese-shop/index.js:13:29)
+    at Module._compile (node:internal/modules/cjs/loader:1165:14)
+12:43:22 [31merror[39m: uncaughtException: typeDefs must contain only strings, documents, schemas, or functions, got object
+Error: typeDefs must contain only strings, documents, schemas, or functions, got object
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:58:19)
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:40:17)
+    at mergeGraphQLTypes (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:66:22)
+    at mergeTypeDefs (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:13:22)
+    at makeExecutableSchema (/server-ese-shop/node_modules/@graphql-tools/schema/cjs/makeExecutableSchema.js:72:58)
+    at Function.constructSchema (/server-ese-shop/node_modules/@apollo/server/dist/cjs/ApolloServer.js:315:50)
+    at new ApolloServer (/server-ese-shop/node_modules/@apollo/server/dist/cjs/ApolloServer.js:89:49)
+    at module.exports (/server-ese-shop/start/gqlServer.js:13:18)
+    at Object.<anonymous> (/server-ese-shop/index.js:13:29)
+    at Module._compile (node:internal/modules/cjs/loader:1165:14)
