@@ -1,3 +1,4 @@
 const boilerplateResolver = require('./boilerplate');
+const productResolver = require('./product');
 
-module.exports = [boilerplateResolver];
+module.exports = [boilerplateResolver, productResolver];
