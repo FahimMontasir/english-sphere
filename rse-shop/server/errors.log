@@ -50,3 +50,27 @@ Error: typeDefs must contain only strings, documents, schemas, or functions, got
     at module.exports (/server-ese-shop/start/gqlServer.js:13:18)
     at Object.<anonymous> (/server-ese-shop/index.js:13:29)
     at Module._compile (node:internal/modules/cjs/loader:1165:14)
+12:46:44 [31merror[39m: uncaughtException: Unknown type "UpdateProduct". Did you mean "updateProduct", "CreateProduct", or "Product"?
+Error: Unknown type "UpdateProduct". Did you mean "updateProduct", "CreateProduct", or "Product"?
+    at assertValidSDL (/server-ese-shop/node_modules/graphql/validation/validate.js:135:11)
+    at buildASTSchema (/server-ese-shop/node_modules/graphql/utilities/buildASTSchema.js:44:34)
+    at makeExecutableSchema (/server-ese-shop/node_modules/@graphql-tools/schema/cjs/makeExecutableSchema.js:73:47)
+    at Function.constructSchema (/server-ese-shop/node_modules/@apollo/server/dist/cjs/ApolloServer.js:315:50)
+    at new ApolloServer (/server-ese-shop/node_modules/@apollo/server/dist/cjs/ApolloServer.js:89:49)
+    at module.exports (/server-ese-shop/start/gqlServer.js:13:18)
+    at Object.<anonymous> (/server-ese-shop/index.js:13:29)
+    at Module._compile (node:internal/modules/cjs/loader:1165:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+13:01:26 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
+13:01:26 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.
+13:01:57 [31merror[39m: [object Object] Variable "$pageNum" of non-null type "Int!" must not be null.
+13:01:57 [31merror[39m: [object Object] Variable "$pageSize" of non-null type "Int!" must not be null.
+13:05:09 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
+13:05:09 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.
+13:27:29 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
+13:27:29 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.
+13:29:17 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
+13:29:17 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.
+13:29:58 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
+13:29:58 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.

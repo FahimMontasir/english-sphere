@@ -6,7 +6,6 @@ mongoose.set('strictQuery', false);
 
 const PORT = process.env.PORT || 4000;
 const isProd = process.env.NODE_ENV;
-console.log(PORT);
 
 module.exports = function (httpServer) {
   mongoose

@@ -51,7 +51,7 @@ const productSchema = `#graphql
     paperType: String!
   }
 
-  input updateProduct {
+  input UpdateProduct {
     _id: ID!
     img: String!
     title: String!

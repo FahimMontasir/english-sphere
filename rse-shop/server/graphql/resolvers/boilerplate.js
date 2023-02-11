@@ -34,7 +34,6 @@ const boilerplateResolver = {
     },
     deleteUser: (parent, args) => {
       const id = Number(args.id);
-      console.log(id);
       return null;
     },
   },
