@@ -37,7 +37,7 @@ module.exports = function (app, httpServer) {
               // We can pass in our server's cache, contextValue, or any other
               // info our data sources require.
               dataSources: {
-                dogsDB: new ProductDataSource({ cache, token }),
+                product: new ProductDataSource({ cache, token }),
               },
               token,
             };

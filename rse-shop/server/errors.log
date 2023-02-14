@@ -74,3 +74,160 @@ Error: Unknown type "UpdateProduct". Did you mean "updateProduct", "CreateProduc
 13:29:17 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.
 13:29:58 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
 13:29:58 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.
+11:12:32 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
+11:12:32 [31merror[39m: Variable "$pageSize" of non-null type "Int!" must not be null.
+11:13:27 [31merror[39m: Expected Iterable, but did not find one for field "Query.products".
+11:14:07 [31merror[39m: Cannot return null for non-nullable field Product.authorName.
+11:14:07 [31merror[39m: Cannot return null for non-nullable field Product.authorName.
+11:14:10 [31merror[39m: Cannot return null for non-nullable field Product.authorName.
+11:14:10 [31merror[39m: Cannot return null for non-nullable field Product.authorName.
+11:14:52 [31merror[39m: Cannot return null for non-nullable field Product.authorName.
+11:14:52 [31merror[39m: Cannot return null for non-nullable field Product.authorName.
+11:15:10 [31merror[39m: Cannot return null for non-nullable field Product._id.
+11:15:10 [31merror[39m: Cannot return null for non-nullable field Product._id.
+11:19:01 [31merror[39m: GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.
+11:19:26 [31merror[39m: GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.
+11:20:02 [31merror[39m: GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.
+11:24:49 [31merror[39m: GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.
+11:25:06 [31merror[39m: Unexpected token } in JSON at position 172
+11:25:21 [31merror[39m: GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.
+11:25:40 [31merror[39m: GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.
+11:26:07 [31merror[39m: GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.
+11:39:25 [31merror[39m: Cannot return null for non-nullable field Product._id.
+11:40:05 [31merror[39m: Cannot return null for non-nullable field Product._id.
+11:44:35 [31merror[39m: Cannot read properties of undefined (reading 'getAllProducts')
+11:48:36 [31merror[39m: BSON field 'skip' value must be >= 0, actual value '-2'
+11:49:51 [31merror[39m: Unexpected token / in JSON at position 139
+11:50:04 [31merror[39m: Variable "$pageNum" of required type "Int!" was not provided.
+11:52:56 [31merror[39m: Variable "$pageNum" of non-null type "Int!" must not be null.
+11:53:03 [31merror[39m: Unexpected number in JSON at position 153
+11:54:01 [31merror[39m: Product.fin is not a function
+12:28:10 [31merror[39m: uncaughtException: Unexpected token ':'
+/server-ese-shop/services/product.js:26
+deleteFilter(_id: ID!): DeleteResponse
+                ^
+
+SyntaxError: Unexpected token ':'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1094:15)
+    at Module._compile (node:internal/modules/cjs/loader:1129:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/server-ese-shop/start/gqlServer.js:11:27)
+    at Module._compile (node:internal/modules/cjs/loader:1165:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/server-ese-shop/index.js:13:1)
+12:29:11 [31merror[39m: uncaughtException: Unexpected token ':'
+/server-ese-shop/services/product.js:35
+deleteBanner(_id: ID!): DeleteResponse
+                ^
+
+SyntaxError: Unexpected token ':'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1094:15)
+    at Module._compile (node:internal/modules/cjs/loader:1129:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/server-ese-shop/start/gqlServer.js:11:27)
+    at Module._compile (node:internal/modules/cjs/loader:1165:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/server-ese-shop/index.js:13:1)
+12:33:29 [31merror[39m: Context creation failed: jwt malformed
+12:36:02 [31merror[39m: Context creation failed: jwt malformed
+12:53:04 [31merror[39m: Variable "$input" got invalid value { title: "abc" }; Field "img" of required type "String!" was not provided.
+12:53:04 [31merror[39m: Variable "$input" got invalid value { title: "abc" }; Field "price" of required type "Int!" was not provided.
+12:53:04 [31merror[39m: Variable "$input" got invalid value { title: "abc" }; Field "authorName" of required type "String!" was not provided.
+12:53:04 [31merror[39m: Variable "$input" got invalid value { title: "abc" }; Field "paperType" of required type "String!" was not provided.
+12:55:22 [31merror[39m: Cannot return null for non-nullable field Product._id.
+12:55:33 [31merror[39m: Cannot return null for non-nullable field Product.authorName.
+12:55:56 [31merror[39m: Cannot return null for non-nullable field Product._id.
+12:56:38 [31merror[39m: Cannot return null for non-nullable field Product._id.
+12:58:46 [31merror[39m: Cannot return null for non-nullable field Product._id.
+13:00:50 [31merror[39m: args is not defined
+13:11:18 [31merror[39m: Cannot return null for non-nullable field Product._id.
+13:12:19 [31merror[39m: Cannot return null for non-nullable field Product._id.
+13:14:21 [31merror[39m: querySrv ESERVFAIL _mongodb._tcp.cluster0.1znel.mongodb.net
+13:14:40 [31merror[39m: querySrv ESERVFAIL _mongodb._tcp.cluster0.1znel.mongodb.net
+13:15:00 [31merror[39m: querySrv ESERVFAIL _mongodb._tcp.cluster0.1znel.mongodb.net
+13:23:31 [31merror[39m: You are not authorized to perform this action.
+13:24:14 [31merror[39m: You are not authorized to perform this action.
+13:25:01 [31merror[39m: "description" length must be at least 50 characters long
+13:26:21 [31merror[39m: product.creatProduct is not a function
+13:30:02 [31merror[39m: "description" length must be at least 50 characters long
+13:30:24 [31merror[39m: Product.creat is not a function
+13:34:45 [31merror[39m: Unexpected error value: undefined
+13:43:16 [31merror[39m: uncaughtException: await is only valid in async functions and the top level bodies of modules
+/server-ese-shop/graphql/resolvers/product.js:11
+      const updatedProduct = await product.updateProduct(args)
+                             ^^^^^
+
+SyntaxError: await is only valid in async functions and the top level bodies of modules
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1094:15)
+    at Module._compile (node:internal/modules/cjs/loader:1129:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/server-ese-shop/graphql/resolvers/index.js:2:25)
+    at Module._compile (node:internal/modules/cjs/loader:1165:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1219:10)
+    at Module.load (node:internal/modules/cjs/loader:1043:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1067:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/server-ese-shop/start/gqlServer.js:9:19)
+13:47:42 [31merror[39m: Variable "$input" got invalid value { img: "String", title: "Test book 1", description: "abc kldldk fj dskjdhsa dk jhas d skjdh askjsd haskj dasjksd a sjkhd", price: 530, authorName: "fahim", paperType: "String" }; Field "_id" of required type "ID!" was not provided.
+13:49:28 [31merror[39m: "_id" with value "adkfdlkf" fails to match the valid mongo id pattern
+13:50:47 [31merror[39m: "updatedAt" is required
+14:01:07 [31merror[39m: uncaughtException: Syntax Error: Expected Name, found "{".
+GraphQLError: Syntax Error: Expected Name, found "{".
+    at syntaxError (/server-ese-shop/node_modules/graphql/error/syntaxError.js:15:10)
+    at Parser.expectToken (/server-ese-shop/node_modules/graphql/language/parser.js:1397:40)
+    at Parser.parseName (/server-ese-shop/node_modules/graphql/language/parser.js:108:24)
+    at Parser.parseNamedType (/server-ese-shop/node_modules/graphql/language/parser.js:707:18)
+    at Parser.parseTypeReference (/server-ese-shop/node_modules/graphql/language/parser.js:688:19)
+    at Parser.parseFieldDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:839:23)
+    at Parser.optionalMany (/server-ese-shop/node_modules/graphql/language/parser.js:1492:28)
+    at Parser.parseFieldsDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:822:17)
+    at Parser.parseObjectTypeDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:794:25)
+    at Parser.parseDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:172:23)
+    at Parser.many (/server-ese-shop/node_modules/graphql/language/parser.js:1511:26)
+    at Parser.parseDocument (/server-ese-shop/node_modules/graphql/language/parser.js:122:25)
+    at parse (/server-ese-shop/node_modules/graphql/language/parser.js:32:17)
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:48:54)
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:40:17)
+    at mergeGraphQLTypes (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:66:22)
+14:01:41 [31merror[39m: uncaughtException: Syntax Error: Expected Name, found ":".
+GraphQLError: Syntax Error: Expected Name, found ":".
+    at syntaxError (/server-ese-shop/node_modules/graphql/error/syntaxError.js:15:10)
+    at Parser.expectToken (/server-ese-shop/node_modules/graphql/language/parser.js:1397:40)
+    at Parser.parseName (/server-ese-shop/node_modules/graphql/language/parser.js:108:24)
+    at Parser.parseFieldDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:836:23)
+    at Parser.optionalMany (/server-ese-shop/node_modules/graphql/language/parser.js:1492:28)
+    at Parser.parseFieldsDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:822:17)
+    at Parser.parseObjectTypeDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:794:25)
+    at Parser.parseDefinition (/server-ese-shop/node_modules/graphql/language/parser.js:172:23)
+    at Parser.many (/server-ese-shop/node_modules/graphql/language/parser.js:1511:26)
+    at Parser.parseDocument (/server-ese-shop/node_modules/graphql/language/parser.js:122:25)
+    at parse (/server-ese-shop/node_modules/graphql/language/parser.js:32:17)
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:48:54)
+    at visitTypeSources (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:40:17)
+    at mergeGraphQLTypes (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:66:22)
+    at mergeTypeDefs (/server-ese-shop/node_modules/@graphql-tools/merge/cjs/typedefs-mergers/merge-typedefs.js:13:22)
+    at makeExecutableSchema (/server-ese-shop/node_modules/@graphql-tools/schema/cjs/makeExecutableSchema.js:72:58)

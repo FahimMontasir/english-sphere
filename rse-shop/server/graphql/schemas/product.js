@@ -41,6 +41,9 @@ const productSchema = `#graphql
   type DeleteResponse {
     message: String!
   }
+  type UpdateResponse {
+    message: String!
+  }
 
   input CreateProduct {
     img: String!
@@ -61,7 +64,7 @@ const productSchema = `#graphql
     paperType: String!
     filter: String
     banner: String
-    updatedAt: String!
+    updatedAt: String
   }
 
   input CreateFilter {
@@ -76,7 +79,7 @@ const productSchema = `#graphql
 
   type Mutation {
     createProduct(input: CreateProduct): Product
-    updateProduct(input: UpdateProduct): Product
+    updateProduct(input: UpdateProduct): UpdateResponse
     deleteProduct(_id: ID!): DeleteResponse
 
 

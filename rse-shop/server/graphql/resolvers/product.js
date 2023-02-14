@@ -1,40 +1,18 @@
 const productResolver = {
-  Query: {
-    products: (_, args, context) => {
-      const { pageNum, pageSize } = args;
-      // return [Product]
-    },
-    product: (_, args, context) => {
-      const { _id } = args;
-      // return Product
-    },
-    filterProducts: (_, args, context) => {
-      // input: FilterProductInput
-      // return [Product]
-    },
-    bannerProducts: (_, args, context) => {
-      const { banner } = args;
-      // return [Product]
-    },
-    filters: (_, __, context) => {
-      // return [Filter]
-    },
-    banners: (_, __, context) => {
-      // return [Banner]
-    },
-  },
   Mutation: {
-    createProduct: (_, args, context) => {
-      // input: CreateProduct
-      // return : Product
+    createProduct: async (_, args, { dataSources: { product } }) => {
+      const createdProduct = await product.createProduct(args);
+      return createdProduct;
     },
-    updateProduct: (_, args, context) => {
-      // input: UpdateProduct
-      // return : Product
+
+    updateProduct: async (_, args, { dataSources: { product } }) => {
+      const updatedResponse = await product.updateProduct(args);
+      return updatedResponse;
     },
-    deleteProduct: (_, args, context) => {
-      const { _id } = args;
-      // return : DeleteResponse
+
+    deleteProduct: async (_, args, { dataSources: { product } }) => {
+      const deletedResponse = await product.updateProduct(args);
+      return deletedResponse;
     },
 
     createFilter: (_, args, context) => {
@@ -53,6 +31,31 @@ const productResolver = {
     deleteBanner: (_, args, context) => {
       const { _id } = args;
       // return : DeleteResponse
+    },
+  },
+
+  Query: {
+    products: async (_, args, context) => {
+      const products = await context.dataSources.product.getAllProducts(args);
+      return products;
+    },
+    product: (_, args, context) => {
+      const { _id } = args;
+      // return Product
+    },
+    filterProducts: (_, args, context) => {
+      // input: FilterProductInput
+      // return [Product]
+    },
+    bannerProducts: (_, args, context) => {
+      const { banner } = args;
+      // return [Product]
+    },
+    filters: (_, __, context) => {
+      // return [Filter]
+    },
+    banners: (_, __, context) => {
+      // return [Banner]
     },
   },
 };

@@ -63,7 +63,6 @@ const validateUpdateProduct = (product) => {
     paperType: Joi.string().required(),
     filter: Joi.string().optional(),
     banner: Joi.string().optional(),
-    updatedAt: Joi.date().required(),
   });
   return schema.validate(product);
 };
