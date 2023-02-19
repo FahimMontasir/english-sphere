@@ -7,3 +7,31 @@
   font-weight: 400;
   src: url(fonts/saira/SairaCondensed-Regular.ttf);
 }
+
+/* page transition */
+.MainComponent {
+  overflow: hidden;
+}
+
+.MainComponent.page-enter-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  z-index: -1;
+}
+
+.MainComponent.page-exit ~ .wipe {
+  transform: translateY(100%);
+}
+
+.MainComponent.page-exit-active ~ .wipe {
+  transform: translateY(0%);
+  transition: transform 500ms ease;
+}
+
+.MainComponent.page-enter-done ~ .wipe {
+  transform: translateY(-100%);
+  transition: transform 500ms ease;
+}

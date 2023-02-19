@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint --fix",
     "codegen": "graphql-codegen --config codegen.ts"
@@ -19,15 +18,16 @@
     "eslint-config-next": "13.0.6",
     "graphql": "^16.6.0",
     "next": "13.0.6",
-    "next-sitemap": "^3.1.52",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-transition-group": "^4.4.5",
     "typescript": "4.9.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.15.0",
     "@graphql-codegen/typescript": "^2.8.3",
     "@graphql-codegen/typescript-operations": "^2.5.8",
+    "@types/react-transition-group": "^4.4.5",
     "autoprefixer": "^10.4.13",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

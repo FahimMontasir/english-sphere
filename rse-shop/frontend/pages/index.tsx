@@ -1,5 +1,6 @@
 // import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRef } from 'react';
 import Icon from '../components/common/Icon';
 import useIntersection from '../hooks/useInterSection';
@@ -52,6 +53,7 @@ export default function Home() {
           Whereas recognition of
         </h1>
         <Icon name="demo" />
+        <Link href="/second">hello</Link>
       </main>
 
       <footer></footer>
