@@ -1,7 +1,7 @@
-import PageTransitions from '../transitions/PageTransition';
+// import PageTransitions from '../transitions/PageTransition';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  return <PageTransitions>{children}</PageTransitions>;
+  return <div>{children}</div>;
 };
 
 export default Layout;
