@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 
 const usePreserveScroll = () => {
   const router = useRouter();
-
+  // !not tested (seems not working at all)
   const scrollPositions = useRef<{ [key: string]: number }>({});
   const isBack = useRef(false);
 

@@ -5,27 +5,25 @@ interface ImageProps {
   alt: string;
   blurDataURL?: string;
   className?: string;
-  responsive?: boolean;
 }
 
 const Image = ({
   src,
   alt,
-  blurDataURL = 'https://i.pravatar.cc/300',
-  className = '',
-  responsive = false
+  blurDataURL = '/static/blur.jpg',
+  className = ''
 }: ImageProps) => {
   return (
     <div
-      className={`relative ${
-        responsive ? 'h-0 w-full pb-[100%]' : ''
-      }  ${className}`}
+      className={`relative overflow-hidden ${
+        className ? className : 'h-0 w-full pb-[100%]'
+      }`}
     >
       <Img
         src={src}
         alt={alt}
         fill
-        className="object-cover"
+        className="content-center object-cover"
         quality={75}
         loading="lazy"
         placeholder="blur"
