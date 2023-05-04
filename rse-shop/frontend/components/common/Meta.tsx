@@ -1,8 +1,13 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-const Meta = ({ title, keywords, description, imgContent }) => {
+interface IProps {
+  title: string;
+  keywords: string;
+  description: string;
+  imgContent: string;
+}
+const Meta = ({ title, keywords, description, imgContent }: IProps) => {
   const router = useRouter();
   return (
     <Head>

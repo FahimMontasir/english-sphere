@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRef } from 'react';
 import Icon from '../components/common/Icon';
-import useIntersection from '../hooks/useInterSection';
 // import {
 //   CreateUserMutation,
 //   CreateUserMutationVariables,
@@ -31,10 +30,9 @@ export default function Home() {
   const ref = useRef(null);
 
   function handleIntersection() {
-    console.log('Element is visible on the screen!');
+    // console.log('Element is visible on the screen!');
   }
 
-  useIntersection(ref, handleIntersection);
   return (
     <div>
       <Head>
