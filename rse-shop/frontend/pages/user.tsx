@@ -4,7 +4,7 @@ interface Props {
   props: React.ReactNode;
 }
 
-function Home({ props }: Props) {
+function User({ props }: Props) {
   return (
     <div>
       <Text variant="h1">
@@ -46,4 +46,4 @@ function Home({ props }: Props) {
   );
 }
 
-export default Home;
+export default User;
