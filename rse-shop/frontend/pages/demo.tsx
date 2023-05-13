@@ -1,8 +1,8 @@
 // import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
 import Head from 'next/head';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { useRef } from 'react';
-import Icon from '../components/common/Icon';
+// import Icon from '../components/common/Icon';
 // import {
 //   CreateUserMutation,
 //   CreateUserMutationVariables,
@@ -50,8 +50,8 @@ export default function Home() {
         <h1 className=" flex bg-inherit font-thin text-red-900">
           Whereas recognition of
         </h1>
-        <Icon name="demo" />
-        <Link href="/second">hello</Link>
+        {/* <Icon name="demo" />
+        <Link href="/second">hello</Link> */}
       </main>
 
       <footer></footer>
