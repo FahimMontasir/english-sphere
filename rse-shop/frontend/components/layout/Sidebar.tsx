@@ -4,7 +4,14 @@ import Text from '../common/Text';
 import Icon, { IconName } from '../common/Icon';
 import { useRouter } from 'next/router';
 
-const Tab = (props: { link: string; name: string; iconName: IconName }) => {
+type TabType = { link: string; name: string; iconName: IconName };
+
+const routesConf: TabType[] = [
+  { link: '/', name: 'Home', iconName: 'home' },
+  { link: '/user', name: 'User', iconName: 'user' }
+];
+
+const Tab = (props: TabType) => {
   const router = useRouter();
   const active =
     router.pathname === props.link
@@ -39,8 +46,14 @@ function Sidebar() {
         Routes
       </Text>
       <nav className="ml-[20px]">
-        <Tab link="/" name="Home" iconName="agoda" />
-        <Tab link="/user" name="User" iconName="agoda" />
+        {routesConf.map(route => (
+          <Tab
+            key={route.link}
+            link={route.link}
+            name={route.name}
+            iconName={route.iconName}
+          />
+        ))}
       </nav>
     </aside>
   );

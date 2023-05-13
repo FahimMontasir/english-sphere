@@ -9,7 +9,7 @@ const IconBase = ({ children, className }: IconStyleProps) => (
   <svg className={`inline-block fill-inherit ${className}`}>{children}</svg>
 );
 
-export type IconName = 'agoda' | 'mastercard' | 'demo';
+export type IconName = 'home' | 'user';
 
 type IconProps = {
   name: IconName;
