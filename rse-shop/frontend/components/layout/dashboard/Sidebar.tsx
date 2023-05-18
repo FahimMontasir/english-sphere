@@ -1,14 +1,14 @@
 import Link from 'next/link';
-import Image from '../common/Image';
-import Text from '../common/Text';
-import Icon, { IconName } from '../common/Icon';
+import Image from '../../common/Image';
+import Text from '../../common/Text';
+import Icon, { IconName } from '../../common/Icon';
 import { useRouter } from 'next/router';
 
 type TabType = { link: string; name: string; iconName: IconName };
 
 const routesConf: TabType[] = [
-  { link: '/', name: 'Home', iconName: 'home' },
-  { link: '/user', name: 'User', iconName: 'user' }
+  { link: '/dashboard', name: 'Home', iconName: 'home' },
+  { link: '/dashboard/user', name: 'User', iconName: 'user' }
 ];
 
 const Tab = (props: TabType) => {
@@ -33,7 +33,7 @@ const Tab = (props: TabType) => {
 
 function Sidebar() {
   return (
-    <aside className="hidden w-[250px] bg-white-c dark:bg-black-c md:block md:flex-none">
+    <aside className="sticky top-0 hidden w-[250px] bg-white-c dark:bg-black-c md:block md:h-screen md:flex-none">
       <div className="mt-[50px] flex flex-col items-center">
         <Image
           className="mb-[5px] h-[80px] w-[80px] rounded-rounded-md"
