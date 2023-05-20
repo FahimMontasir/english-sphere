@@ -3,6 +3,7 @@ import Button from '../../components/common/Button';
 import Text from '../../components/common/Text';
 import Card from '../../components/dashboard/home/Card';
 import Image from '../../components/common/Image';
+import DisplayCard from '../../components/common/DisplayCard';
 
 interface Props {
   props: React.ReactNode;
@@ -31,7 +32,7 @@ function Home({ props }: Props) {
           <Text variant="h1" className="order-1">
             New Releases
           </Text>
-          <div className="order-3 flex gap-[40px] overflow-x-auto overflow-y-hidden whitespace-nowrap md:order-2">
+          <div className="order-3 mt-[10px] flex gap-[40px] overflow-x-auto overflow-y-hidden whitespace-nowrap md:order-2 md:mt-0">
             {TAB_NAME.map(name => (
               <button
                 key={name}
@@ -57,16 +58,12 @@ function Home({ props }: Props) {
         </div>
 
         {/* all books */}
-        <div className="mt-[20px] ml-[60px] ">
-          <div className="h-[370px] w-[190px] rounded-rounded-md bg-white-c">
-            <div className="flex justify-center">
-              <Image
-                className="mt-[20px] h-[180px] w-[110px] rounded-rounded-md"
-                src="https://i.pravatar.cc/1000"
-                alt="image"
-              />
-            </div>
-          </div>
+        <div className="mt-[20px] flex flex-wrap gap-[15px] md:ml-[60px] md:gap-[30px]">
+          <DisplayCard />
+          <DisplayCard />
+          <DisplayCard />
+          <DisplayCard />
+          <DisplayCard />
         </div>
       </section>
     </>

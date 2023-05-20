@@ -8,6 +8,11 @@
   src: url(fonts/saira/SairaCondensed-Regular.ttf);
 }
 
+* {
+  /* to remove the blue highlight of button on mobile? */
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* page transition */
 .MainComponent {
   overflow: hidden;

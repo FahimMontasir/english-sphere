@@ -33,7 +33,7 @@ const Tab = (props: TabType) => {
 
 function Sidebar() {
   return (
-    <aside className="sticky top-0 hidden w-[250px] bg-white-c dark:bg-black-c md:block md:h-screen md:flex-none">
+    <aside className="sticky top-0 z-[9999] hidden w-[250px] bg-white-c dark:bg-black-c md:block md:h-screen md:flex-none">
       <div className="mt-[50px] flex flex-col items-center">
         <Image
           className="mb-[5px] h-[80px] w-[80px] rounded-rounded-md"
