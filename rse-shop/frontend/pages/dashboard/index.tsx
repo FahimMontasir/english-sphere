@@ -4,6 +4,8 @@ import Text from '../../components/common/Text';
 import Card from '../../components/dashboard/home/Card';
 import Image from '../../components/common/Image';
 import DisplayCard from '../../components/common/DisplayCard';
+import Modal from '../../components/common/Modal';
+import BookInput from '../../components/dashboard/home/BookInput';
 
 interface Props {
   props: React.ReactNode;
@@ -12,6 +14,7 @@ const TAB_NAME = ['On Sale', 'New Arrivals', 'Top Rated', 'Most Views'];
 
 function Home({ props }: Props) {
   const [activeTab, setActiveTab] = useState('On Sale');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleTabClick = (name: string) => {
     setActiveTab(name);
@@ -52,7 +55,11 @@ function Home({ props }: Props) {
               </button>
             ))}
           </div>
-          <Button variant="contained" className="order-2 md:order-3">
+          <Button
+            onClick={() => setIsOpen(true)}
+            variant="contained"
+            className="order-2 md:order-3"
+          >
             ADD BOOK
           </Button>
         </div>
@@ -66,6 +73,9 @@ function Home({ props }: Props) {
           <DisplayCard />
         </div>
       </section>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <BookInput />
+      </Modal>
     </>
   );
 }
