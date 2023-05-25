@@ -1,8 +1,10 @@
+import { ReactElement } from 'react';
 import Button from '../../components/common/Button';
 import Filter from '../../components/common/Filter';
 import Icon from '../../components/common/Icon';
 import Image from '../../components/common/Image';
 import Text from '../../components/common/Text';
+import DashboardLayout from '../../components/layout/dashboard';
 
 interface Props {
   props: React.ReactNode;
@@ -60,5 +62,9 @@ function User({ props }: Props) {
     </>
   );
 }
+
+User.getLayout = function getLayout(page: ReactElement) {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};
 
 export default User;

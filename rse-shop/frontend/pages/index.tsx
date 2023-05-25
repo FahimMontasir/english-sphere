@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Button from '../components/common/Button';
 
 interface Props {
   props: React.ReactNode;
@@ -7,7 +8,9 @@ interface Props {
 function Home({ props }: Props) {
   return (
     <>
-      <Link href="/dashboard">dashboad</Link>
+      <Button>
+        <Link href="/dashboard"> go to dashboad</Link>
+      </Button>
     </>
   );
 }

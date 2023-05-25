@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import Button from '../../components/common/Button';
 import Text from '../../components/common/Text';
 import Card from '../../components/dashboard/home/Card';
-import Image from '../../components/common/Image';
 import DisplayCard from '../../components/common/DisplayCard';
 import Modal from '../../components/common/Modal';
 import BookInput from '../../components/dashboard/home/BookInput';
+import DashboardLayout from '../../components/layout/dashboard';
 
 interface Props {
   props: React.ReactNode;
@@ -79,5 +79,9 @@ function Home({ props }: Props) {
     </>
   );
 }
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};
 
 export default Home;

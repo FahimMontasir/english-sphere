@@ -2,7 +2,7 @@
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-screen overflow-x-hidden bg-bgwhite dark:bg-bgblack">
       <section className="flex">
@@ -18,4 +18,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
+export default DashboardLayout;
