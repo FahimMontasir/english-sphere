@@ -7,12 +7,16 @@ type Props = {
   placeholder?: string;
   value?: string;
   options?: string[];
+  buttonVariant?: 'outlined' | 'contained';
+  btnStyle?: string;
 };
 
 const Filter = ({
   placeholder = 'Filter',
   value,
-  options = ['hello', 'mello', 'gello']
+  options = ['hello', 'mello', 'gello'],
+  buttonVariant = 'outlined',
+  btnStyle = ''
 }: Props) => {
   const filterRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -23,11 +27,11 @@ const Filter = ({
   return (
     <div ref={filterRef} className="relative">
       <Button
-        variant="outlined"
+        variant={buttonVariant}
         onClick={() => setIsOpen(prev => !prev)}
         className={`${
           value ? 'text-black-c' : 'text-gray-600'
-        } w-full justify-between text-[20px] active:!animate-none md:text-[20px]`}
+        } w-full justify-between text-[20px] active:!animate-none md:text-[20px] ${btnStyle}`}
       >
         {placeholder}{' '}
         <Icon
