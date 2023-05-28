@@ -11,7 +11,7 @@ type PropsType = {
   className?: string;
 };
 
-const commonStyle = 'font-saira not-italic text-black-c dark:text-white-c';
+const commonStyle = 'font-saira not-italic text-black-c';
 
 function Text({ variant, className = '', children }: PropsType) {
   switch (variant) {

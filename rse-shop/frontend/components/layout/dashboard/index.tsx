@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-screen overflow-x-hidden bg-bgwhite dark:bg-bgblack">
+    <div className="h-screen overflow-x-hidden bg-bgwhite">
       <section className="flex">
         <Sidebar />
         <div className="flex-1">

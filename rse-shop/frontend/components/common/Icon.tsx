@@ -15,7 +15,10 @@ export type IconName =
   | 'close'
   | 'camera'
   | 'dropdown'
-  | 'search-user';
+  | 'search-user'
+  | 'mobile'
+  | 'profile'
+  | 'cart';
 
 type IconProps = {
   name: IconName;
