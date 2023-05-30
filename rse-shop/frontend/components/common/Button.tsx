@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 
-type Variants = 'outlined' | 'contained';
+type Variants = 'outlined' | 'contained' | 'text';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
@@ -10,7 +10,8 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variants = {
   outlined: 'bg-bgwhite',
-  contained: 'bg-white-c shadow-default'
+  contained: 'bg-white-c shadow-default',
+  text: 'bg-transparent py-0 px-0 !justify-start active:motion-safe:animate-none'
 };
 
 export default function Button({

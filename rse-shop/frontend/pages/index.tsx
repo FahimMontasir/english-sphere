@@ -1,6 +1,9 @@
+import Button from '../components/common/Button';
 import Image from '../components/common/Image';
 import Text from '../components/common/Text';
 import WebsiteLayout from '../components/layout/web';
+import LargeFCard from '../components/web/home/LargeFCard';
+import SmallFCard from '../components/web/home/SmallFCard';
 
 type Props = {
   props: React.ReactNode;
@@ -8,25 +11,19 @@ type Props = {
 
 function Home({ props }: Props) {
   return (
-    <>
-      <div className="relative h-[480px] w-[550px]">
-        <div className="absolute inset-0">
-          <Image
-            className="h-full w-full rounded-rounded-md"
-            src="https://i.pravatar.cc/1000"
-            alt="image"
-          />
+    <section className="m-[10px] md:mx-[80px] md:mt-[30px]">
+      {/* feature */}
+      <section className="flex flex-wrap gap-[10px] md:flex-nowrap md:items-center md:justify-between">
+        <LargeFCard />
+        <div className="flex flex-wrap justify-center gap-[10px] md:justify-end md:gap-[20px]">
+          {Array(4)
+            .fill(1)
+            .map((_, i) => (
+              <SmallFCard key={i} />
+            ))}
         </div>
-        <div className="relative z-10 flex h-full flex-col items-center justify-center">
-          <h1 className="text-2xl font-bold text-gray-200">
-            Next JS 13 Background Image with Tailwind CSS{' '}
-          </h1>
-          <p className="mt-4 text-sm text-white">
-            lorem ipsom Next JS 13 Background Image with Tailwind CSS
-          </p>
-        </div>
-      </div>
-    </>
+      </section>
+    </section>
   );
 }
 
