@@ -29,8 +29,8 @@ const Image = ({
         className="content-center object-cover"
         quality={75}
         loading="lazy"
-        placeholder="blur"
-        blurDataURL={blurDataURL}
+        // placeholder="blur"
+        // blurDataURL={blurDataURL}
       />
     </div>
   );

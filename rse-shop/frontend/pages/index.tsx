@@ -1,4 +1,6 @@
+import BookDisplay from '../components/common/BookDisplay';
 import Button from '../components/common/Button';
+import DisplayLCard from '../components/common/DisplayLCard';
 import Image from '../components/common/Image';
 import Text from '../components/common/Text';
 import WebsiteLayout from '../components/layout/web';
@@ -21,6 +23,14 @@ function Home({ props }: Props) {
             .map((_, i) => (
               <SmallFCard key={i} />
             ))}
+        </div>
+      </section>
+
+      {/* books */}
+      <section className="mt-[60px] flex flex-wrap items-center justify-center gap-[10px]">
+        <DisplayLCard />
+        <div className="w-full md:w-[60%]">
+          <BookDisplay />
         </div>
       </section>
     </section>
