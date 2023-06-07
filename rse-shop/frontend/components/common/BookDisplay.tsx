@@ -2,16 +2,27 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import Text from './Text';
 import Button from './Button';
 import DisplayCard from './DisplayCard';
+import { useRouter } from 'next/router';
+import { slugify } from '../../utils';
+
 const TAB_NAME = ['On Sale', 'New Arrivals', 'Top Rated', 'Most Views'];
+
 type IProps = {
   setIsOpen?: Dispatch<SetStateAction<boolean>>;
 };
+
 const BookDisplay = ({ setIsOpen }: IProps) => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('On Sale');
 
   const handleTabClick = (name: string) => {
     setActiveTab(name);
   };
+
+  const handleBookDetails = (slug: string) => {
+    router.push(`/web/book-details/${slugify(slug)}`);
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-between md:flex-row md:items-center md:justify-between">
@@ -51,11 +62,14 @@ const BookDisplay = ({ setIsOpen }: IProps) => {
 
       {/* all books */}
       <div className="mt-[20px] flex flex-wrap gap-[15px] md:ml-[60px] md:gap-[30px]">
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
+        {Array(5)
+          .fill(1)
+          .map((_, i) => (
+            <DisplayCard
+              key={i}
+              onClick={() => handleBookDetails('Where the crawdads sing')}
+            />
+          ))}
       </div>
     </>
   );

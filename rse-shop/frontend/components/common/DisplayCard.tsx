@@ -6,11 +6,22 @@ type Props = {
   name?: string;
   author?: string;
   price?: number;
+  onClick?: () => void;
 };
 
-const DisplayCard = ({ imgUrl, paperType, name, author, price }: Props) => {
+const DisplayCard = ({
+  imgUrl,
+  paperType,
+  name,
+  author,
+  price,
+  onClick
+}: Props) => {
   return (
-    <div className="h-[250px] w-[105px] rounded-rounded-md bg-white-c md:h-[370px] md:w-[190px]">
+    <div
+      onClick={onClick}
+      className="h-[250px] w-[105px] cursor-pointer rounded-rounded-md bg-white-c md:h-[370px] md:w-[190px]"
+    >
       <div className="flex justify-center">
         <Image
           className="mt-[10px] h-[90px] w-[55px] rounded-rounded-md md:mt-[20px] md:h-[180px] md:w-[110px]"

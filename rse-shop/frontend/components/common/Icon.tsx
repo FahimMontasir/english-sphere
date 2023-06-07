@@ -18,7 +18,10 @@ export type IconName =
   | 'search-user'
   | 'mobile'
   | 'profile'
-  | 'cart';
+  | 'cart'
+  | 'apple'
+  | 'android'
+  | 'divider';
 
 type IconProps = {
   name: IconName;

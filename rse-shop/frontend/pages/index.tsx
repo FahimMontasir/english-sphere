@@ -27,7 +27,7 @@ function Home({ props }: Props) {
       </section>
 
       {/* books */}
-      <section className="mt-[60px] flex flex-wrap items-center justify-center gap-[10px]">
+      <section className="mt-[60px] flex flex-wrap items-center justify-center gap-[10px] md:flex-nowrap md:items-start">
         <DisplayLCard />
         <div className="w-full md:w-[60%]">
           <BookDisplay />
