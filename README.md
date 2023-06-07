@@ -1,6 +1,8 @@
 # Refactor Speaking: English for web developers
 
-### `RSE Shop live link:` [click here...](https://rse-shop-by-fahim-montasir.netlify.app/)
+### `RSE Shop- DASHBOARD live link:` [click here...](https://rse-shop-by-fahim-montasir.netlify.app/dashboard)
+
+### `RSE Shop- WEBSITE live link:` [click here...](https://rse-shop-by-fahim-montasir.netlify.app/)
 
 ## `Design file:` [figma](https://www.figma.com/file/AAmi8RVuUCNjv4Yt4Q7Gs4/refactor-speaking?node-id=0%3A1)
 
