@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${saira.variable} h-screen overflow-x-hidden bg-bgwhite dark:bg-black`}
+      className={`${saira.variable} h-screen overflow-x-hidden bg-bgwhite dark:bg-bgblack`}
     >
       <body suppressHydrationWarning={true}>{children}</body>
     </html>

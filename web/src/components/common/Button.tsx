@@ -23,7 +23,7 @@ export default function Button({
   return (
     <button
       {...rest}
-      className={`flex items-center justify-center rounded-rounded-md py-[9px] px-[23px] font-saira text-[18px] font-[500] not-italic leading-[28px] tracking-wide  text-black-c dark:text-white-c active:motion-safe:animate-ping md:text-[24px] md:leading-[38px]
+      className={`flex items-center justify-center rounded-rounded-md py-[9px] px-[23px] font-saira text-[18px] font-[500] not-italic leading-[28px] tracking-wide  text-black-c dark:text-white-c active:motion-safe:animate-ping md:text-[24px] md:leading-[38px] 
        ${variants[variant]} ${className}`}
     >
       {children}
