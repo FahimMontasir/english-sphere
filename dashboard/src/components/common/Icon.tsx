@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type IconStyleProps = {
   className?: string;
@@ -13,19 +13,20 @@ const IconBase = ({ children, className, onClick }: IconStyleProps) => (
 );
 
 export type IconName =
-  | 'home'
-  | 'user'
-  | 'close'
-  | 'camera'
-  | 'dropdown'
-  | 'search-user'
-  | 'mobile'
-  | 'profile'
-  | 'cart'
-  | 'apple'
-  | 'android'
-  | 'divider'
-  | 'empty-cart';
+  | "home"
+  | "user"
+  | "materials"
+  | "close"
+  | "camera"
+  | "dropdown"
+  | "search-user"
+  | "mobile"
+  | "profile"
+  | "cart"
+  | "apple"
+  | "android"
+  | "divider"
+  | "empty-cart";
 
 type IconProps = {
   name: IconName;

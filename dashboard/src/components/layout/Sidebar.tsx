@@ -7,7 +7,8 @@ type TabType = { link: string; name: string; iconName: IconName };
 
 const routesConf: TabType[] = [
   { link: "/", name: "Home", iconName: "home" },
-  { link: "/user", name: "User", iconName: "user" },
+  { link: "/users", name: "Users", iconName: "user" },
+  { link: "/materials", name: "Materials", iconName: "materials" },
 ];
 
 const Tab = (props: TabType) => {
@@ -39,7 +40,7 @@ function Sidebar() {
           src="https://i.pravatar.cc/1000"
           alt="image"
         />
-        <Text variant="h1">Hero Alom</Text>
+        <Text variant="h1">Admin@RSE</Text>
       </div>
       <Text variant="h1" className="ml-[5px] mb-[10px]">
         Routes
