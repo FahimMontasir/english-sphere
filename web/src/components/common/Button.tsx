@@ -1,6 +1,6 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from "react";
 
-type Variants = 'outlined' | 'contained' | 'text';
+type Variants = "outlined" | "contained" | "text";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
@@ -9,21 +9,21 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variants = {
-  outlined: 'bg-bgwhite',
-  contained: 'bg-white-c shadow-default',
-  text: 'bg-transparent py-0 px-0 !justify-start active:motion-safe:animate-none'
+  outlined: "bg-bgwhite dark:bg-bgblack",
+  contained: "bg-white-c shadow-default dark:bg-black-c",
+  text: "bg-transparent py-0 px-0 !justify-start active:motion-safe:animate-none",
 };
 
 export default function Button({
   children,
-  variant = 'contained',
-  className = '',
+  variant = "contained",
+  className = "",
   ...rest
 }: Props) {
   return (
     <button
       {...rest}
-      className={`flex items-center justify-center rounded-rounded-md py-[9px] px-[23px] font-saira text-[18px] font-[500] not-italic leading-[28px] tracking-wide  text-black-c active:motion-safe:animate-ping md:text-[24px] md:leading-[38px]
+      className={`flex items-center justify-center rounded-rounded-md py-[9px] px-[23px] font-saira text-[18px] font-[500] not-italic leading-[28px] tracking-wide  text-black-c dark:text-white-c active:motion-safe:animate-ping md:text-[24px] md:leading-[38px]
        ${variants[variant]} ${className}`}
     >
       {children}

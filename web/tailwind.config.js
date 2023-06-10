@@ -24,7 +24,7 @@ module.exports = {
         "rounded-xl": "1rem",
       },
       fontFamily: {
-        saira: ["var(--font-saira)", "sans-serif"],
+        saira: ["var(--font-saira)"],
       },
       boxShadow: {
         default: "0px 4px 22px rgba(0, 0, 0, 0.05)",

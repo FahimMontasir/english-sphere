@@ -12,7 +12,7 @@ const IconBase = ({ children, className, onClick }: IconStyleProps) => (
   </svg>
 );
 
-export type IconName = "top-bg" | "bottom-bg";
+export type IconName = "top-bg" | "bottom-bg" | "apple" | "android";
 
 type IconProps = {
   name: IconName;
