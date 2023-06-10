@@ -1,11 +1,5 @@
 # Refactor Speaking: English for web developers
 
-### `RSE Shop- DASHBOARD live link:` [click here...](https://rse-shop-by-fahim-montasir.netlify.app/dashboard)
-
-### `RSE Shop- WEBSITE live link:` [click here...](https://rse-shop-by-fahim-montasir.netlify.app/)
-
-## `Design file:` [figma](https://www.figma.com/file/AAmi8RVuUCNjv4Yt4Q7Gs4/refactor-speaking?node-id=0%3A1)
-
 ## `Features`
 
 1. realtime audio calling
@@ -13,3 +7,13 @@
 3. related vocabulary and grammar lesson
 4. chatting with other learners
 5. post learning experience or materials
+6. book selling and purchasing
+7. learning materials
+
+## `Design File:` [FIGMA](https://www.figma.com/file/AAmi8RVuUCNjv4Yt4Q7Gs4/refactor-speaking?node-id=0%3A1)
+
+## `All Live Links`
+
+1. [RSE: WEB](https://rse-by-fahim-montasir.netlify.app/)
+2. [RSE-SHOP: DASHBOARD](https://rse-shop-by-fahim-montasir.netlify.app/dashboard)
+3. [RSE-SHOP: WEB](https://rse-shop-by-fahim-montasir.netlify.app/)
