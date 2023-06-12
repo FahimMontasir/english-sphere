@@ -1,12 +1,13 @@
-import Icon from './Icon';
+import Icon from "./Icon";
 
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
 };
 
-const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+const Modal = ({ isOpen, onClose, children, className }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -15,7 +16,9 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       <div className="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm backdrop-filter" />
 
       <div className="fixed inset-0 m-5 flex items-center justify-center md:m-10">
-        <div className="h-full w-full max-w-4xl rounded-lg bg-white-c p-3 md:p-8">
+        <div
+          className={`h-full w-full max-w-4xl rounded-lg bg-white-c p-3 md:p-8 ${className}`}
+        >
           <div className="-mt-[5px] flex items-center justify-end md:-mt-[15px]">
             <button onClick={onClose}>
               <Icon

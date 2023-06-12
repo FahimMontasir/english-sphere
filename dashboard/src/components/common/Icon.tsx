@@ -22,11 +22,15 @@ export type IconName =
   | "search-user"
   | "mobile"
   | "profile"
-  | "cart"
   | "apple"
   | "android"
   | "divider"
-  | "empty-cart";
+  | "profile-cam"
+  | "pen"
+  | "chat"
+  | "add"
+  | "notification"
+  | "noti-send";
 
 type IconProps = {
   name: IconName;

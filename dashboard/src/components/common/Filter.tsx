@@ -9,6 +9,7 @@ type Props = {
   options?: string[];
   buttonVariant?: "outlined" | "contained";
   btnStyle?: string;
+  noAddNew?: boolean;
 };
 
 const Filter = ({
@@ -20,6 +21,7 @@ const Filter = ({
   ],
   buttonVariant = "outlined",
   btnStyle = "",
+  noAddNew = false,
 }: Props) => {
   const filterRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -60,48 +62,51 @@ const Filter = ({
                 </button>
               ))}
             </div>
-            <div className="relative">
-              <Button
-                variant="outlined"
-                className="h-[30px] w-full rounded-[0px_0px_12px_12px] text-[18px] active:!animate-none md:text-[18px]"
-                onClick={() => setAddNewInput((prev) => !prev)}
-              >
-                Add New
-              </Button>
 
-              {addNewInput && (
-                <div className="absolute origin-top-right right-0 z-20 mt-2 bg-white-c rounded-rounded-md shadow-default w-[240px] overflow-hidden">
-                  {/* image input */}
-                  <label
-                    htmlFor="dropzone-file"
-                    className="flex cursor-pointer items-center justify-center pt-[20px]"
-                  >
-                    <Icon
-                      name="camera"
-                      className="h-[40px] w-[40px] fill-black-c"
-                    />
+            {!noAddNew && (
+              <div className="relative">
+                <Button
+                  variant="outlined"
+                  className="h-[30px] w-full rounded-[0px_0px_12px_12px] text-[18px] active:!animate-none md:text-[18px]"
+                  onClick={() => setAddNewInput((prev) => !prev)}
+                >
+                  Add New
+                </Button>
+
+                {addNewInput && (
+                  <div className="absolute origin-top-right right-0 z-20 mt-2 bg-white-c rounded-rounded-md shadow-default w-[240px] overflow-hidden">
+                    {/* image input */}
+                    <label
+                      htmlFor="dropzone-file"
+                      className="flex cursor-pointer items-center justify-center pt-[20px]"
+                    >
+                      <Icon
+                        name="camera"
+                        className="h-[40px] w-[40px] fill-black-c"
+                      />
+                      <input
+                        // onChange={e => console.log('file', e.target.value)}
+                        id="dropzone-file"
+                        type="file"
+                        className="hidden"
+                      />
+                    </label>
+
                     <input
-                      // onChange={e => console.log('file', e.target.value)}
-                      id="dropzone-file"
-                      type="file"
-                      className="hidden"
+                      placeholder="Title..."
+                      className="h-[60px] w-full p-[10px] focus:outline-none"
                     />
-                  </label>
-
-                  <input
-                    placeholder="Title..."
-                    className="h-[60px] w-full p-[10px] focus:outline-none"
-                  />
-                  <Button
-                    variant="outlined"
-                    className="h-[30px] w-full rounded-[0px_0px_12px_12px] text-[18px] active:!animate-none md:text-[18px]"
-                    // onClick={() => }
-                  >
-                    Add
-                  </Button>
-                </div>
-              )}
-            </div>
+                    <Button
+                      variant="outlined"
+                      className="h-[30px] w-full rounded-[0px_0px_12px_12px] text-[18px] active:!animate-none md:text-[18px]"
+                      // onClick={() => }
+                    >
+                      Add
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </>
       )}

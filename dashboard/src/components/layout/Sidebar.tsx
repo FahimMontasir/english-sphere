@@ -13,10 +13,12 @@ const routesConf: TabType[] = [
 
 const Tab = (props: TabType) => {
   const router = useRouter();
+  const pathname = router.pathname.includes("[")
+    ? router.pathname.replace(/\[[^\]]+\]/, "").replace(/\/$/, "")
+    : router.pathname;
+
   const active =
-    router.pathname === props.link
-      ? "bg-bgwhite"
-      : "shadow-tab hover:bg-bgwhite";
+    pathname === props.link ? "bg-bgwhite" : "shadow-tab hover:bg-bgwhite";
   return (
     <Link href={props.link}>
       <span
