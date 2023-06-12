@@ -1,6 +1,6 @@
 // for page transition we will use framer motion
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
