@@ -1,6 +1,12 @@
 import { Translations } from "./en"
 
 const ar: Translations = {
+  homeScreen: {
+    voice: "এখনই কথা বলুন",
+    learning: "শেখার বিষয়বস্তু",
+    ls: "লাইভ স্ট্রিম",
+    lsBtn: "লাইভে যাও!",
+  },
   common: {
     ok: "نعم",
     cancel: "حذف",

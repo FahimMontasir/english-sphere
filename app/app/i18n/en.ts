@@ -1,4 +1,10 @@
 const en = {
+  homeScreen: {
+    voice: "Insta Talk",
+    learning: "Learning Materials",
+    ls: "Live Streams",
+    lsBtn: "Go Live!",
+  },
   common: {
     ok: "OK!",
     cancel: "Cancel",

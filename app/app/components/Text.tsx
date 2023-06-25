@@ -87,7 +87,7 @@ const $fontWeightStyles = Object.entries(typography.primary).reduce((acc, [weigh
 }, {}) as Record<Weights, TextStyle>
 
 const $baseStyle: StyleProp<TextStyle> = [
-  $sizeStyles.sm,
+  $sizeStyles.xs,
   $fontWeightStyles.normal,
   { color: colors.text },
 ]
@@ -97,13 +97,13 @@ const $presets = {
 
   bold: [$baseStyle, $fontWeightStyles.bold] as StyleProp<TextStyle>,
 
-  heading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.bold] as StyleProp<TextStyle>,
+  heading: [$baseStyle, $sizeStyles.md, $fontWeightStyles.bold] as StyleProp<TextStyle>,
 
-  subheading: [$baseStyle, $sizeStyles.lg, $fontWeightStyles.medium] as StyleProp<TextStyle>,
+  subheading: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.medium] as StyleProp<TextStyle>,
 
   formLabel: [$baseStyle, $fontWeightStyles.medium] as StyleProp<TextStyle>,
 
-  formHelper: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+  formHelper: [$baseStyle, $sizeStyles.xs, $fontWeightStyles.normal] as StyleProp<TextStyle>,
 }
 
 const $rtlStyle: TextStyle = isRTL ? { writingDirection: "rtl" } : {}
