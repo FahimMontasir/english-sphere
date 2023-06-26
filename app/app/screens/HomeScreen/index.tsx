@@ -1,23 +1,27 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ViewStyle, TouchableOpacity, FlatList, Image, ImageStyle } from "react-native"
+import { View, ViewStyle, TouchableOpacity, FlatList, ScrollView } from "react-native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { AppStackScreenProps } from "app/navigators"
-import { AutoImage, Button, Icon, MaterialCard, Screen, Text } from "app/components"
 import { colors, spacing } from "app/theme"
-import { ScrollView } from "react-native-gesture-handler"
-const defaultAccImage = require("../../../assets/icons/view.png")
-// import { useNavigation } from "@react-navigation/native"
+// components
+import { AutoImage, Button, Icon, MaterialCard, Screen, Text } from "app/components"
+import { LSCard } from "./components/LSCard"
+// hooks
+import { useHomeScreen } from "./useHomeScreen"
 // import { useStores } from "app/models"
+// assets
+const defaultAccImage = require("../../../assets/icons/view.png")
 
 interface HomeScreenProps extends NativeStackScreenProps<AppStackScreenProps<"Home">> {}
 
-export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
-  // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
+export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen(_props) {
+  // const {navigation} = _props
+  // MST stores
+  // const { somestore } = useStores()
 
-  // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const { data, handleRefresh, refreshing } = useHomeScreen()
+  // console.log({ data })
 
   return (
     <Screen contentContainerStyle={$screenContentContainer} preset="fixed" safeAreaEdges={["top"]}>
@@ -64,14 +68,10 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
         columnWrapperStyle={$flatListColumnWrapper}
         contentContainerStyle={$flatListContentContainer}
         scrollEnabled
-        data={[
-          { thumbnail: "https://i.pravatar.cc/300", id: 1 },
-          { thumbnail: "https://i.pravatar.cc/300", id: 2 },
-          { thumbnail: "https://i.pravatar.cc/300", id: 3 },
-          { thumbnail: "https://i.pravatar.cc/300", id: 4 },
-          { thumbnail: "https://i.pravatar.cc/300", id: 5 },
-        ]}
-        renderItem={({ item }) => <Image style={$lsThumbnail} source={{ uri: item.thumbnail }} />}
+        data={data}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        renderItem={({ item }) => <LSCard item={item} />}
       />
     </Screen>
   )
@@ -128,13 +128,6 @@ const $goLsContainer: ViewStyle = {
 const $flatListContentContainer: ViewStyle = {
   paddingVertical: spacing.xl,
   paddingHorizontal: spacing.sm,
-}
-
-const $lsThumbnail: ImageStyle = {
-  width: 100,
-  height: 80,
-  borderRadius: spacing.xs,
-  marginTop: 10,
 }
 
 const $flatListColumnWrapper: ViewStyle = {
