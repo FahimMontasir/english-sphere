@@ -1,5 +1,9 @@
 # Refactor Speaking: English for web developers
 
+This app is still `in active development`. If you want to evaluate my
+socket.io and/or WebRTC knowledge, check out [this project](https://github.com/FahimMontasir/socket.io). Get ready to
+witness my expertise in action!
+
 ## `Features`
 
 1. realtime audio calling
