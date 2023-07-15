@@ -1,9 +1,8 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { View, ViewStyle, TouchableOpacity, FlatList, ScrollView } from "react-native"
-import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { AppStackScreenProps } from "app/navigators"
-import { colors, spacing } from "app/theme"
+import { spacing } from "app/theme"
 // components
 import { AutoImage, Button, Icon, MaterialCard, Screen, Text } from "app/components"
 import { LSCard } from "./components/LSCard"
@@ -13,15 +12,12 @@ import { useHomeScreen } from "./useHomeScreen"
 // assets
 const defaultAccImage = require("../../../assets/icons/view.png")
 
-interface HomeScreenProps extends NativeStackScreenProps<AppStackScreenProps<"Home">> {}
-
-export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen(_props) {
-  // const {navigation} = _props
+export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function HomeScreen(_props) {
+  const { navigation } = _props
   // MST stores
   // const { somestore } = useStores()
 
   const { data, handleRefresh, refreshing } = useHomeScreen()
-  // console.log({ data })
 
   return (
     <Screen contentContainerStyle={$screenContentContainer} preset="fixed" safeAreaEdges={["top"]}>
@@ -29,7 +25,7 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen(_pro
         ListHeaderComponent={
           <>
             <View style={$topContainer}>
-              <TouchableOpacity style={$avatar}>
+              <TouchableOpacity style={$avatar} onPress={() => navigation.navigate("Account")}>
                 <AutoImage
                   maxWidth={50}
                   maxHeight={50}
@@ -78,7 +74,6 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen(_pro
 })
 
 const $screenContentContainer: ViewStyle = {
-  backgroundColor: colors.background,
   flex: 1,
 }
 

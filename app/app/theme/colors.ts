@@ -5,6 +5,7 @@ const palette = {
   white: "#FFFFFF",
   black: "#232428",
   gray: "#E1E1E1",
+  transparentGray: "rgba(225, 225, 225, 0.80)",
   green: "#22C55E",
   indigo: "#3B82F6",
   yellow: "#FBBF24",

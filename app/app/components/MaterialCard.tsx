@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from "react-native"
 import { observer } from "mobx-react-lite"
-import { spacing } from "app/theme"
+import { colors, spacing } from "app/theme"
 import { Text } from "app/components/Text"
 
 export interface MaterialCardProps {
@@ -59,7 +59,7 @@ const $container: ImageStyle = {
 }
 
 const $textContainer: ViewStyle = {
-  backgroundColor: "rgba(225, 225, 225, 0.80)",
+  backgroundColor: colors.palette.transparentGray,
 }
 
 const $text: TextStyle = {

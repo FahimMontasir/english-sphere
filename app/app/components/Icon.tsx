@@ -109,6 +109,8 @@ export const iconRegistry = {
   x: require("../../assets/icons/x.png"),
   leaderBoard: require("../../assets/icons/leaderboard.png"),
   instaTalk: require("../../assets/icons/instatalk.png"),
+  camera: require("../../assets/icons/camera.png"),
+  pen: require("../../assets/icons/pen.png"),
 }
 
 const $imageStyle: ImageStyle = {
