@@ -1,17 +1,24 @@
 import { Translations } from "./en"
 
+// eng to ban type: https://www.google.com/intl/bn/inputtools/try/
 const ar: Translations = {
+  common: {
+    ok: "نعم",
+    cancel: "حذف",
+    back: "خلف",
+    logOut: "تسجيل خروج", // @demo remove-current-line
+  },
   homeScreen: {
     voice: "এখনই কথা বলুন",
     learning: "শেখার বিষয়বস্তু",
     ls: "লাইভ স্ট্রিম",
     lsBtn: "লাইভে যাও!",
   },
-  common: {
-    ok: "نعم",
-    cancel: "حذف",
-    back: "خلف",
-    logOut: "تسجيل خروج", // @demo remove-current-line
+  accountScreen: {
+    position: "অবস্থান:",
+    skill: "দক্ষতা",
+    logNHistory: "ইন্সটা টক লগ এবং বিজ্ঞপ্তি",
+    loadBtn: "আরও দেখুন",
   },
   welcomeScreen: {
     postscript:

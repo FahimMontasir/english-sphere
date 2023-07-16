@@ -111,6 +111,8 @@ export const iconRegistry = {
   instaTalk: require("../../assets/icons/instatalk.png"),
   camera: require("../../assets/icons/camera.png"),
   pen: require("../../assets/icons/pen.png"),
+  chat: require("../../assets/icons/chat.png"),
+  plus: require("../../assets/icons/plus.png"),
 }
 
 const $imageStyle: ImageStyle = {

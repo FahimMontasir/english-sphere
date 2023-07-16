@@ -203,6 +203,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
           {...TextInputProps}
           editable={!disabled}
           style={$inputStyles}
+          selectionColor={colors.palette.gray} // cursor color
         />
 
         {!!RightAccessory && (

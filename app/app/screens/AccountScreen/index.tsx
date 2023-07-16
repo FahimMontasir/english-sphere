@@ -1,10 +1,11 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ImageBackground, ImageStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+import { ScrollView, TextStyle, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Icon, Screen, Text } from "app/components"
-import { colors, spacing } from "app/theme"
-import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
+import { Button, NotiLogTile, Screen, Text } from "app/components"
+import Cover from "./components/Cover"
+import { spacing } from "app/theme"
+import Skill from "./components/Skill"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -13,7 +14,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
 ) {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
-  const $coverContainerInsets = useSafeAreaInsetsStyle(["top"])
+  // const { navigation } = _props
 
   return (
     <Screen
@@ -22,30 +23,20 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
       contentContainerStyle={$contentContainerStyle}
       preset="scroll"
     >
-      <ImageBackground
-        style={$coverContainer}
-        source={{ uri: "https://i.pravatar.cc/300" }}
-        resizeMode="cover"
-      >
-        <View style={[$coverLeftContentContainer, $coverContainerInsets]}>
-          <Icon style={$cameraIcon} icon="camera" size={25} color={colors.palette.white} />
-          <View style={$userNameContainer}>
-            <Text text="Fahim Montasir" preset="subheading" numberOfLines={1} />
-            <Icon icon="pen" size={20} color={colors.palette.black} />
-          </View>
-        </View>
+      <Cover />
 
-        <ImageBackground
-          imageStyle={$profilePhotoImage}
-          style={$profilePhotoContainer}
-          source={{ uri: "https://i.pravatar.cc/300" }}
-          resizeMode="cover"
-        >
-          <TouchableOpacity activeOpacity={0.8} style={$profilePhotoCameraContainer}>
-            <Icon icon="camera" size={20} color={colors.palette.black} />
-          </TouchableOpacity>
-        </ImageBackground>
-      </ImageBackground>
+      <Skill />
+      {/* logs and history */}
+      <Text tx="accountScreen.logNHistory" preset="heading" style={$logsHeading} />
+      <ScrollView>
+        <View style={$logsNotiContainer}>
+          <NotiLogTile />
+          <NotiLogTile isNoti />
+          <NotiLogTile isNoti />
+          <NotiLogTile isNoti />
+          <Button style={$loadBtn} tx="accountScreen.loadBtn" />
+        </View>
+      </ScrollView>
     </Screen>
   )
 })
@@ -54,50 +45,11 @@ const $contentContainerStyle: ViewStyle = {
   flex: 1,
 }
 
-const $coverContainer: ImageStyle = {
-  height: 150,
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "flex-end",
+const $logsHeading: TextStyle = {
+  marginLeft: spacing.xs,
+  marginBottom: spacing.sm,
 }
 
-const $coverLeftContentContainer: ViewStyle = {
-  height: "100%",
-  justifyContent: "space-between",
-}
+const $logsNotiContainer: ViewStyle = { gap: 10, margin: spacing.sm, alignItems: "center" }
 
-const $cameraIcon: ImageStyle = {
-  marginLeft: spacing.sm,
-}
-
-const $userNameContainer: ViewStyle = {
-  backgroundColor: colors.palette.transparentGray,
-  width: 165,
-  height: 40,
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingHorizontal: spacing.xs,
-  borderTopRightRadius: spacing.md,
-}
-
-const $profilePhotoImage: ImageStyle = {
-  borderRadius: 50,
-}
-
-const $profilePhotoContainer: ImageStyle = {
-  width: 100,
-  height: 100,
-  marginBottom: -25,
-  marginRight: spacing.md,
-  justifyContent: "flex-end",
-}
-
-const $profilePhotoCameraContainer: ViewStyle = {
-  backgroundColor: colors.background,
-  width: 30,
-  height: 30,
-  borderRadius: 30,
-  justifyContent: "center",
-  alignItems: "center",
-}
+const $loadBtn: ViewStyle = { width: 120 }

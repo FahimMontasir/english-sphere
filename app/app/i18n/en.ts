@@ -1,15 +1,21 @@
 const en = {
+  common: {
+    ok: "OK!",
+    cancel: "Cancel",
+    back: "Back",
+    logOut: "Log Out", // @demo remove-current-line
+  },
   homeScreen: {
     voice: "Insta Talk",
     learning: "Learning Materials",
     ls: "Live Streams",
     lsBtn: "Go Live!",
   },
-  common: {
-    ok: "OK!",
-    cancel: "Cancel",
-    back: "Back",
-    logOut: "Log Out", // @demo remove-current-line
+  accountScreen: {
+    position: "Position:",
+    skill: "Skill",
+    logNHistory: "Insta Talk Logs and Notifications",
+    loadBtn: "Load More",
   },
   welcomeScreen: {
     postscript:
