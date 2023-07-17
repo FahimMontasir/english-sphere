@@ -1,18 +1,38 @@
-import * as React from "react"
+import React from "react"
+import I18n from "i18n-js"
 import { Image, ImageStyle, StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, spacing } from "app/theme"
 import { Text } from "./Text"
 import { Icon } from "./Icon"
+import { TxKeyPath, translate } from "app/i18n"
 
-export interface NotiLogTileProps {
+export interface TileProps {
   style?: StyleProp<ViewStyle>
   isNoti?: boolean
+  imgUri?: string
+  headingTxOptions?: I18n.TranslateOptions
+  headingTx?: TxKeyPath
+  heading?: string
+  rightCaption?: string
+  msg?: string
 }
 
-export const NotiLogTile = observer(function NotiLogTile(props: NotiLogTileProps) {
-  const { style, isNoti } = props
+export const Tile = observer(function Tile(props: TileProps) {
+  const {
+    style,
+    isNoti,
+    imgUri = "https://i.pravatar.cc/300",
+    headingTxOptions,
+    heading = "Elon Musk",
+    headingTx,
+    rightCaption = "1h ago...",
+    msg = "the app is still in active development. Wait for a while!",
+  } = props
   const $styles = [$container, style]
+
+  const i18nText = headingTx && translate(headingTx, headingTxOptions)
+  const headingContent = i18nText || heading
 
   return (
     <View style={$styles}>
@@ -21,19 +41,13 @@ export const NotiLogTile = observer(function NotiLogTile(props: NotiLogTileProps
           {isNoti ? (
             <Icon icon="bell" containerStyle={$notiIconContainer} size={30} />
           ) : (
-            <Image
-              source={{ uri: "https://i.pravatar.cc/300" }}
-              resizeMode="cover"
-              style={$image}
-            />
+            <Image source={{ uri: imgUri }} resizeMode="cover" style={$image} />
           )}
-          <Text text="Elon Musk Porich" preset="subheading" />
+          <Text text={headingContent} preset="subheading" />
         </View>
-        <Text text="1h ago..." />
+        <Text text={rightCaption} />
       </View>
-      {isNoti && (
-        <Text style={$notiDes} text="the app is still in active development. Wait for a while!" />
-      )}
+      {isNoti && <Text style={$notiDes} text={msg} />}
     </View>
   )
 })

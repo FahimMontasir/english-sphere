@@ -238,9 +238,9 @@ const $inputWrapperStyle: ViewStyle = {
   flexDirection: "row",
   alignItems: "flex-start",
   borderWidth: 1,
-  borderRadius: 4,
-  backgroundColor: colors.palette.neutral200,
-  borderColor: colors.palette.neutral400,
+  borderRadius: spacing.md,
+  backgroundColor: colors.palette.white,
+  borderColor: colors.palette.black,
   overflow: "hidden",
 }
 

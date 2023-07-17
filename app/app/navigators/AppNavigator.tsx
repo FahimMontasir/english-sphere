@@ -40,7 +40,8 @@ export type AppStackParamList = {
   // 🔥 Your screens go here
   Home: undefined
   Account: undefined
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Chat: undefined
+	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -84,7 +85,8 @@ const AppStack = observer(function AppStack() {
       {/** 🔥 Your screens go here */}
       <Stack.Screen name="Home" component={Screens.HomeScreen} />
       <Stack.Screen name="Account" component={Screens.AccountScreen} />
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="Chat" component={Screens.ChatScreen} />
+			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

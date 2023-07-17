@@ -1,11 +1,12 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ScrollView, TextStyle, View, ViewStyle } from "react-native"
+import { ImageStyle, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, NotiLogTile, Screen, Text } from "app/components"
+import { Icon, Screen, Text } from "app/components"
 import Cover from "./components/Cover"
-import { spacing } from "app/theme"
+import { colors, spacing } from "app/theme"
 import Skill from "./components/Skill"
+import NotiLogs from "./components/NotiLogs"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -14,7 +15,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
 ) {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
-  // const { navigation } = _props
+  const { navigation } = _props
 
   return (
     <Screen
@@ -25,18 +26,18 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
     >
       <Cover />
 
+      {/* position section */}
+      <View style={$positionTextContainer}>
+        <Text tx="accountScreen.position" />
+        <Text text="400" />
+      </View>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("Chat")}>
+        <Icon style={$chatIcon} icon="chat" size={30} color={colors.palette.black} />
+      </TouchableOpacity>
+
       <Skill />
-      {/* logs and history */}
-      <Text tx="accountScreen.logNHistory" preset="heading" style={$logsHeading} />
-      <ScrollView>
-        <View style={$logsNotiContainer}>
-          <NotiLogTile />
-          <NotiLogTile isNoti />
-          <NotiLogTile isNoti />
-          <NotiLogTile isNoti />
-          <Button style={$loadBtn} tx="accountScreen.loadBtn" />
-        </View>
-      </ScrollView>
+
+      <NotiLogs />
     </Screen>
   )
 })
@@ -45,11 +46,15 @@ const $contentContainerStyle: ViewStyle = {
   flex: 1,
 }
 
-const $logsHeading: TextStyle = {
+const $positionTextContainer: TextStyle = {
+  marginTop: spacing.xxs,
   marginLeft: spacing.xs,
-  marginBottom: spacing.sm,
+  flexDirection: "row",
+  gap: spacing.xxs,
 }
 
-const $logsNotiContainer: ViewStyle = { gap: 10, margin: spacing.sm, alignItems: "center" }
-
-const $loadBtn: ViewStyle = { width: 120 }
+const $chatIcon: ImageStyle = {
+  alignSelf: "flex-end",
+  marginRight: spacing.md,
+  marginTop: spacing.xs,
+}

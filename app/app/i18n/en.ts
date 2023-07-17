@@ -17,6 +17,12 @@ const en = {
     logNHistory: "Insta Talk Logs and Notifications",
     loadBtn: "Load More",
   },
+  chatScreen: {
+    search: "Search chat...",
+    instaChat: "Insta Chat",
+    instaMsg: "Start chatting with users",
+    friends: "Friends",
+  },
   welcomeScreen: {
     postscript:
       "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
