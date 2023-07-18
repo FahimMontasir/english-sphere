@@ -9,4 +9,6 @@ export * from "./ErrorScreen/ErrorBoundary"
 // export other screens here
 export * from "./HomeScreen"
 export * from "./AccountScreen"
-export * from "./ChatScreen"
+export * from "./Chat/ChatScreen"
+export * from "./Chat/ChatReqScreen"
+export * from "./Chat/MessageScreen"

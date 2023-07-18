@@ -26,6 +26,10 @@ const ar: Translations = {
     instaMsg: "ব্যবহারকারীদের সাথে চ্যাটিং শুরু করুন",
     friends: "বন্ধুরা",
   },
+  chatReqScreen: {
+    request: "রিকুয়েস্টেড",
+    instruction: " • একসেপ্ট করতে রিপ্লে করুন",
+  },
   welcomeScreen: {
     postscript:
       "ربما لا يكون هذا هو الشكل الذي يبدو عليه تطبيقك مالم يمنحك المصمم هذه الشاشات وشحنها في هذه الحالة",

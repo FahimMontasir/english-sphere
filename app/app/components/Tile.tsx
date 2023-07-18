@@ -1,13 +1,22 @@
-import React from "react"
+import React, { ComponentType } from "react"
 import I18n from "i18n-js"
-import { Image, ImageStyle, StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import {
+  Image,
+  ImageStyle,
+  StyleProp,
+  TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewStyle,
+} from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, spacing } from "app/theme"
 import { Text } from "./Text"
 import { Icon } from "./Icon"
 import { TxKeyPath, translate } from "app/i18n"
 
-export interface TileProps {
+export interface TileProps extends TouchableOpacityProps {
   style?: StyleProp<ViewStyle>
   isNoti?: boolean
   imgUri?: string
@@ -28,14 +37,20 @@ export const Tile = observer(function Tile(props: TileProps) {
     headingTx,
     rightCaption = "1h ago...",
     msg = "the app is still in active development. Wait for a while!",
+    ...WrapperProps
   } = props
   const $styles = [$container, style]
 
   const i18nText = headingTx && translate(headingTx, headingTxOptions)
   const headingContent = i18nText || heading
 
+  const isPressable = !!WrapperProps.onPress
+  const Wrapper: ComponentType<TouchableOpacityProps> = WrapperProps?.onPress
+    ? TouchableOpacity
+    : View
+
   return (
-    <View style={$styles}>
+    <Wrapper accessibilityRole={isPressable ? "list" : undefined} {...WrapperProps} style={$styles}>
       <View style={$topContainer}>
         <View style={$userContainer}>
           {isNoti ? (
@@ -48,7 +63,7 @@ export const Tile = observer(function Tile(props: TileProps) {
         <Text text={rightCaption} />
       </View>
       {isNoti && <Text style={$notiDes} text={msg} />}
-    </View>
+    </Wrapper>
   )
 })
 

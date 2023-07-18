@@ -6,9 +6,11 @@ import { Icon, Screen, Text, TextField, Tile } from "app/components"
 import { colors, spacing } from "app/theme"
 // import { useStores } from "app/models"
 
-export const ChatScreen: FC<AppStackScreenProps<"Chat">> = observer(function ChatScreen() {
+export const ChatScreen: FC<AppStackScreenProps<"Chat">> = observer(function ChatScreen(_props) {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
+
+  const { navigation } = _props
 
   return (
     <Screen contentContainerStyle={$root} preset="fixed" safeAreaEdges={["top"]}>
@@ -19,7 +21,12 @@ export const ChatScreen: FC<AppStackScreenProps<"Chat">> = observer(function Cha
           placeholderTx="chatScreen.search"
           RightAccessory={(props) => <Icon containerStyle={props.style} icon="searchUser" />}
         />
-        <Icon icon="chatRequest" size={25} color={colors.palette.black} />
+        <Icon
+          onPress={() => navigation.navigate("ChatReq")}
+          icon="chatRequest"
+          size={25}
+          color={colors.palette.black}
+        />
       </View>
 
       {/* insta chat section */}
@@ -37,7 +44,7 @@ export const ChatScreen: FC<AppStackScreenProps<"Chat">> = observer(function Cha
           {Array(15)
             .fill(0)
             .map((_, i) => (
-              <Tile key={i} />
+              <Tile key={i} onPress={() => navigation.navigate("Message")} />
             ))}
         </View>
       </ScrollView>
