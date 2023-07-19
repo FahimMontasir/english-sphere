@@ -115,6 +115,7 @@ export const iconRegistry = {
   plus: require("../../assets/icons/plus.png"),
   searchUser: require("../../assets/icons/search-user.png"),
   chatRequest: require("../../assets/icons/chat-request.png"),
+  send: require("../../assets/icons/send.png"),
 }
 
 const $imageStyle: ImageStyle = {
