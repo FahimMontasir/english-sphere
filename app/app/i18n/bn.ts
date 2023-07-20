@@ -30,6 +30,9 @@ const ar: Translations = {
     request: "রিকুয়েস্টেড",
     instruction: " • একসেপ্ট করতে রিপ্লে করুন",
   },
+  leaderBoardScreen: {
+    searchPlaceholder: "Search user...",
+  },
   welcomeScreen: {
     postscript:
       "ربما لا يكون هذا هو الشكل الذي يبدو عليه تطبيقك مالم يمنحك المصمم هذه الشاشات وشحنها في هذه الحالة",

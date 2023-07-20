@@ -33,7 +33,11 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
                   source={{ uri: "https://i.pravatar.cc/50" }}
                 />
               </TouchableOpacity>
-              <Icon icon="leaderBoard" size={45} onPress={() => console.log("hi")} />
+              <Icon
+                icon="leaderBoard"
+                size={45}
+                onPress={() => navigation.navigate("LeaderBoard")}
+              />
             </View>
 
             <View style={$instaTalkContainer}>

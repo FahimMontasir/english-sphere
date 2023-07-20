@@ -25,6 +25,7 @@ export interface TileProps extends TouchableOpacityProps {
   heading?: string
   rightCaption?: string
   msg?: string
+  position?: number
 }
 
 export const Tile = observer(function Tile(props: TileProps) {
@@ -37,6 +38,7 @@ export const Tile = observer(function Tile(props: TileProps) {
     headingTx,
     rightCaption = "1h ago...",
     msg = "the app is still in active development. Wait for a while!",
+    position,
     ...WrapperProps
   } = props
   const $styles = [$container, style]
@@ -60,6 +62,7 @@ export const Tile = observer(function Tile(props: TileProps) {
           )}
           <Text text={headingContent} preset="subheading" />
         </View>
+        {position && <Text text={String(position)} />}
         <Text text={rightCaption} />
       </View>
       {isNoti && <Text style={$notiDes} text={msg} />}
