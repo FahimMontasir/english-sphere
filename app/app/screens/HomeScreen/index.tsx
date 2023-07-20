@@ -49,11 +49,11 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
             <Text preset="heading" tx="homeScreen.learning" />
             <ScrollView horizontal>
               <View style={$materialContainer}>
-                <MaterialCard />
-                <MaterialCard />
-                <MaterialCard />
-                <MaterialCard />
-                <MaterialCard />
+                {Array(5)
+                  .fill(0)
+                  .map((_, i) => (
+                    <MaterialCard key={i} onPress={() => navigation.navigate("Material")} />
+                  ))}
               </View>
             </ScrollView>
 

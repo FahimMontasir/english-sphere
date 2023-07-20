@@ -44,6 +44,7 @@ export type AppStackParamList = {
 	ChatReq: undefined
 	Message: undefined
 	LeaderBoard: undefined
+	Material: undefined
 	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -92,6 +93,7 @@ const AppStack = observer(function AppStack() {
 			<Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />
 			<Stack.Screen name="Message" component={Screens.MessageScreen} />
 			<Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
+			<Stack.Screen name="Material" component={Screens.MaterialScreen} />
 			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

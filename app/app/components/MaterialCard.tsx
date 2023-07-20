@@ -7,12 +7,13 @@ import {
   TextStyle,
   View,
   ViewStyle,
+  TouchableOpacityProps,
 } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, spacing } from "app/theme"
 import { Text } from "app/components/Text"
 
-export interface MaterialCardProps {
+export interface MaterialCardProps extends TouchableOpacityProps {
   /**
    * An optional style override useful for padding & margin.
    */
@@ -23,15 +24,11 @@ export interface MaterialCardProps {
  * Describe your component here
  */
 export const MaterialCard = observer(function MaterialCard(props: MaterialCardProps) {
-  const { style } = props
+  const { style, ...others } = props
   const $styles = [$container, style]
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      style={$touchableContainer}
-      onPress={() => console.log("card")}
-    >
+    <TouchableOpacity activeOpacity={0.8} style={$touchableContainer} {...others}>
       <ImageBackground
         style={$styles}
         source={{ uri: "https://i.pravatar.cc/300" }}
