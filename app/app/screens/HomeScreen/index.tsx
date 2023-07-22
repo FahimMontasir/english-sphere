@@ -41,7 +41,7 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
             </View>
 
             <View style={$instaTalkContainer}>
-              <Icon icon="instaTalk" size={100} onPress={() => console.log("hi")} />
+              <Icon icon="instaTalk" size={100} onPress={() => navigation.navigate("Welcome")} />
               <Text preset="subheading" tx="homeScreen.voice" />
             </View>
 

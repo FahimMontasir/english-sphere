@@ -17,7 +17,7 @@ import { useColorScheme } from "react-native"
 import * as Screens from "app/screens"
 import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
+import { DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 
 /**
@@ -34,19 +34,19 @@ import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined
   Login: undefined // @demo remove-current-line
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
+  Welcome: undefined
   Home: undefined
   Account: undefined
   Chat: undefined
-	ChatReq: undefined
-	Message: undefined
-	LeaderBoard: undefined
-	Material: undefined
-	MaterialDetails: undefined
-	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  ChatReq: undefined
+  Message: undefined
+  LeaderBoard: undefined
+  Material: undefined
+  MaterialDetails: undefined
+  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -88,15 +88,16 @@ const AppStack = observer(function AppStack() {
       )}
       {/* @demo remove-block-end */}
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
       <Stack.Screen name="Home" component={Screens.HomeScreen} />
       <Stack.Screen name="Account" component={Screens.AccountScreen} />
       <Stack.Screen name="Chat" component={Screens.ChatScreen} />
-			<Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />
-			<Stack.Screen name="Message" component={Screens.MessageScreen} />
-			<Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
-			<Stack.Screen name="Material" component={Screens.MaterialScreen} />
-			<Stack.Screen name="MaterialDetails" component={Screens.MaterialDetailsScreen} />
-			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />
+      <Stack.Screen name="Message" component={Screens.MessageScreen} />
+      <Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
+      <Stack.Screen name="Material" component={Screens.MaterialScreen} />
+      <Stack.Screen name="MaterialDetails" component={Screens.MaterialDetailsScreen} />
+      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })
