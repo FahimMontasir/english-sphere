@@ -3,6 +3,7 @@ import {
   Image,
   ImageStyle,
   StyleProp,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
@@ -17,6 +18,9 @@ export interface MaterialTileProps extends TouchableOpacityProps {
   imgUri?: string
   heading?: string
   details?: string
+  textStyle?: StyleProp<TextStyle>
+  imageStyle?: StyleProp<ImageStyle>
+  textContainerStyle?: StyleProp<ViewStyle>
 }
 
 export const MaterialTile = observer(function MaterialTile(props: MaterialTileProps) {
@@ -25,17 +29,20 @@ export const MaterialTile = observer(function MaterialTile(props: MaterialTilePr
     imgUri = "https://i.pravatar.cc/300",
     heading = "The best way to learn future tense quic",
     details = "alkssfj alfjalk;jfla;jdf j dfjojri lueoriu sf oiru orije dfjl;sd dlf sl oeoi ldf eoi ru dlfjls; dlfjk sdlf ldkfj sdfjsdf dslkfj dsfsldfk",
+    textStyle,
+    textContainerStyle,
+    imageStyle,
     ...WrapperProps
   } = props
   const $styles = [$container, style]
 
   return (
     <TouchableOpacity {...WrapperProps} style={$styles} activeOpacity={0.8}>
-      <Image source={{ uri: imgUri }} resizeMode="cover" style={$image} />
+      <Image source={{ uri: imgUri }} resizeMode="cover" style={[$image, imageStyle]} />
 
-      <View style={$textContainer}>
-        <Text text={heading} preset="subheading" numberOfLines={1} />
-        <Text text={details} numberOfLines={2} />
+      <View style={[$textContainer, textContainerStyle]}>
+        <Text style={textStyle} text={heading} preset="subheading" numberOfLines={1} />
+        <Text style={textStyle} text={details} numberOfLines={2} />
       </View>
     </TouchableOpacity>
   )

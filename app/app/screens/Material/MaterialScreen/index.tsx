@@ -8,40 +8,40 @@ import { MaterialTile } from "./components/MaterialTile"
 
 // import { useStores } from "app/models"
 
-export const MaterialScreen: FC<AppStackScreenProps<"Material">> = observer(
-  function MaterialScreen() {
-    // Pull in one of our MST stores
-    // const { someStore, anotherStore } = useStores()
+export const MaterialScreen: FC<AppStackScreenProps<"Material">> = observer(function MaterialScreen(
+  _props,
+) {
+  // Pull in one of our MST stores
+  // const { someStore, anotherStore } = useStores()
+  const { navigation } = _props
+  return (
+    <Screen contentContainerStyle={$root} preset="fixed" safeAreaEdges={["top"]}>
+      <Text text="Basic English for Speaking" preset="heading" style={$topHeadingText} />
+      <Text text="Important Materials" preset="heading" style={$headingText} />
+      <ScrollView
+        horizontal
+        style={$importantContainer}
+        contentContainerStyle={$importantMaterialContentContainer}
+        showsHorizontalScrollIndicator={false}
+      >
+        {Array(5)
+          .fill(0)
+          .map((_, i) => (
+            <MaterialCard key={i} onPress={() => navigation.navigate("MaterialDetails")} />
+          ))}
+      </ScrollView>
+      <Text text="Recent Materials" preset="heading" style={$headingText} />
 
-    return (
-      <Screen contentContainerStyle={$root} preset="fixed" safeAreaEdges={["top"]}>
-        <Text text="Basic English for Speaking" preset="heading" style={$topHeadingText} />
-        <Text text="Important Materials" preset="heading" style={$headingText} />
-        <ScrollView
-          horizontal
-          style={$importantContainer}
-          contentContainerStyle={$importantMaterialContentContainer}
-          showsHorizontalScrollIndicator={false}
-        >
-          {Array(5)
-            .fill(0)
-            .map((_, i) => (
-              <MaterialCard key={i} />
-            ))}
-        </ScrollView>
-        <Text text="Recent Materials" preset="heading" style={$headingText} />
-
-        <FlatList
-          contentContainerStyle={$recentMaterialContentContainer}
-          data={Array(8)
-            .fill(0)
-            .map((_, i) => ({ name: i }))}
-          renderItem={() => <MaterialTile />}
-        />
-      </Screen>
-    )
-  },
-)
+      <FlatList
+        contentContainerStyle={$recentMaterialContentContainer}
+        data={Array(8)
+          .fill(0)
+          .map((_, i) => ({ name: i }))}
+        renderItem={() => <MaterialTile onPress={() => navigation.navigate("MaterialDetails")} />}
+      />
+    </Screen>
+  )
+})
 
 const $root: ViewStyle = { flex: 1 }
 
