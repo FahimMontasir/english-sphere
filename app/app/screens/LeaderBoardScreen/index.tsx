@@ -24,9 +24,10 @@ const data = [
 ]
 
 export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observer(
-  function LeaderBoardScreen() {
+  function LeaderBoardScreen(_props) {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
+    const { navigation } = _props
 
     return (
       <Screen contentContainerStyle={$root} preset="fixed" safeAreaEdges={["top"]}>
@@ -44,7 +45,11 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
           contentContainerStyle={$flatListContentContainer}
           data={data}
           renderItem={({ item }) => (
-            <Tile position={item.position} rightCaption={item.rightCaption} />
+            <Tile
+              onPress={() => navigation.navigate("Account")}
+              position={item.position}
+              rightCaption={item.rightCaption}
+            />
           )}
           showsVerticalScrollIndicator={false}
         />

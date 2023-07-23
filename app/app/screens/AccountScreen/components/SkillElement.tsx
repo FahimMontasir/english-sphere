@@ -1,37 +1,38 @@
 import * as React from "react"
-import { TextInput, TouchableOpacity, View, ViewStyle } from "react-native"
-import { Icon, TextField } from "app/components"
+import { View, ViewStyle } from "react-native"
+import { TextField } from "app/components"
 import { colors, spacing } from "app/theme"
 
 const SkillElement = () => {
-  const inputRef = React.useRef<TextInput>()
+  // const inputRef = React.useRef<TextInput>()
   const [value, setValue] = React.useState("React.js")
-  const [status, setStatus] = React.useState("disabled")
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [status, setStatus] = React.useState()
 
-  const onIconPress = () => {
-    setStatus(undefined)
-    // if (!inputRef.current.isFocused()) {
-    //   inputRef.current.focus()
-    // }
-  }
+  // const onIconPress = () => {
+  //   setStatus(undefined)
+  //   // if (!inputRef.current.isFocused()) {
+  //   //   inputRef.current.focus()
+  //   // }
+  // }
 
-  const RightIcon = () => {
-    return (
-      <TouchableOpacity onPress={onIconPress} activeOpacity={0.8} style={$rightIconContainer}>
-        <Icon icon="pen" size={20} />
-      </TouchableOpacity>
-    )
-  }
+  // const RightIcon = () => {
+  //   return (
+  //     <TouchableOpacity onPress={onIconPress} activeOpacity={0.8} style={$rightIconContainer}>
+  //       <Icon icon="pen" size={20} />
+  //     </TouchableOpacity>
+  //   )
+  // }
 
   return (
     <View style={$container}>
       <TextField
-        ref={inputRef}
+        // ref={inputRef}
         status={status as "disabled"}
         value={value}
         onChangeText={(t) => setValue(t)}
         inputWrapperStyle={$inputWrapper}
-        RightAccessory={RightIcon}
+        // RightAccessory={RightIcon}
       />
     </View>
   )
@@ -45,15 +46,15 @@ const $inputWrapper: ViewStyle = {
   borderWidth: 0,
   backgroundColor: colors.palette.white,
   borderRadius: spacing.sm,
-  overflow: "visible",
+  // overflow: "visible",
 }
 
-const $rightIconContainer: ViewStyle = {
-  backgroundColor: colors.background,
-  width: 35,
-  height: 35,
-  borderRadius: 35,
-  marginTop: -10,
-  alignItems: "center",
-  justifyContent: "center",
-}
+// const $rightIconContainer: ViewStyle = {
+//   backgroundColor: colors.background,
+//   width: 35,
+//   height: 35,
+//   borderRadius: 35,
+//   marginTop: -10,
+//   alignItems: "center",
+//   justifyContent: "center",
+// }

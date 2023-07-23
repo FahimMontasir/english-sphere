@@ -41,7 +41,7 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
             </View>
 
             <View style={$instaTalkContainer}>
-              <Icon icon="instaTalk" size={100} onPress={() => navigation.navigate("Welcome")} />
+              <Icon icon="instaTalk" size={100} onPress={() => navigation.navigate("InstaTalk")} />
               <Text preset="subheading" tx="homeScreen.voice" />
             </View>
 
@@ -60,7 +60,7 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
             {/* live stream */}
             <View style={$goLsContainer}>
               <Text preset="heading" tx="homeScreen.ls" />
-              <Button tx="homeScreen.lsBtn" />
+              <Button tx="homeScreen.lsBtn" onPress={() => navigation.navigate("LiveStreaming")} />
             </View>
           </>
         }
@@ -71,7 +71,9 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
         data={data}
         refreshing={refreshing}
         onRefresh={handleRefresh}
-        renderItem={({ item }) => <LSCard item={item} />}
+        renderItem={({ item }) => (
+          <LSCard onPress={() => navigation.navigate("LiveStreaming")} item={item} />
+        )}
       />
     </Screen>
   )

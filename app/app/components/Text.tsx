@@ -6,7 +6,7 @@ import { colors, typography } from "../theme"
 
 type Sizes = keyof typeof $sizeStyles
 type Weights = keyof typeof typography.primary
-type Presets = keyof typeof $presets
+export type TextPresets = keyof typeof $presets
 
 export interface TextProps extends RNTextProps {
   /**
@@ -29,7 +29,7 @@ export interface TextProps extends RNTextProps {
   /**
    * One of the different types of text presets.
    */
-  preset?: Presets
+  preset?: TextPresets
   /**
    * Text weight modifier.
    */
@@ -56,7 +56,7 @@ export function Text(props: TextProps) {
   const i18nText = tx && translate(tx, txOptions)
   const content = i18nText || text || children
 
-  const preset: Presets = $presets[props.preset] ? props.preset : "default"
+  const preset: TextPresets = $presets[props.preset] ? props.preset : "default"
   const $styles = [
     $rtlStyle,
     $presets[preset],

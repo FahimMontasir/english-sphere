@@ -46,6 +46,8 @@ export type AppStackParamList = {
   LeaderBoard: undefined
   Material: undefined
   MaterialDetails: undefined
+  LiveStreaming: undefined
+  InstaTalk: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -71,10 +73,7 @@ const AppStack = observer(function AppStack() {
 
   // @demo remove-block-end
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName={"Home"} // @demo remove-current-line
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={"Welcome"}>
       {/* @demo remove-block-start */}
       {isAuthenticated ? (
         <>
@@ -97,6 +96,8 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
       <Stack.Screen name="Material" component={Screens.MaterialScreen} />
       <Stack.Screen name="MaterialDetails" component={Screens.MaterialDetailsScreen} />
+      <Stack.Screen name="LiveStreaming" component={Screens.LiveStreamingScreen} />
+      <Stack.Screen name="InstaTalk" component={Screens.InstaTalkScreen} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
