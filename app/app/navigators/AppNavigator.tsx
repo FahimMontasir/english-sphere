@@ -48,6 +48,7 @@ export type AppStackParamList = {
   MaterialDetails: undefined
   LiveStreaming: undefined
   InstaTalk: undefined
+  PrivacyPolicy: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -66,39 +67,37 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
-  // @demo remove-block-start
   const {
-    authenticationStore: { isAuthenticated },
+    authenticationStore: { isAuthenticated, authToken },
   } = useStores()
 
-  // @demo remove-block-end
+  console.log({ authToken, isAuthenticated })
+
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={"Welcome"}>
-      {/* @demo remove-block-start */}
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={isAuthenticated ? "Home" : "Welcome"}
+    >
       {isAuthenticated ? (
         <>
-          {/* @demo remove-block-end */}
-          {/* <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} /> */}
-          {/* @demo remove-block-start */}
-          {/* <Stack.Screen name="Demo" component={DemoNavigator} /> */}
+          <Stack.Screen name="Home" component={Screens.HomeScreen} />
+          <Stack.Screen name="Account" component={Screens.AccountScreen} />
+          <Stack.Screen name="Chat" component={Screens.ChatScreen} />
+          <Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />
+          <Stack.Screen name="Message" component={Screens.MessageScreen} />
+          <Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
+          <Stack.Screen name="Material" component={Screens.MaterialScreen} />
+          <Stack.Screen name="MaterialDetails" component={Screens.MaterialDetailsScreen} />
+          <Stack.Screen name="LiveStreaming" component={Screens.LiveStreamingScreen} />
+          <Stack.Screen name="InstaTalk" component={Screens.InstaTalkScreen} />
         </>
       ) : (
-        <>{/* <Stack.Screen name="Login" component={Screens.LoginScreen} /> */}</>
+        <>
+          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+          <Stack.Screen name="Login" component={Screens.LoginScreen} />
+          <Stack.Screen name="PrivacyPolicy" component={Screens.PrivacyPolicyScreen} />
+        </>
       )}
-      {/* @demo remove-block-end */}
-      {/** 🔥 Your screens go here */}
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-      <Stack.Screen name="Home" component={Screens.HomeScreen} />
-      <Stack.Screen name="Account" component={Screens.AccountScreen} />
-      <Stack.Screen name="Chat" component={Screens.ChatScreen} />
-      <Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />
-      <Stack.Screen name="Message" component={Screens.MessageScreen} />
-      <Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
-      <Stack.Screen name="Material" component={Screens.MaterialScreen} />
-      <Stack.Screen name="MaterialDetails" component={Screens.MaterialDetailsScreen} />
-      <Stack.Screen name="LiveStreaming" component={Screens.LiveStreamingScreen} />
-      <Stack.Screen name="InstaTalk" component={Screens.InstaTalkScreen} />
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

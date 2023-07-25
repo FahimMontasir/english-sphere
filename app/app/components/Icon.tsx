@@ -118,6 +118,10 @@ export const iconRegistry = {
   send: require("../../assets/icons/send.png"),
   endCall: require("../../assets/icons/end-call.png"),
   dot: require("../../assets/icons/dot.png"),
+  logout: require("../../assets/icons/logout.png"),
+  ban: require("../../assets/icons/ban.png"),
+  eng: require("../../assets/icons/eng.png"),
+  google: require("../../assets/icons/google.png"),
 }
 
 const $imageStyle: ImageStyle = {

@@ -12,6 +12,7 @@
 import { applySnapshot, IDisposer, onSnapshot } from "mobx-state-tree"
 import { RootStore, RootStoreSnapshot } from "../RootStore"
 import * as storage from "../../utils/storage"
+import { SECURE_JWT_KEY, secureLoad } from "app/utils/storage/secureStorageAsync"
 
 /**
  * The key we'll be saving our state as within async storage.
@@ -24,10 +25,18 @@ const ROOT_STATE_STORAGE_KEY = "root-v1"
 let _disposer: IDisposer
 export async function setupRootStore(rootStore: RootStore) {
   let restoredState: RootStoreSnapshot | undefined | null
+  let secureToken: string | null
 
   try {
-    // load the last known state from AsyncStorage
-    restoredState = (await storage.load(ROOT_STATE_STORAGE_KEY)) as RootStoreSnapshot | null
+    // load the last known state from mmkv
+    const others = storage.load(ROOT_STATE_STORAGE_KEY) as RootStoreSnapshot
+    secureToken = await secureLoad(SECURE_JWT_KEY)
+
+    restoredState = {
+      ...others,
+      authenticationStore: { ...others.authenticationStore, authToken: secureToken },
+    } as RootStoreSnapshot | null
+
     applySnapshot(rootStore, restoredState)
   } catch (e) {
     // if there's any problems loading, then inform the dev what happened

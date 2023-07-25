@@ -5,6 +5,7 @@ import { I18nManager } from "react-native"
 // if English isn't your default language, move Translations to the appropriate language file.
 import en, { Translations } from "./en"
 import bn from "./bn"
+import { loadString } from "app/utils/storage"
 
 i18n.fallbacks = true
 /**
@@ -15,7 +16,7 @@ i18n.fallbacks = true
 i18n.translations = { bn, bn_BD: bn, en, "en-US": en }
 
 // use this to change lan manually
-i18n.locale = Localization.locale
+i18n.locale = loadString("lang") || "en"
 
 // handle RTL languages
 export const isRTL = Localization.isRTL

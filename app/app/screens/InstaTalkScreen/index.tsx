@@ -4,6 +4,7 @@ import { ImageStyle, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Icon, Screen, UserCard } from "app/components"
 import { colors } from "app/theme"
+import CameraVerification from "app/components/CameraVerification"
 
 // import { useStores } from "app/models"
 
@@ -21,6 +22,7 @@ export const InstaTalkScreen: FC<AppStackScreenProps<"InstaTalk">> = observer(
           rejectText="Next"
           textPreset="heading"
         />
+        <CameraVerification />
         <Icon
           icon="endCall"
           onPress={() => navigation.navigate("Home")}

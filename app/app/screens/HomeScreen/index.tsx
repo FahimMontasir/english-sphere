@@ -1,16 +1,22 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ViewStyle, TouchableOpacity, FlatList, ScrollView } from "react-native"
+import {
+  View,
+  ViewStyle,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+  Image,
+  ImageStyle,
+} from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { spacing } from "app/theme"
 // components
-import { AutoImage, Button, Icon, MaterialCard, Screen, Text } from "app/components"
+import { Button, Icon, MaterialCard, Screen, Text } from "app/components"
 import { LSCard } from "./components/LSCard"
 // hooks
 import { useHomeScreen } from "./useHomeScreen"
 // import { useStores } from "app/models"
-// assets
-const defaultAccImage = require("../../../assets/icons/view.png")
 
 export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function HomeScreen(_props) {
   const { navigation } = _props
@@ -26,10 +32,9 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
           <>
             <View style={$topContainer}>
               <TouchableOpacity style={$avatar} onPress={() => navigation.navigate("Account")}>
-                <AutoImage
-                  maxWidth={50}
-                  maxHeight={50}
-                  defaultSource={defaultAccImage}
+                <Image
+                  style={$avatarImg}
+                  resizeMode="contain"
                   source={{ uri: "https://i.pravatar.cc/50" }}
                 />
               </TouchableOpacity>
@@ -97,6 +102,7 @@ const $avatar: ViewStyle = {
   borderRadius: 50,
   overflow: "hidden",
 }
+const $avatarImg: ImageStyle = { width: 50, height: 50 }
 
 const $instaTalkContainer: ViewStyle = {
   alignItems: "center",

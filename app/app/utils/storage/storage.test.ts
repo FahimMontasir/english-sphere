@@ -1,11 +1,12 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { MMKV } from "react-native-mmkv"
 import { load, loadString, save, saveString, clear, remove } from "./storage"
+const storage = new MMKV()
 
 // fixtures
 const VALUE_OBJECT = { x: 1 }
 const VALUE_STRING = JSON.stringify(VALUE_OBJECT)
 
-beforeEach(() => (AsyncStorage.getItem as jest.Mock).mockReturnValue(Promise.resolve(VALUE_STRING)))
+beforeEach(() => (storage.getString as jest.Mock).mockReturnValue(Promise.resolve(VALUE_STRING)))
 afterEach(() => jest.clearAllMocks())
 
 test("load", async () => {
@@ -20,20 +21,20 @@ test("loadString", async () => {
 
 test("save", async () => {
   await save("something", VALUE_OBJECT)
-  expect(AsyncStorage.setItem).toHaveBeenCalledWith("something", VALUE_STRING)
+  expect(storage.set).toHaveBeenCalledWith("something", VALUE_STRING)
 })
 
 test("saveString", async () => {
   await saveString("something", VALUE_STRING)
-  expect(AsyncStorage.setItem).toHaveBeenCalledWith("something", VALUE_STRING)
+  expect(storage.set).toHaveBeenCalledWith("something", VALUE_STRING)
 })
 
 test("remove", async () => {
   await remove("something")
-  expect(AsyncStorage.removeItem).toHaveBeenCalledWith("something")
+  expect(storage.delete).toHaveBeenCalledWith("something")
 })
 
 test("clear", async () => {
   await clear()
-  expect(AsyncStorage.clear).toHaveBeenCalledWith()
+  expect(storage.clearAll).toHaveBeenCalledWith()
 })

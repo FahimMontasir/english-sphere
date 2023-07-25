@@ -14,7 +14,7 @@ const en = {
   accountScreen: {
     position: "Position:",
     skill: "Skill",
-    logNHistory: "Insta Talk Logs and Notifications",
+    logNHistory: "Insta Logs and Notifications",
     loadBtn: "Load More",
   },
   chatScreen: {

@@ -12,10 +12,10 @@
  *
  * @refresh reset
  */
-import { Platform } from "react-native"
+// import { Platform } from "react-native"
 import { Reactotron } from "./reactotronClient"
 import { ArgType } from "reactotron-core-client"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+// import AsyncStorage from "@react-native-async-storage/async-storage"
 import { onSnapshot } from "mobx-state-tree"
 import { mst } from "reactotron-mst"
 import { RootStore, RootStoreSnapshot } from "../../models/RootStore"
@@ -103,14 +103,14 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
     })
 
     // hookup middleware
-    if (Platform.OS !== "web") {
-      if (config.useAsyncStorage) {
-        Reactotron.setAsyncStorageHandler(AsyncStorage)
-      }
-      Reactotron.useReactNative({
-        asyncStorage: config.useAsyncStorage ? undefined : false,
-      })
-    }
+    // if (Platform.OS !== "web") {
+    //   if (config.useAsyncStorage) {
+    //     Reactotron.setAsyncStorageHandler(AsyncStorage)
+    //   }
+    //   Reactotron.useReactNative({
+    //     asyncStorage: config.useAsyncStorage ? undefined : false,
+    //   })
+    // }
 
     // ignore some chatty `mobx-state-tree` actions
     const RX = /postProcessSnapshot|@APPLY_SNAPSHOT/

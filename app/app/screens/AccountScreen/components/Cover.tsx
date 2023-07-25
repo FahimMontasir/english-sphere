@@ -4,9 +4,19 @@ import { ImageBackground, ImageStyle, TouchableOpacity, View, ViewStyle } from "
 import { Icon, Text } from "app/components"
 import { colors, spacing } from "app/theme"
 import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
+import { SECURE_JWT_KEY, secureDelete } from "app/utils/storage/secureStorageAsync"
 
-const Cover = observer(function Cover() {
+interface ICover {
+  logout: () => void
+}
+
+const Cover = observer(function Cover({ logout }: ICover) {
   const $coverContainerInsets = useSafeAreaInsetsStyle(["top"])
+
+  const handleLogout = async () => {
+    await secureDelete(SECURE_JWT_KEY)
+    logout()
+  }
 
   return (
     <ImageBackground
@@ -22,16 +32,25 @@ const Cover = observer(function Cover() {
         </View>
       </View>
 
-      <ImageBackground
-        imageStyle={$profilePhotoImage}
-        style={$profilePhotoContainer}
-        source={{ uri: "https://i.pravatar.cc/300" }}
-        resizeMode="cover"
-      >
-        <TouchableOpacity activeOpacity={0.8} style={$profilePhotoCameraContainer}>
-          <Icon icon="camera" size={20} color={colors.palette.black} />
-        </TouchableOpacity>
-      </ImageBackground>
+      <View style={[$coverRightContentContainer, $coverContainerInsets]}>
+        <Icon
+          onPress={handleLogout}
+          icon="logout"
+          size={25}
+          color={colors.palette.white}
+          style={$logoutIcon}
+        />
+        <ImageBackground
+          imageStyle={$profilePhotoImage}
+          style={$profilePhotoContainer}
+          source={{ uri: "https://i.pravatar.cc/300" }}
+          resizeMode="cover"
+        >
+          <TouchableOpacity activeOpacity={0.8} style={$profilePhotoCameraContainer}>
+            <Icon icon="camera" size={20} color={colors.palette.black} />
+          </TouchableOpacity>
+        </ImageBackground>
+      </View>
     </ImageBackground>
   )
 })
@@ -50,8 +69,18 @@ const $coverLeftContentContainer: ViewStyle = {
   justifyContent: "space-between",
 }
 
+const $coverRightContentContainer: ViewStyle = {
+  height: "100%",
+  justifyContent: "space-between",
+  alignItems: "flex-end",
+}
+
 const $cameraIcon: ImageStyle = {
   marginLeft: spacing.sm,
+}
+
+const $logoutIcon: ImageStyle = {
+  marginRight: spacing.sm,
 }
 
 const $userNameContainer: ViewStyle = {

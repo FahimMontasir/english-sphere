@@ -1,3 +1,4 @@
+import { loadString, saveString } from "app/utils/storage"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
 export const AuthenticationStoreModel = types
@@ -5,6 +6,7 @@ export const AuthenticationStoreModel = types
   .props({
     authToken: types.maybe(types.string),
     authEmail: "",
+    lang: loadString("lang") || "en",
   })
   .views((store) => ({
     get isAuthenticated() {
@@ -29,9 +31,12 @@ export const AuthenticationStoreModel = types
       store.authToken = undefined
       store.authEmail = ""
     },
+    toggleLang() {
+      const toggled = store.lang === "en" ? "bn" : "en"
+      store.lang = toggled
+      saveString("lang", toggled)
+    },
   }))
 
 export interface AuthenticationStore extends Instance<typeof AuthenticationStoreModel> {}
 export interface AuthenticationStoreSnapshot extends SnapshotOut<typeof AuthenticationStoreModel> {}
-
-// @demo remove-file

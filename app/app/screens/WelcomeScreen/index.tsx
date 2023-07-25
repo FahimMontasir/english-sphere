@@ -18,7 +18,7 @@ export const WelcomeScreen: FC<AppStackScreenProps<"Welcome">> = observer(functi
 
   function goNext() {
     setPlaying(false)
-    navigation.navigate("Home")
+    navigation.navigate("Login")
   }
 
   const $bottomContainerInsets = useSafeAreaInsetsStyle(["bottom"])

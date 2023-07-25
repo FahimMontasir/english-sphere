@@ -3,6 +3,8 @@ import React from "react"
 import { StyleProp, Text as RNText, TextProps as RNTextProps, TextStyle } from "react-native"
 import { isRTL, translate, TxKeyPath } from "../i18n"
 import { colors, typography } from "../theme"
+import { useStores } from "app/models"
+import { observer } from "mobx-react-lite"
 
 type Sizes = keyof typeof $sizeStyles
 type Weights = keyof typeof typography.primary
@@ -50,7 +52,12 @@ export interface TextProps extends RNTextProps {
  *
  * - [Documentation and Examples](https://github.com/infinitered/ignite/blob/master/docs/Components-Text.md)
  */
-export function Text(props: TextProps) {
+export const Text = observer(function Text(props: TextProps) {
+  const {
+    authenticationStore: { lang },
+  } = useStores()
+  i18n.locale = lang
+
   const { weight, size, tx, txOptions, text, children, style: $styleOverride, ...rest } = props
 
   const i18nText = tx && translate(tx, txOptions)
@@ -70,7 +77,7 @@ export function Text(props: TextProps) {
       {content}
     </RNText>
   )
-}
+})
 
 const $sizeStyles = {
   xxl: { fontSize: 36, lineHeight: 44 } satisfies TextStyle,

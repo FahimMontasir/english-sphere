@@ -7,14 +7,16 @@ import Cover from "./components/Cover"
 import { colors, spacing } from "app/theme"
 import Skill from "./components/Skill"
 import NotiLogs from "./components/NotiLogs"
+import { useStores } from "app/models"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(function AccountScreen(
   _props,
 ) {
-  // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
+  const {
+    authenticationStore: { logout },
+  } = useStores()
   const { navigation } = _props
 
   return (
@@ -24,7 +26,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
       contentContainerStyle={$contentContainerStyle}
       preset="scroll"
     >
-      <Cover />
+      <Cover logout={logout} />
 
       {/* position section */}
       <View style={$positionTextContainer}>
