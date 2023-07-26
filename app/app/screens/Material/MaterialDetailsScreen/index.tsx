@@ -1,13 +1,14 @@
 import React, { FC } from "react"
 import Markdown from "react-native-marked"
 import { observer } from "mobx-react-lite"
-import { Image, ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { TextStyle, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Screen, Text } from "app/components"
 import { colors, spacing } from "app/theme"
 import getMarkdownStyles from "./styles/styleCustomization"
 import { markdownRenderer } from "./Components/ComponentCustomization"
 import { Drawer } from "./Components/Drawer"
+import { FastImage, FastImageStyle } from "app/components/FastImage"
 // import { useStores } from "app/models"
 
 export const MaterialDetailsScreen: FC<AppStackScreenProps<"MaterialDetails">> = observer(
@@ -31,11 +32,7 @@ export const MaterialDetailsScreen: FC<AppStackScreenProps<"MaterialDetails">> =
               contentContainerStyle: $markdownContentContainer,
               ListHeaderComponent: (
                 <>
-                  <Image
-                    style={$coverImage}
-                    source={{ uri: "https://i.pravatar.cc/600" }}
-                    resizeMode="cover"
-                  />
+                  <FastImage style={$coverImage} uri="https://i.pravatar.cc/600" />
                   <Text text="Heading from server" preset="heading" style={$headingText} />
                   <Text text="short description text will be placed here!! It will not be more than two line" />
                 </>
@@ -53,7 +50,7 @@ const $root: ViewStyle = {
   flex: 1,
 }
 
-const $coverImage: ImageStyle = {
+const $coverImage: FastImageStyle = {
   height: 150,
   marginHorizontal: -spacing.sm,
 }

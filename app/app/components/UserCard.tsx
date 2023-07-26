@@ -1,25 +1,20 @@
 import * as React from "react"
-import { ImageStyle, StyleProp, View, ViewStyle, ViewProps, Image } from "react-native"
+import { StyleProp, View, ViewStyle, ViewProps } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, spacing } from "app/theme"
 import { Text, TextPresets } from "app/components/Text"
 import { Button } from "./Button"
+import { FastImage, FastImageStyle } from "./FastImage"
 
 export interface UserCardProps extends ViewProps {
-  /**
-   * An optional style override useful for padding & margin.
-   */
   style?: StyleProp<ViewStyle>
-  imageStyle?: StyleProp<ImageStyle>
+  imageStyle?: StyleProp<FastImageStyle>
   buttonContainerStyle?: StyleProp<ViewStyle>
   acceptText?: string
   rejectText?: string
   textPreset?: TextPresets
 }
 
-/**
- * Describe your component here
- */
 export const UserCard = observer(function UserCard(props: UserCardProps) {
   const {
     style,
@@ -34,9 +29,9 @@ export const UserCard = observer(function UserCard(props: UserCardProps) {
 
   return (
     <View style={$styles} {...others}>
-      <Image
-        source={{ uri: "https://i.pravatar.cc/500" }}
-        resizeMode="cover"
+      <FastImage
+        uri="https://i.pravatar.cc/500"
+        priority="high"
         style={[$pendingUserImg, imageStyle]}
       />
       <Text text="Atel Montasir" preset={textPreset} />
@@ -48,7 +43,7 @@ export const UserCard = observer(function UserCard(props: UserCardProps) {
   )
 })
 
-const $container: ImageStyle = {
+const $container: ViewStyle = {
   alignItems: "center",
   gap: spacing.xxs,
   backgroundColor: colors.palette.white,
@@ -58,7 +53,7 @@ const $container: ImageStyle = {
 
 const $buttonContainer: ViewStyle = { flexDirection: "row", columnGap: spacing.xxs }
 
-const $pendingUserImg: ImageStyle = {
+const $pendingUserImg: FastImageStyle = {
   height: 80,
   width: 80,
   borderRadius: spacing.xs,

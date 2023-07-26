@@ -1,7 +1,5 @@
 import React from "react"
 import {
-  Image,
-  ImageStyle,
   StyleProp,
   TextStyle,
   TouchableOpacity,
@@ -12,6 +10,7 @@ import {
 import { observer } from "mobx-react-lite"
 import { colors, spacing } from "app/theme"
 import { Text } from "app/components"
+import { FastImage, FastImageStyle } from "app/components/FastImage"
 
 export interface MaterialTileProps extends TouchableOpacityProps {
   style?: StyleProp<ViewStyle>
@@ -19,7 +18,7 @@ export interface MaterialTileProps extends TouchableOpacityProps {
   heading?: string
   details?: string
   textStyle?: StyleProp<TextStyle>
-  imageStyle?: StyleProp<ImageStyle>
+  imageStyle?: StyleProp<FastImageStyle>
   textContainerStyle?: StyleProp<ViewStyle>
 }
 
@@ -38,7 +37,7 @@ export const MaterialTile = observer(function MaterialTile(props: MaterialTilePr
 
   return (
     <TouchableOpacity {...WrapperProps} style={$styles} activeOpacity={0.8}>
-      <Image source={{ uri: imgUri }} resizeMode="cover" style={[$image, imageStyle]} />
+      <FastImage uri={imgUri} style={[$image, imageStyle]} />
 
       <View style={[$textContainer, textContainerStyle]}>
         <Text style={textStyle} text={heading} preset="subheading" numberOfLines={1} />
@@ -59,6 +58,6 @@ const $container: ViewStyle = {
   height: 80,
 }
 
-const $image: ImageStyle = { height: "100%", width: 100 }
+const $image: FastImageStyle = { height: "100%", width: 100 }
 
 const $textContainer: ViewStyle = { justifyContent: "center", width: "70%", gap: 5 }

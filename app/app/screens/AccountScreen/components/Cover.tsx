@@ -1,16 +1,21 @@
 import * as React from "react"
 import { observer } from "mobx-react-lite"
-import { ImageBackground, ImageStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+import { ImageBackground, ImageStyle, View, ViewStyle } from "react-native"
 import { Icon, Text } from "app/components"
 import { colors, spacing } from "app/theme"
 import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
 import { SECURE_JWT_KEY, secureDelete } from "app/utils/storage/secureStorageAsync"
+import CameraVerification from "app/components/CameraVerification"
+import { CameraType } from "expo-camera"
 
 interface ICover {
   logout: () => void
 }
 
 const Cover = observer(function Cover({ logout }: ICover) {
+  const [closedCameraP, setClosedCameraP] = React.useState(true)
+  const [closedCameraC, setClosedCameraC] = React.useState(true)
+
   const $coverContainerInsets = useSafeAreaInsetsStyle(["top"])
 
   const handleLogout = async () => {
@@ -19,39 +24,56 @@ const Cover = observer(function Cover({ logout }: ICover) {
   }
 
   return (
-    <ImageBackground
-      style={$coverContainer}
-      source={{ uri: "https://i.pravatar.cc/300" }}
-      resizeMode="cover"
-    >
-      <View style={[$coverLeftContentContainer, $coverContainerInsets]}>
-        <Icon style={$cameraIcon} icon="camera" size={25} color={colors.palette.white} />
-        <View style={$userNameContainer}>
-          <Text text="Fahim Montasir" preset="subheading" numberOfLines={1} />
-          <Icon icon="pen" size={20} color={colors.palette.black} />
+    <>
+      <ImageBackground
+        style={$coverContainer}
+        source={{ uri: "https://i.pravatar.cc/300" }}
+        resizeMode="cover"
+      >
+        <View style={[$coverLeftContentContainer, $coverContainerInsets]}>
+          <Icon
+            onPress={() => setClosedCameraC(false)}
+            containerStyle={$cameraIcon}
+            icon="camera"
+            size={25}
+            color={colors.palette.white}
+          />
+          <View style={$userNameContainer}>
+            <Text text="Fahim Montasir" preset="subheading" numberOfLines={1} />
+            <Icon icon="pen" size={20} color={colors.palette.black} />
+          </View>
         </View>
-      </View>
 
-      <View style={[$coverRightContentContainer, $coverContainerInsets]}>
-        <Icon
-          onPress={handleLogout}
-          icon="logout"
-          size={25}
-          color={colors.palette.white}
-          style={$logoutIcon}
-        />
-        <ImageBackground
-          imageStyle={$profilePhotoImage}
-          style={$profilePhotoContainer}
-          source={{ uri: "https://i.pravatar.cc/300" }}
-          resizeMode="cover"
-        >
-          <TouchableOpacity activeOpacity={0.8} style={$profilePhotoCameraContainer}>
-            <Icon icon="camera" size={20} color={colors.palette.black} />
-          </TouchableOpacity>
-        </ImageBackground>
-      </View>
-    </ImageBackground>
+        <View style={[$coverRightContentContainer, $coverContainerInsets]}>
+          <Icon
+            onPress={handleLogout}
+            icon="logout"
+            size={25}
+            color={colors.palette.white}
+            style={$logoutIcon}
+          />
+          <ImageBackground
+            imageStyle={$profilePhotoImage}
+            style={$profilePhotoContainer}
+            source={{ uri: "https://i.pravatar.cc/300" }}
+            resizeMode="cover"
+          >
+            <Icon
+              onPress={() => setClosedCameraP(false)}
+              containerStyle={$profilePhotoCameraContainer}
+              icon="camera"
+              size={20}
+              color={colors.palette.black}
+            />
+          </ImageBackground>
+        </View>
+      </ImageBackground>
+
+      {!closedCameraP && <CameraVerification handleCloseCamera={setClosedCameraP} />}
+      {!closedCameraC && (
+        <CameraVerification handleCloseCamera={setClosedCameraC} cameraType={CameraType.back} />
+      )}
+    </>
   )
 })
 
@@ -77,6 +99,7 @@ const $coverRightContentContainer: ViewStyle = {
 
 const $cameraIcon: ImageStyle = {
   marginLeft: spacing.sm,
+  width: 25,
 }
 
 const $logoutIcon: ImageStyle = {

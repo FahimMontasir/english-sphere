@@ -1,23 +1,21 @@
 import React, { useState, useRef, useEffect } from "react"
-import {
-  StyleSheet,
-  Dimensions,
-  View,
-  Text,
-  TouchableOpacity,
-  ViewStyle,
-  TextStyle,
-} from "react-native"
+import { StyleSheet, View, TouchableOpacity, ViewStyle, TextStyle } from "react-native"
 import { Camera, CameraType } from "expo-camera"
-import { AntDesign, MaterialIcons } from "@expo/vector-icons"
+import Toast from "react-native-toast-message"
+import { colors } from "app/theme"
+import { Icon } from "./Icon"
+import { Text } from "./Text"
 
-const WINDOW_HEIGHT = Dimensions.get("window").height
-const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08)
+interface ICameraVerification {
+  cameraType?: CameraType
+  handleCloseCamera: (param: boolean) => void
+}
 
-export default function CameraVerification() {
+export default function CameraVerification(props: ICameraVerification) {
+  const { cameraType = CameraType.front, handleCloseCamera } = props
+
   const cameraRef = useRef<Camera>()
   const [permission, requestPermission] = Camera.useCameraPermissions()
-  const [cameraType, setCameraType] = useState(CameraType.front)
   const [isPreview, setIsPreview] = useState(false)
   const [isCameraReady, setIsCameraReady] = useState(false)
 
@@ -35,22 +33,12 @@ export default function CameraVerification() {
     setIsCameraReady(true)
   }
 
-  const switchCamera = () => {
-    if (isPreview) {
-      return
-    }
-    setCameraType((prevCameraType) =>
-      prevCameraType === CameraType.back ? CameraType.front : CameraType.back,
-    )
-  }
-
   const onSnap = async () => {
     if (cameraRef.current) {
       const options = { quality: 0.7, base64: true }
       const data = await cameraRef.current.takePictureAsync(options)
       const source = data.base64
 
-      console.log("form snap")
       if (source) {
         cameraRef.current.pausePreview()
         setIsPreview(true)
@@ -79,59 +67,86 @@ export default function CameraVerification() {
         //     alert("Cannot upload")
         //     console.log(err)
         //   })
+
+        Toast.show({
+          type: "success",
+          text1: "Your photo is uploaded successfully!",
+          onHide: () => {
+            cancelPreview()
+            handleCloseCamera(true)
+          },
+        })
       }
     }
   }
 
   const cancelPreview = () => {
-    cameraRef.current.resumePreview()
+    cameraRef.current?.resumePreview()
     setIsPreview(false)
   }
 
   if (!permission) {
-    return <Text style={$text}>No access to camera</Text>
+    return <View />
   }
 
   if (!permission.granted) {
-    return <Text style={$text}>No access to camera</Text>
+    return (
+      <View style={$container}>
+        <Text style={$warningText} text="Please allow access to use camera!!!" preset="heading" />
+      </View>
+    )
   }
 
   return (
-    <View style={StyleSheet.absoluteFillObject}>
+    <View style={$container}>
       <Camera
         ref={cameraRef}
-        style={StyleSheet.absoluteFillObject}
+        style={$cameraContainer}
+        autoFocus
         type={cameraType}
         onCameraReady={onCameraReady}
         useCamera2Api={true}
       />
-      <View style={StyleSheet.absoluteFillObject}>
-        {isPreview && (
-          <TouchableOpacity onPress={cancelPreview} style={$closeButton} activeOpacity={0.7}>
-            <AntDesign name="close" size={32} color="#fff" />
-          </TouchableOpacity>
-        )}
+      <View style={StyleSheet.absoluteFill}>
         {!isPreview && (
-          <View style={$bottomButtonsContainer}>
-            <TouchableOpacity disabled={!isCameraReady} onPress={switchCamera}>
-              <MaterialIcons name="flip-camera-ios" size={28} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              disabled={!isCameraReady}
-              onPress={onSnap}
-              style={$capture}
+          <>
+            <Icon
+              onPress={() => handleCloseCamera(true)}
+              icon="x"
+              containerStyle={$closeButton}
+              size={32}
+              color={colors.palette.white}
             />
-          </View>
+            <View style={$bottomButtonsContainer}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                disabled={!isCameraReady}
+                onPress={onSnap}
+                style={$capture}
+              >
+                <Icon icon="camera" color={colors.palette.white} size={32} />
+              </TouchableOpacity>
+            </View>
+          </>
         )}
       </View>
     </View>
   )
 }
 
+const $container: ViewStyle = {
+  // flex: 1,
+  ...StyleSheet.absoluteFillObject,
+  zIndex: 9999,
+  justifyContent: "center",
+  backgroundColor: colors.background,
+}
+
+const $cameraContainer: ViewStyle = { width: "100%", height: "65%", marginTop: -50 }
+
 const $bottomButtonsContainer: ViewStyle = {
   alignItems: "center",
-  bottom: 28,
+  bottom: 25,
   flexDirection: "row",
   justifyContent: "center",
   position: "absolute",
@@ -139,27 +154,28 @@ const $bottomButtonsContainer: ViewStyle = {
 }
 
 const $capture: ViewStyle = {
-  backgroundColor: "#4834e0",
-  borderRadius: Math.floor(CAPTURE_SIZE / 2),
-  height: CAPTURE_SIZE,
-  marginBottom: 28,
-  marginHorizontal: 30,
-  width: CAPTURE_SIZE,
+  backgroundColor: colors.palette.indigo,
+  borderRadius: 25,
+  height: 80,
+  width: 80,
+  marginBottom: 25,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 const $closeButton: ViewStyle = {
   alignItems: "center",
-  backgroundColor: "#5A45FF",
+  backgroundColor: colors.palette.indigo,
   borderRadius: 25,
   height: 50,
   justifyContent: "center",
-  opacity: 0.7,
   position: "absolute",
   right: 20,
   top: 35,
   width: 50,
 }
 
-const $text: TextStyle = {
-  color: "#ffffff",
+const $warningText: TextStyle = {
+  color: colors.palette.red,
+  textAlign: "center",
 }

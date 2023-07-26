@@ -1,9 +1,11 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { Image, ImageStyle, View, ViewStyle, TouchableOpacity, FlatList } from "react-native"
+import { ImageStyle, View, ViewStyle, TouchableOpacity } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Icon, Screen, Text, UserCard } from "app/components"
 import { colors, spacing } from "app/theme"
+import { FastImage, FastImageStyle } from "app/components/FastImage"
+import { FlashList } from "@shopify/flash-list"
 // import { useStores } from "app/models"
 
 export const LiveStreamingScreen: FC<AppStackScreenProps<"LiveStreaming">> = observer(
@@ -21,11 +23,7 @@ export const LiveStreamingScreen: FC<AppStackScreenProps<"LiveStreaming">> = obs
           color={colors.palette.red}
           size={30}
         />
-        <Image
-          source={{ uri: "https://i.pravatar.cc/500" }}
-          resizeMode="cover"
-          style={$userVideo}
-        />
+        <FastImage uri="https://i.pravatar.cc/500" style={$userVideo} />
 
         <View style={$othersVideoContainer}>
           {Array(3)
@@ -46,11 +44,7 @@ export const LiveStreamingScreen: FC<AppStackScreenProps<"LiveStreaming">> = obs
                     onPress={() => console.log("remove")}
                   />
                 </TouchableOpacity>
-                <Image
-                  source={{ uri: "https://i.pravatar.cc/500" }}
-                  resizeMode="cover"
-                  style={$othersVideo}
-                />
+                <FastImage uri="https://i.pravatar.cc/500" style={$othersVideo} />
               </View>
             ))}
         </View>
@@ -58,9 +52,11 @@ export const LiveStreamingScreen: FC<AppStackScreenProps<"LiveStreaming">> = obs
         <Text text="Other users request" preset="heading" />
         <Text text="* You only can accept up to 3 users" />
 
-        <FlatList
+        <FlashList
           horizontal
           contentContainerStyle={$requestedUserContainer}
+          ItemSeparatorComponent={() => <View style={$flashListItemSeparator} />}
+          estimatedItemSize={100}
           data={Array(10)
             .fill(0)
             .map((_, i) => ({ name: i }))}
@@ -78,7 +74,7 @@ const $root: ViewStyle = {
 
 const $endIcon: ImageStyle = { alignSelf: "flex-end", marginTop: spacing.md }
 
-const $userVideo: ImageStyle = {
+const $userVideo: FastImageStyle = {
   height: 250,
   width: "100%",
   borderRadius: spacing.xs,
@@ -92,7 +88,7 @@ const $othersVideoContainer: ViewStyle = {
   marginBottom: spacing.xxxl,
 }
 
-const $othersVideo: ImageStyle = {
+const $othersVideo: FastImageStyle = {
   height: 100,
   width: 100,
   borderRadius: spacing.xs,
@@ -108,4 +104,6 @@ const $dotContainer: ViewStyle = {
   width: "100%",
 }
 
-const $requestedUserContainer: ViewStyle = { marginTop: spacing.sm, gap: 10 }
+const $requestedUserContainer: ViewStyle = { marginTop: spacing.sm }
+
+const $flashListItemSeparator: ViewStyle = { marginLeft: 10 }

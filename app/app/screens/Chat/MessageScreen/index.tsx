@@ -1,18 +1,11 @@
 import React, { FC, useEffect, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import {
-  FlatList,
-  NativeSyntheticEvent,
-  Image,
-  ImageStyle,
-  NativeScrollEvent,
-  View,
-  ViewStyle,
-} from "react-native"
+import { FlatList, NativeSyntheticEvent, NativeScrollEvent, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Icon, Screen, Text, TextField } from "app/components"
 import { colors, spacing } from "app/theme"
 import { Message } from "./components/Message"
+import { FastImage, FastImageStyle } from "app/components/FastImage"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -102,7 +95,7 @@ export const MessageScreen: FC<AppStackScreenProps<"Message">> = observer(functi
   return (
     <Screen contentContainerStyle={$contentContainer} preset="fixed" safeAreaEdges={["top"]}>
       <View style={$headerContainer}>
-        <Image source={{ uri: "https://i.pravatar.cc/300" }} resizeMode="cover" style={$image} />
+        <FastImage uri="https://i.pravatar.cc/300" style={$image} />
         <Text text="Fahim Montasir" preset="subheading" />
         <View style={$activeContainer}>
           <View style={$active} />
@@ -146,7 +139,7 @@ const $headerContainer: ViewStyle = {
   margin: spacing.sm,
 }
 
-const $image: ImageStyle = { height: 40, width: 40, borderRadius: 40 }
+const $image: FastImageStyle = { height: 40, width: 40, borderRadius: 40 }
 
 const $activeContainer: ViewStyle = { alignItems: "center" }
 

@@ -1,10 +1,10 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ImageStyle, ViewStyle } from "react-native"
+import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Icon, Screen, UserCard } from "app/components"
 import { colors } from "app/theme"
-import CameraVerification from "app/components/CameraVerification"
+import { FastImageStyle } from "app/components/FastImage"
 
 // import { useStores } from "app/models"
 
@@ -22,7 +22,7 @@ export const InstaTalkScreen: FC<AppStackScreenProps<"InstaTalk">> = observer(
           rejectText="Next"
           textPreset="heading"
         />
-        <CameraVerification />
+
         <Icon
           icon="endCall"
           onPress={() => navigation.navigate("Home")}
@@ -42,4 +42,4 @@ const $root: ViewStyle = {
 }
 
 const $userCardStyle: ViewStyle = { backgroundColor: "transparent", gap: 10 }
-const $userCardImageStyle: ImageStyle = { width: 250, height: 250 }
+const $userCardImageStyle: FastImageStyle = { width: 250, height: 250 }

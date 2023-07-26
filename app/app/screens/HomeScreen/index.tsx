@@ -1,14 +1,7 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import {
-  View,
-  ViewStyle,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-  Image,
-  ImageStyle,
-} from "react-native"
+import { View, ViewStyle, TouchableOpacity, ScrollView, TextStyle } from "react-native"
+import { FlashList } from "@shopify/flash-list"
 import { AppStackScreenProps } from "app/navigators"
 import { spacing } from "app/theme"
 // components
@@ -16,6 +9,8 @@ import { Button, Icon, MaterialCard, Screen, Text } from "app/components"
 import { LSCard } from "./components/LSCard"
 // hooks
 import { useHomeScreen } from "./useHomeScreen"
+import { FastImage, FastImageStyle } from "app/components/FastImage"
+import { openLinkInBrowser } from "app/utils/openLinkInBrowser"
 // import { useStores } from "app/models"
 
 export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function HomeScreen(_props) {
@@ -27,16 +22,12 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
 
   return (
     <Screen contentContainerStyle={$screenContentContainer} preset="fixed" safeAreaEdges={["top"]}>
-      <FlatList
+      <FlashList
         ListHeaderComponent={
           <>
             <View style={$topContainer}>
               <TouchableOpacity style={$avatar} onPress={() => navigation.navigate("Account")}>
-                <Image
-                  style={$avatarImg}
-                  resizeMode="contain"
-                  source={{ uri: "https://i.pravatar.cc/50" }}
-                />
+                <FastImage uri="https://i.pravatar.cc/50" priority="high" style={$avatarImg} />
               </TouchableOpacity>
               <Icon
                 icon="leaderBoard"
@@ -70,15 +61,25 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
           </>
         }
         numColumns={3}
-        columnWrapperStyle={$flatListColumnWrapper}
         contentContainerStyle={$flatListContentContainer}
         scrollEnabled
+        estimatedItemSize={100}
         data={data}
         refreshing={refreshing}
         onRefresh={handleRefresh}
         renderItem={({ item }) => (
           <LSCard onPress={() => navigation.navigate("LiveStreaming")} item={item} />
         )}
+        ListFooterComponent={
+          <View style={$footerContainer}>
+            <Text text="Made with ❤️ by " />
+            <Text
+              onPress={() => openLinkInBrowser("https://github.com/FahimMontasir")}
+              text="Fahim Montasir"
+              style={$fahimMontasir}
+            />
+          </View>
+        }
       />
     </Screen>
   )
@@ -102,7 +103,7 @@ const $avatar: ViewStyle = {
   borderRadius: 50,
   overflow: "hidden",
 }
-const $avatarImg: ImageStyle = { width: 50, height: 50 }
+const $avatarImg: FastImageStyle = { width: 50, height: 50 }
 
 const $instaTalkContainer: ViewStyle = {
   alignItems: "center",
@@ -137,7 +138,10 @@ const $flatListContentContainer: ViewStyle = {
   paddingHorizontal: spacing.sm,
 }
 
-const $flatListColumnWrapper: ViewStyle = {
-  columnGap: 10,
-  justifyContent: "center",
+const $footerContainer: ViewStyle = {
+  flexDirection: "row",
+  marginTop: spacing.xxxl,
+  alignSelf: "center",
 }
+
+const $fahimMontasir: TextStyle = { textDecorationLine: "underline", color: "blue" }

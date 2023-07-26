@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ImageStyle, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Icon, Screen, Text } from "app/components"
 import Cover from "./components/Cover"
@@ -33,9 +33,14 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
         <Text tx="accountScreen.position" />
         <Text text="400" />
       </View>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("Chat")}>
-        <Icon style={$chatIcon} icon="chat" size={30} color={colors.palette.black} />
-      </TouchableOpacity>
+
+      <Icon
+        onPress={() => navigation.navigate("Chat")}
+        containerStyle={$chatIcon}
+        icon="chat"
+        size={30}
+        color={colors.palette.black}
+      />
 
       <Skill />
 
@@ -53,6 +58,7 @@ const $positionTextContainer: TextStyle = {
   marginLeft: spacing.xs,
   flexDirection: "row",
   gap: spacing.xxs,
+  width: "50%",
 }
 
 const $chatIcon: ImageStyle = {

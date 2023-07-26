@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from "react"
-import { Dimensions, FlatList, Platform, View, ViewStyle } from "react-native"
+import { Dimensions, Platform, TextStyle, View, ViewStyle } from "react-native"
 import { DrawerLayout, DrawerState } from "react-native-gesture-handler"
 import { useSharedValue, withTiming } from "react-native-reanimated"
+import { FlashList } from "@shopify/flash-list"
 import { Text } from "app/components"
 import { isRTL } from "app/i18n"
 import { colors, spacing } from "app/theme"
@@ -23,7 +24,7 @@ export const Drawer: FC<IDrawer> = function Drawer(props) {
   const [open, setOpen] = useState(false)
   const timeout = useRef<ReturnType<typeof setTimeout>>()
   const drawerRef = useRef<DrawerLayout>()
-  const menuRef = useRef<FlatList>()
+  const menuRef = useRef<FlashList<any>>()
   const progress = useSharedValue(0)
 
   const toggleDrawer = () => {
@@ -67,11 +68,15 @@ export const Drawer: FC<IDrawer> = function Drawer(props) {
       }}
       renderNavigationView={() => (
         <View style={[$drawer, $drawerInsets]}>
-          <FlatList
+          <FlashList
             ref={menuRef}
-            ListHeaderComponent={<Text text="Recent Materials" preset="heading" />}
+            ListHeaderComponent={
+              <Text style={$materialsHeading} text="Recent Materials" preset="heading" />
+            }
             showsVerticalScrollIndicator={false}
+            estimatedItemSize={100}
             contentContainerStyle={$flatListContentContainer}
+            ItemSeparatorComponent={() => <View style={$flashListItemSeparator} />}
             data={Array(15)
               .fill(0)
               .map((_, i) => ({ name: i }))}
@@ -98,10 +103,13 @@ const $drawer: ViewStyle = {
   flex: 1,
 }
 
+const $materialsHeading: TextStyle = { marginBottom: spacing.sm }
+
 const $flatListContentContainer: ViewStyle = {
   paddingHorizontal: spacing.xs,
-  gap: spacing.xs,
   paddingVertical: 50,
 }
 
 const $materialTileTextContainer: ViewStyle = { width: "65%" }
+
+const $flashListItemSeparator: ViewStyle = { marginTop: 10 }

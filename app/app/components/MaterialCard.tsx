@@ -1,7 +1,5 @@
 import * as React from "react"
 import {
-  ImageBackground,
-  ImageStyle,
   StyleProp,
   TouchableOpacity,
   TextStyle,
@@ -12,34 +10,25 @@ import {
 import { observer } from "mobx-react-lite"
 import { colors, spacing } from "app/theme"
 import { Text } from "app/components/Text"
+import { FastImage, FastImageStyle } from "./FastImage"
 
 export interface MaterialCardProps extends TouchableOpacityProps {
-  /**
-   * An optional style override useful for padding & margin.
-   */
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<FastImageStyle>
 }
 
-/**
- * Describe your component here
- */
 export const MaterialCard = observer(function MaterialCard(props: MaterialCardProps) {
   const { style, ...others } = props
   const $styles = [$container, style]
 
   return (
     <TouchableOpacity activeOpacity={0.8} style={$touchableContainer} {...others}>
-      <ImageBackground
-        style={$styles}
-        source={{ uri: "https://i.pravatar.cc/300" }}
-        resizeMode="cover"
-      >
+      <FastImage style={$styles} uri="https://i.pravatar.cc/300" priority="high">
         <View style={$textContainer}>
           <Text numberOfLines={1} preset="subheading" style={$text}>
             English for Web developers
           </Text>
         </View>
-      </ImageBackground>
+      </FastImage>
     </TouchableOpacity>
   )
 })
@@ -49,7 +38,7 @@ const $touchableContainer: ViewStyle = {
   borderRadius: 8,
 }
 
-const $container: ImageStyle = {
+const $container: FastImageStyle = {
   width: 170,
   height: 80,
   justifyContent: "flex-end",

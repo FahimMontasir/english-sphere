@@ -1,9 +1,10 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { FlatList, View, ViewStyle } from "react-native"
+import { View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Icon, Screen, Text, TextField, Tile } from "app/components"
 import { spacing } from "app/theme"
+import { FlashList } from "@shopify/flash-list"
 // import { useStores } from "app/models"
 
 const data = [
@@ -31,7 +32,7 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
 
     return (
       <Screen contentContainerStyle={$root} preset="fixed" safeAreaEdges={["top"]}>
-        <FlatList
+        <FlashList
           ListHeaderComponent={
             <View style={$searchUserContainer}>
               <Text text="Your Position: 221" preset="subheading" />
@@ -43,6 +44,8 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
             </View>
           }
           contentContainerStyle={$flatListContentContainer}
+          ItemSeparatorComponent={() => <View style={$flashListItemSeparator} />}
+          estimatedItemSize={60}
           data={data}
           renderItem={({ item }) => (
             <Tile
@@ -73,4 +76,6 @@ const $searchUserContainer: ViewStyle = {
 
 const $searchInputWrapper: ViewStyle = { width: 180 }
 
-const $flatListContentContainer: ViewStyle = { gap: 10, paddingBottom: spacing.xl }
+const $flashListItemSeparator: ViewStyle = { marginTop: 10 }
+
+const $flatListContentContainer: ViewStyle = { paddingBottom: spacing.xl }

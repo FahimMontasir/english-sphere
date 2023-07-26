@@ -1,8 +1,6 @@
 import React, { ComponentType } from "react"
 import I18n from "i18n-js"
 import {
-  Image,
-  ImageStyle,
   StyleProp,
   TextStyle,
   TouchableOpacity,
@@ -15,6 +13,7 @@ import { colors, spacing } from "app/theme"
 import { Text } from "./Text"
 import { Icon } from "./Icon"
 import { TxKeyPath, translate } from "app/i18n"
+import { FastImage, FastImageStyle } from "./FastImage"
 
 export interface TileProps extends TouchableOpacityProps {
   style?: StyleProp<ViewStyle>
@@ -58,7 +57,7 @@ export const Tile = observer(function Tile(props: TileProps) {
           {isNoti ? (
             <Icon icon="bell" containerStyle={$notiIconContainer} size={30} />
           ) : (
-            <Image source={{ uri: imgUri }} resizeMode="cover" style={$image} />
+            <FastImage uri={imgUri} style={$image} />
           )}
           <Text text={headingContent} preset="subheading" />
         </View>
@@ -78,7 +77,7 @@ const $container: ViewStyle = {
   width: "100%",
 }
 
-const $image: ImageStyle = { height: 40, width: 40, borderRadius: 40 }
+const $image: FastImageStyle = { height: 40, width: 40, borderRadius: 40 }
 
 const $topContainer: ViewStyle = {
   flexDirection: "row",
