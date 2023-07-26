@@ -104,6 +104,6 @@ const $dotContainer: ViewStyle = {
   width: "100%",
 }
 
-const $requestedUserContainer: ViewStyle = { marginTop: spacing.sm }
+const $requestedUserContainer: ViewStyle = { paddingTop: spacing.sm }
 
 const $flashListItemSeparator: ViewStyle = { marginLeft: 10 }

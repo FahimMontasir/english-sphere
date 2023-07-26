@@ -7,7 +7,14 @@ import { FastImage, FastImageStyle } from "app/components/FastImage"
 
 class CustomRenderer extends Renderer implements RendererInterface {
   image(uri: string, _alt?: string, _style?: ImageStyle): ReactNode {
-    return <FastImage key={this.getKey()} style={_style as FastImageStyle} uri={uri} />
+    return (
+      <FastImage
+        key={this.getKey()}
+        style={_style as FastImageStyle}
+        uri={uri}
+        resizeMode="contain"
+      />
+    )
   }
 
   text(text: string, styles?: TextStyle): React.ReactNode {

@@ -1,4 +1,5 @@
-# flow: run the login flow and then navigate to the demo podcast list screen, favorite a podcast, and then switch the list to only be favorites.
+# TODO: Learn from this demo file
+#flow: run the login flow and then navigate to the demo podcast list screen, favorite a podcast, and then switch the list to only be favorites.
 
 appId: com.rseapp
 env:
@@ -34,5 +35,3 @@ env:
 - tapOn:
     text: ${FAVORITES_TEXT}
 - assertVisible: ${TITLE}
-
-# @demo remove-file
