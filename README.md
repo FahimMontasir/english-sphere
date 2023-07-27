@@ -1,16 +1,16 @@
 # Refactor Speaking: English for web developers
 
-This app is still `in active development`. If you want to evaluate my
-socket.io and/or WebRTC knowledge, check out [this project](https://github.com/FahimMontasir/socket.io). Get ready to
-witness my expertise in action!
+[![](https://markdown-videos.vercel.app/youtube/JOazi1u6M7g)](https://youtu.be/JOazi1u6M7g)
+
+This app is still `in active development`.
 
 ## `Features`
 
 1. realtime audio calling
-2. live stream
+2. live streaming
 3. related vocabulary and grammar lesson
-4. chatting with other learners
-5. post learning experience or materials
+4. chat with other learners
+5. materials
 6. book selling and purchasing
 7. learning materials
 
@@ -18,6 +18,8 @@ witness my expertise in action!
 
 ## `All Live Links`
 
+1. Mobile App
+   ![APP](assets/mobile-app-screens.png)
 1. [RSE: DASHBOARD](https://rse-dashboard-by-fahim-montasir.netlify.app/)
 1. [RSE: WEB](https://rse-by-fahim-montasir.netlify.app/)
 1. [RSE-SHOP: DASHBOARD](https://rse-shop-by-fahim-montasir.netlify.app/dashboard)
