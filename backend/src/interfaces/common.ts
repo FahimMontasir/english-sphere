@@ -1,3 +1,5 @@
+import { IUserRoles } from './user';
+
 export type IPaginationOptions = {
   page?: number;
   limit?: number;
@@ -12,4 +14,9 @@ export type IGenericPaginationResponse<T> = {
     total: number;
   };
   data: T;
+};
+
+export type IJwtPayload = {
+  _id: string;
+  role: IUserRoles;
 };

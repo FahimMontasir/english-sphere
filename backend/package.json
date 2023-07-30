@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@socket.io/admin-ui": "^0.5.1",
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -31,10 +31,11 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.2",
-    "@types/uuid": "^9.0.2",
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "eslint": "^8.43.0",

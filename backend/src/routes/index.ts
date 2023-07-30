@@ -1,5 +1,4 @@
 import express, { Router } from 'express';
-import { UserRoutes } from '../modules/rest/user/user.routes';
 import { FriendInvitationRoutes } from '../modules/rest/chat-req/friendInvitation.routes';
 
 const router = express.Router();
@@ -12,10 +11,6 @@ type IModuleRoutes = {
 // the routes/events of socket sever is inside socket.server.ts
 // route started with /api/v1
 const moduleRoutes: IModuleRoutes = [
-  {
-    path: '/user',
-    route: UserRoutes,
-  },
   {
     path: '/friend-invitation',
     route: FriendInvitationRoutes,

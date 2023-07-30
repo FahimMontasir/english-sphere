@@ -1,28 +1,32 @@
-import jwt, { Secret } from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
-import configs from '../../configs';
+import { NextFunction, Request, Response } from 'express';
+import { Secret } from 'jsonwebtoken';
 import ApiError from '../../errors/ApiError';
-import { DecodedUser } from '../../interfaces/user';
+import { JwtHelper } from '../../shared/jwtHelper';
+import configs from '../../configs';
+import { IUserRoles } from '../../interfaces/user';
 
-// replace user with appropriate type
-export const verifyToken = (
-  req: Request & { user?: DecodedUser },
-  res: Response,
-  next: NextFunction
-) => {
-  let token: string = req.body.token || req.query.token || req.headers['authorization'];
+const auth =
+  (...requiredRoles: IUserRoles[]) =>
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      //get authorization token
+      const token = req.headers.authorization;
+      if (!token) throw new ApiError(403, 'You are not authorized!');
 
-  if (!token) {
-    throw new ApiError(403, 'A token is required for authentication');
-  }
+      //verify token
+      const decoded = JwtHelper.verifyToken(token, configs.jwt.secret as Secret);
 
-  try {
-    token = token.replace(/^Bearer\s+/, '');
-    const decoded = jwt.verify(token, configs.token_key as Secret);
-    req.user = decoded as DecodedUser;
-  } catch (err) {
-    throw new ApiError(401, 'Invalid Token');
-  }
+      req.user = decoded;
 
-  return next();
-};
+      // role guard
+      if (requiredRoles.length && !requiredRoles.includes(decoded.role)) {
+        throw new ApiError(403, 'Forbidden');
+      }
+
+      return next();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+export default auth;

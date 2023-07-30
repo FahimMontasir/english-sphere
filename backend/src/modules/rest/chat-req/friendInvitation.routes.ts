@@ -2,7 +2,7 @@ import express from 'express';
 import validateRequest from '../../../middlewares/rest/validateRequest';
 import { FriendInvitationController } from './friendInvitation.controller';
 import { FriendInvitationValidation } from './friendInvitation.validation';
-import { verifyToken } from '../../../middlewares/rest/auth';
+import { verifyToken } from '../../../middlewares/rest/userAuth';
 
 const router = express.Router();
 

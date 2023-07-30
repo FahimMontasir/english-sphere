@@ -1,5 +1,5 @@
 {
-  "include": ["src", "src/modules/socket/demo-all/main.controller.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "es2016",
