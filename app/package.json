@@ -70,11 +70,13 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "^13.10.0",
     "react-native-toast-message": "^2.1.6",
+    "react-native-webrtc": "^111.0.3",
     "react-native-webview": "^13.2.3",
     "react-native-youtube-iframe": "^2.3.0",
     "reactotron-mst": "3.1.4",
     "reactotron-react-js": "^3.3.7",
-    "reactotron-react-native": "5.0.3"
+    "reactotron-react-native": "5.0.3",
+    "socket.io-client": "^4.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

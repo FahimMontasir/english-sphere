@@ -74,7 +74,7 @@ const AppStack = observer(function AppStack() {
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Home" component={Screens.HomeScreen} />
+          <Stack.Screen name="Home" component={Screens.WebRTC} />
           <Stack.Screen name="Account" component={Screens.AccountScreen} />
           <Stack.Screen name="Chat" component={Screens.ChatScreen} />
           <Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />
