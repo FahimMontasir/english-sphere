@@ -62,4 +62,4 @@ const appUserSchema = new Schema<IAppUser>(
   }
 );
 
-export const CCUser = model<IAppUser, IAppUserModel>('AppUser', appUserSchema);
+export const AppUser = model<IAppUser, IAppUserModel>('AppUser', appUserSchema);
