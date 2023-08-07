@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IGenericErrorMessage, IGenericErrorResponse } from '../interfaces/error';
+import { IGenericErrorMessage, IGenericErrorResponse } from 'interfaces/error';
 
 const handleValidationError = (err: mongoose.Error.ValidationError): IGenericErrorResponse => {
   const errors: IGenericErrorMessage[] = Object.values(err.errors).map(el => {

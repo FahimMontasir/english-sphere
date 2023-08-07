@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import configs from '../configs';
+import configs from 'configs';
 
 const hash = async (password: string) => {
   return await bcrypt.hash(password, Number(configs.bcrypt_salt_rounds));

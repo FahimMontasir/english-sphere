@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { Secret } from 'jsonwebtoken';
-import ApiError from '../../errors/ApiError';
-import { JwtHelper } from '../../shared/jwtHelper';
-import configs from '../../configs';
-import { IUserRoles } from '../../interfaces/user';
+import configs from 'configs';
+import ApiError from 'errors/ApiError';
+import { IUserRoles } from 'interfaces/user';
+import { JwtHelper } from 'shared/jwtHelper';
 
 const auth =
   (...requiredRoles: IUserRoles[]) =>

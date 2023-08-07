@@ -1,5 +1,5 @@
 import { Namespace, Socket } from 'socket.io';
-import { DecodedUser } from '../../../../interfaces/user';
+import { IDecodedUser } from '../../../../interfaces/user';
 
 export type IDirectMessageData = {
   receiverUserId: string;
@@ -25,7 +25,7 @@ type InterServerEvents = {
 };
 
 type SocketData = {
-  user: DecodedUser;
+  user: IDecodedUser;
 };
 
 export type ChatEventServer = Namespace<

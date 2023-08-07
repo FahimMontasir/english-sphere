@@ -1,7 +1,7 @@
 import { CookieOptions } from 'express';
-import configs from '../../../../configs';
-import { catchAsync } from '../../../../shared/catchAsync';
-import { sendResponse } from '../../../../shared/sendResponse';
+import { catchAsync } from 'shared/catchAsync';
+import { sendResponse } from 'shared/sendResponse';
+import configs from 'configs';
 import { CCAuthService } from './auth.cc.service';
 
 const register = catchAsync(async (req, res) => {
@@ -53,8 +53,22 @@ const refreshToken = catchAsync(async (req, res) => {
   });
 });
 
+const changePassword = catchAsync(async (req, res) => {
+  const user = req.user;
+  const passwordData = req.body;
+
+  await CCAuthService.changePassword(user, passwordData);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Password changed successfully!',
+  });
+});
+
 export const CCAuthController = {
   register,
   login,
   refreshToken,
+  changePassword,
 };

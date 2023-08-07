@@ -1,11 +1,11 @@
 import { Secret } from 'jsonwebtoken';
-import configs from '../../../../configs';
-import ApiError from '../../../../errors/ApiError';
-import { JwtHelper } from '../../../../shared/jwtHelper';
-import { ICCUser } from '../../user/cc/user.cc.interface';
-import { CCUser } from '../../user/cc/user.cc.model';
-import { ICCLogin, ICCLoginResponse } from './auth.cc.interface';
-import { IDecodedUser } from '../../../../interfaces/user';
+import { ICCUser } from 'modules/rest/user/cc/user.cc.interface';
+import { CCUser } from 'modules/rest/user/cc/user.cc.model';
+import ApiError from 'errors/ApiError';
+import { JwtHelper } from 'shared/jwtHelper';
+import configs from 'configs/index';
+import { IDecodedUser } from 'interfaces/user';
+import { ICCChangePassword, ICCLogin, ICCLoginResponse } from './auth.cc.interface';
 
 const register = async (body: ICCUser): Promise<void | null> => {
   const { email } = body;
@@ -50,6 +50,26 @@ const login = async (payload: ICCLogin): Promise<ICCLoginResponse> => {
   };
 };
 
+const changePassword = async (user: IDecodedUser, payload: ICCChangePassword): Promise<void> => {
+  const { oldPassword, newPassword } = payload;
+
+  const isUserExist = await CCUser.findOne({ id: user._id }).select('+password');
+  if (!isUserExist) {
+    throw new ApiError(404, 'User does not exist');
+  }
+  //checking is password matching
+  if (
+    user.role !== 'superAdmin' &&
+    isUserExist.password &&
+    !(await CCUser.isPasswordMatched(oldPassword, isUserExist.password))
+  ) {
+    throw new ApiError(401, 'Old Password is incorrect.');
+  }
+
+  isUserExist.password = newPassword;
+  isUserExist.save();
+};
+
 const refreshToken = async (token: string): Promise<{ accessToken: string }> => {
   // verify token
   let verifiedToken: IDecodedUser;
@@ -82,4 +102,5 @@ export const CCAuthService = {
   register,
   login,
   refreshToken,
+  changePassword,
 };

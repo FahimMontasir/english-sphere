@@ -1,5 +1,5 @@
 import { Namespace, Socket } from 'socket.io';
-import { DecodedUser } from '../../../../interfaces/user';
+import { IDecodedUser } from '../../../../interfaces/user';
 import { IActiveRoom } from '../main.interface';
 
 export type IRoomJoinHandlerData = {
@@ -31,7 +31,7 @@ type InterServerEvents = {
 };
 
 type SocketData = {
-  user: DecodedUser;
+  user: IDecodedUser;
 };
 
 export type RoomEventServer = Namespace<

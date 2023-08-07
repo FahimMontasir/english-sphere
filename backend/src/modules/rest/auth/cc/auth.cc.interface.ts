@@ -1,4 +1,4 @@
-import { ICCUser } from '../../user/cc/user.cc.interface';
+import { ICCUser } from 'modules/rest/user/cc/user.cc.interface';
 
 export type ICCLogin = {
   email: string;
@@ -9,4 +9,9 @@ export type ICCLoginResponse = {
   accessToken: string;
   refreshToken: string;
   user: ICCUser;
+};
+
+export type ICCChangePassword = {
+  oldPassword: string;
+  newPassword: string;
 };

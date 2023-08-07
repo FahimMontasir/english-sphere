@@ -3,7 +3,7 @@ import configs from '../../../configs';
 import { logger } from '../../../shared/logger';
 import { userEvent } from './user/user.event';
 import { MainNspStore } from './main.store';
-import { UserSocketService } from './user/user.service';
+// import { UserSocketService } from './user/user.service';
 import { chatEvent } from './chat/chat.event';
 import { roomEvent } from './room/room.event';
 
@@ -28,6 +28,6 @@ export const onMainNamespaceConnect = (io: Namespace, socket: Socket) => {
 
   //when user leave from the website or app
   socket.on('disconnect', () => {
-    UserSocketService.disconnectHandler(socket);
+    // UserSocketService.disconnectHandler(socket);
   });
 };
