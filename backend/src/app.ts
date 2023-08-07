@@ -1,13 +1,24 @@
 import express, { Application } from 'express';
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
+import helmet from 'helmet';
 import { createServer } from 'http';
 import cookieParser from 'cookie-parser';
 import routes from 'routes';
 import globalErrorHandler from 'middlewares/rest/globalErrorHandler';
+import { logger } from 'shared/logger';
+import rateLimiterMiddleware from 'middlewares/rest/rateLimiter';
 
 const app: Application = express();
 
-app.use(cors());
+const corsOption: CorsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+//protection from outside attack
+app.use(cors(corsOption));
+app.use(helmet());
+app.use(rateLimiterMiddleware);
 
 //parser
 app.use(cookieParser());
@@ -21,7 +32,8 @@ app.use('/api/v1', routes);
 app.use(globalErrorHandler);
 
 // handle not found error
-app.use((req, res, next) => {
+app.use((req, res) => {
+  logger.warn(`Api endpoint not found: ${req.originalUrl}`);
   res.status(404).json({
     success: false,
     message: 'Not Found',
@@ -32,7 +44,6 @@ app.use((req, res, next) => {
       },
     ],
   });
-  next();
 });
 
 // created httpServer for socket io

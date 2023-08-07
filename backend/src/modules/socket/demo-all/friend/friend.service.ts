@@ -1,4 +1,4 @@
-import { errorLogger } from '../../../../shared/logger';
+import { logger } from '../../../../shared/logger';
 import { FriendInvitation } from '../../../rest/chat-req/friendInvitation.model';
 // import { User } from '../../../rest/user/user.model';
 import { MainNspStore } from '../main.store';
@@ -21,7 +21,7 @@ const updateFriendsPendingInvitations = async (userId: string): Promise<void> =>
       });
     });
   } catch (err) {
-    errorLogger.error(err);
+    logger.error(err);
   }
 };
 
@@ -51,7 +51,7 @@ const updateFriends = async (userId: string) => {
     //   }
     // }
   } catch (err) {
-    errorLogger.error(err);
+    logger.error(err);
   }
 };
 

@@ -5,7 +5,7 @@ import configs from 'configs';
 import { CCAuthService } from './auth.cc.service';
 
 const register = catchAsync(async (req, res) => {
-  await CCAuthService.register(req.body);
+  await CCAuthService.register(req.body, req.user);
 
   sendResponse(res, {
     statusCode: 200,

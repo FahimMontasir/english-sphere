@@ -17,22 +17,22 @@ const isProduction = configs.env === 'production';
 
 const logger = createLogger({
   level: 'info',
-  format: combine(format.colorize(), label({ label: 'CHAT' }), timestamp(), customFormat),
+  format: combine(format.colorize(), label({ label: 'RSE' }), timestamp(), customFormat),
   transports: [new transports.Console()],
   exitOnError: false,
 });
 
 const errorLogger = createLogger({
   level: 'error',
-  format: combine(format.colorize(), label({ label: 'CHAT-ERROR' }), timestamp(), customFormat),
+  format: combine(format.colorize(), label({ label: 'RSE-ERROR' }), timestamp(), customFormat),
   transports: [
     isProduction
       ? new DailyRotateFile({
-          filename: path.join(process.cwd(), 'logs', 'errors', 'chat-%DATE%-error.log'),
+          filename: path.join(process.cwd(), 'logs', 'errors', 'rse-%DATE%-error.log'),
           datePattern: 'YYYY-DD-MM-HH',
           zippedArchive: true,
           maxSize: '20m',
-          maxFiles: '14d',
+          maxFiles: '7d',
         })
       : new transports.Console(),
   ],

@@ -1,4 +1,4 @@
-// import { errorLogger, logger } from '../../../../shared/logger';
+// import { logger } from '../../../../shared/logger';
 // import { MainNspStore } from '../main.store';
 // import { ChatEventServer, ChatEventSocket, IDirectMessageData } from './chat.interface';
 // import { Conversation, Message } from './chat.model';
@@ -40,7 +40,7 @@
 //       });
 //     }
 //   } catch (error) {
-//     errorLogger.error(error);
+//     logger.error(error);
 //   }
 // };
 
@@ -81,7 +81,7 @@
 //       await updateChatHistory(newConversation._id.toString());
 //     }
 //   } catch (err) {
-//     errorLogger.error(err);
+//     logger.error(err);
 //   }
 // };
 
@@ -99,7 +99,7 @@
 //       await updateChatHistory(conversation._id.toString(), socket.id);
 //     }
 //   } catch (err) {
-//     errorLogger.error(err);
+//     logger.error(err);
 //   }
 // };
 

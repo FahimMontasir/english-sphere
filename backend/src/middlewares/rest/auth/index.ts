@@ -4,10 +4,15 @@ import configs from 'configs';
 import ApiError from 'errors/ApiError';
 import { IUserRoles } from 'interfaces/user';
 import { JwtHelper } from 'shared/jwtHelper';
+import { logger } from 'shared/logger';
 
 const auth =
   (...requiredRoles: IUserRoles[]) =>
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    // Todo: check user agent before authorize token
+    const userAgent = req.get('User-Agent');
+    logger.warn(userAgent);
+
     try {
       //get authorization token
       const token = req.headers.authorization;

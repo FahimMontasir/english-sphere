@@ -1,6 +1,6 @@
 import { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
-import { errorLogger } from 'shared/logger';
+import { logger } from 'shared/logger';
 import { IGenericErrorMessage } from 'interfaces/error';
 import handleValidationError from 'errors/ValidationError';
 import handleZodError from 'errors/ZodError';
@@ -8,8 +8,9 @@ import handleCastError from 'errors/CastError';
 import ApiError from 'errors/ApiError';
 import configs from 'configs';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  errorLogger.error(err);
+  logger.error(err);
 
   let statusCode = 500;
   let message = 'Something went wrong!';
@@ -45,7 +46,6 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     errorMessages,
     stack: configs.env !== 'production' ? err.stack : undefined,
   });
-  next();
 };
 
 export default globalErrorHandler;

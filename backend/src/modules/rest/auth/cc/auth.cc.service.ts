@@ -7,12 +7,24 @@ import configs from 'configs/index';
 import { IDecodedUser } from 'interfaces/user';
 import { ICCChangePassword, ICCLogin, ICCLoginResponse } from './auth.cc.interface';
 
-const register = async (body: ICCUser): Promise<void | null> => {
-  const { email } = body;
+const register = async (body: ICCUser, localUser: IDecodedUser): Promise<void | null> => {
+  const { email, role } = body;
   // check if user exists
   const userExists = await CCUser.exists({ email });
   if (userExists) {
     throw new ApiError(400, 'This Email is already in use.');
+  }
+
+  switch (localUser?.role) {
+    case 'superAdmin':
+      break;
+    case 'admin':
+      if (role === 'superAdmin' || role === 'admin') {
+        throw new ApiError(403, 'You are not authorized to set this role');
+      }
+      break;
+    default:
+      throw new ApiError(403, 'You are not authorized to set user role');
   }
 
   await CCUser.create(body);
@@ -21,10 +33,11 @@ const register = async (body: ICCUser): Promise<void | null> => {
 const login = async (payload: ICCLogin): Promise<ICCLoginResponse> => {
   const { email, password } = payload;
 
-  const isUserExist = await CCUser.findOne({ email });
+  const isUserExist = await CCUser.findOne({ email }).select('+password');
   if (!isUserExist) {
     throw new ApiError(404, 'User does not exist');
   }
+
   if (isUserExist.password && !(await CCUser.isPasswordMatched(password, isUserExist.password))) {
     throw new ApiError(400, 'Password is incorrect.');
   }
@@ -53,7 +66,7 @@ const login = async (payload: ICCLogin): Promise<ICCLoginResponse> => {
 const changePassword = async (user: IDecodedUser, payload: ICCChangePassword): Promise<void> => {
   const { oldPassword, newPassword } = payload;
 
-  const isUserExist = await CCUser.findOne({ id: user._id }).select('+password');
+  const isUserExist = await CCUser.findById(user._id).select('+password');
   if (!isUserExist) {
     throw new ApiError(404, 'User does not exist');
   }
