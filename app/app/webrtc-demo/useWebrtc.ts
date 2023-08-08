@@ -120,7 +120,8 @@ export const useWebRTC = () => {
           setLocalStream(stream)
 
           // setup stream listening
-          // peerConnection.current.addStream(stream)
+          // @ts-ignore
+          peerConnection.current.addStream(stream)
         })
         .catch((error) => {
           console.log("getUserMedia Error", error)

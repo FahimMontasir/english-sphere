@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import routes from 'routes';
 import globalErrorHandler from 'middlewares/rest/globalErrorHandler';
 import { logger } from 'shared/logger';
-import rateLimiterMiddleware from 'middlewares/rest/rateLimiter';
 
 const app: Application = express();
 
@@ -18,7 +17,8 @@ const corsOption: CorsOptions = {
 //protection from outside attack
 app.use(cors(corsOption));
 app.use(helmet());
-app.use(rateLimiterMiddleware);
+// protect ddos attack inside vps
+// app.use(rateLimiterMiddleware);
 
 //parser
 app.use(cookieParser());

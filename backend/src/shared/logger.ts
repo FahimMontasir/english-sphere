@@ -3,6 +3,7 @@ import { createLogger, format, transports } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import configs from 'configs';
 
+// todo: change this to previous logging system (this is not good as before)
 const { combine, timestamp, label, printf } = format;
 
 const customFormat = printf(({ level, message, label, timestamp }) => {

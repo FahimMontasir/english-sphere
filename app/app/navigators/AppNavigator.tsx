@@ -66,6 +66,7 @@ const AppStack = observer(function AppStack() {
   } = useStores()
 
   console.log({ authToken, isAuthenticated })
+  // Todo: set jwtToken, api-key from here!
 
   return (
     <Stack.Navigator
@@ -74,7 +75,7 @@ const AppStack = observer(function AppStack() {
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Home" component={Screens.WebRTC} />
+          <Stack.Screen name="Home" component={Screens.HomeScreen} />
           <Stack.Screen name="Account" component={Screens.AccountScreen} />
           <Stack.Screen name="Chat" component={Screens.ChatScreen} />
           <Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />

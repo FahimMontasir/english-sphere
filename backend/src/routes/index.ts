@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-// import { FriendInvitationRoutes } from '../modules/rest/chat-req/friendInvitation.routes';
+import { AppAuthRoutes } from 'modules/rest/auth/app/auth.app.routes';
 import { CCAuthRoutes } from 'modules/rest/auth/cc/auth.cc.routes';
 
 const router = express.Router();
@@ -13,10 +13,7 @@ type IModuleRoutes = {
 // route started with /api/v1
 const moduleRoutes: IModuleRoutes = [
   { path: '/auth/cc', route: CCAuthRoutes },
-  // {
-  //   path: '/friend-invitation',
-  //   route: FriendInvitationRoutes,
-  // },
+  { path: '/auth/app', route: AppAuthRoutes },
 ];
 
 moduleRoutes.map(r => router.use(r.path, r.route));

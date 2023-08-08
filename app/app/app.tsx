@@ -24,6 +24,9 @@ import { customFontsToLoad } from "./theme"
 import { setupReactotron } from "./services/reactotron"
 import Config from "./config"
 import { registerGlobals } from "react-native-webrtc"
+import { useOnlineManager } from "./services/tanStack/hooks/useOnlineManager"
+import { useAppState } from "./services/tanStack/hooks/useAppState"
+import TanStackProvider from "./services/tanStack"
 
 registerGlobals()
 
@@ -64,6 +67,10 @@ interface AppProps {
  * This is the root component of our app.
  */
 function App(props: AppProps) {
+  // required for tan stack query
+  useOnlineManager()
+  useAppState()
+
   const { hideSplashScreen } = props
   const {
     initialNavigationState,
@@ -101,11 +108,13 @@ function App(props: AppProps) {
     <>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <ErrorBoundary catchErrors={Config.catchErrors}>
-          <AppNavigator
-            linking={linking}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
+          <TanStackProvider>
+            <AppNavigator
+              linking={linking}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </TanStackProvider>
         </ErrorBoundary>
       </SafeAreaProvider>
       <Toast />
