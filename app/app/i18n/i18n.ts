@@ -1,4 +1,4 @@
-import * as Localization from "expo-localization"
+// import * as Localization from "expo-localization"
 import i18n from "i18n-js"
 import { I18nManager } from "react-native"
 
@@ -19,7 +19,7 @@ i18n.translations = { bn, bn_BD: bn, en, "en-US": en }
 i18n.locale = loadString("lang") || "en"
 
 // handle RTL languages
-export const isRTL = Localization.isRTL
+export const isRTL = false
 I18nManager.allowRTL(isRTL)
 I18nManager.forceRTL(isRTL)
 

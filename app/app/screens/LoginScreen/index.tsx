@@ -4,28 +4,21 @@ import { TextStyle, TouchableOpacity, ViewStyle } from "react-native"
 import { Icon, Screen, Text } from "../../components"
 import { AppStackScreenProps } from "../../navigators"
 import { spacing } from "../../theme"
-import { SECURE_JWT_KEY, secureSave } from "app/utils/storage/secureStorageAsync"
 import { useStores } from "app/models"
-import { getCountryByTimezone } from "app/utils/getCountryByTimezone"
 
-import gender from "gender-detection" // TODO: move this pkg to backend
+import { useLoginScreen } from "./useLoginScree"
 
 export const LoginScreen: FC<AppStackScreenProps<"Login">> = observer(function LoginScreen(_props) {
   const { navigation } = _props
+
   const {
     authenticationStore: { setAuthToken },
   } = useStores()
-  const { countryName, currency, countryCodeISO } = getCountryByTimezone() // TODO: move this pkg to backend
 
-  console.log({
-    gender: gender.detect("fahim"), // TODO: move this pkg to backend
-  })
+  const { signIn, isLoading } = useLoginScreen(setAuthToken)
 
   const handleLogin = async () => {
-    console.log({ countryCodeISO, countryName, currency })
-
-    await secureSave(SECURE_JWT_KEY, "demojwttoken: ")
-    setAuthToken("from settoken")
+    await signIn()
   }
 
   return (
@@ -35,9 +28,14 @@ export const LoginScreen: FC<AppStackScreenProps<"Login">> = observer(function L
         preset="heading"
         style={$topText}
       />
-      <TouchableOpacity onPress={handleLogin} style={$iconContainer} activeOpacity={0.8}>
+      <TouchableOpacity
+        disabled={isLoading}
+        onPress={handleLogin}
+        style={$iconContainer}
+        activeOpacity={0.8}
+      >
         <Icon icon="google" />
-        <Text style={$iconText} text="Continue with google!" />
+        <Text style={$iconText} text={isLoading ? "Signing in..." : "Continue with google!"} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("PrivacyPolicy")}

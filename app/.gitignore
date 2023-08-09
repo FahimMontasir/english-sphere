@@ -1,4 +1,7 @@
-/app/config/config.prod.ts
+# firebase
+android/app/google-services.json
+app/config/config.prod.ts
+
 # OSX
 #
 .DS_Store

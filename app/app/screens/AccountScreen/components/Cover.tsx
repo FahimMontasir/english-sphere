@@ -7,6 +7,8 @@ import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
 import { SECURE_JWT_KEY, secureDelete } from "app/utils/storage/secureStorageAsync"
 import CameraVerification from "app/components/CameraVerification"
 import { CameraType } from "expo-camera"
+import { GoogleSignin } from "@react-native-google-signin/google-signin"
+import Toast from "react-native-toast-message"
 
 interface ICover {
   logout: () => void
@@ -20,7 +22,12 @@ const Cover = observer(function Cover({ logout }: ICover) {
 
   const handleLogout = async () => {
     await secureDelete(SECURE_JWT_KEY)
+    await GoogleSignin.signOut()
     logout()
+    Toast.show({
+      type: "info",
+      text1: "You have logged out!",
+    })
   }
 
   return (
