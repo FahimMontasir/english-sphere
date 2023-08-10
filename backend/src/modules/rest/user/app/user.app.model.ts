@@ -5,7 +5,7 @@ import { GENDER } from '../../../../constants/gender';
 
 const appUserSchema = new Schema<IAppUser>(
   {
-    fcmToken: String,
+    fcmTokens: [String],
     fullName: {
       type: String,
       required: true,
@@ -56,6 +56,10 @@ const appUserSchema = new Schema<IAppUser>(
       default: 0,
     },
     friends: [{ type: Schema.Types.ObjectId, ref: 'AppUser' }],
+    isBanned: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

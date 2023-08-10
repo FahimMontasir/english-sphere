@@ -4,13 +4,11 @@ import { RequestHandler } from 'express';
 
 const checkRequest: RequestHandler = (req, res, next) => {
   try {
-    const userAgent = req.get('User-Agent');
-    if (userAgent !== configs.agent.app) {
-      throw new ApiError(403, 'User agent mismatched!');
-    } else if (req.headers['x-api-key'] !== configs.apiKey.app) {
+    // not necessary though. we have firebase :)
+    if (req.headers['x-api-key'] !== configs.apiKey.app) {
       throw new ApiError(403, 'Wrong api key!');
     }
-    // check also using firebase inside service
+    // verify user using firebase
     next();
   } catch (error) {
     next(error);

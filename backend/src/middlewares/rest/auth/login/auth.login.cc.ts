@@ -33,10 +33,8 @@ const limitRate: RequestHandler = (req, res, next) => {
 
 const checkRequest: RequestHandler = (req, res, next) => {
   try {
-    const userAgent = req.get('User-Agent');
-    if (userAgent !== configs.agent.cc) {
-      throw new ApiError(403, 'User agent mismatched!');
-    } else if (req.headers['x-api-key'] !== configs.apiKey.cc) {
+    // need to be secured inside next js app as well
+    if (req.headers['x-api-key'] !== configs.apiKey.cc) {
       throw new ApiError(403, 'Wrong api key!');
     }
 

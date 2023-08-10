@@ -5,6 +5,17 @@ import configs from 'configs';
 import { errorLogger, logger } from 'shared/logger';
 import { SocketServer } from './socket.server';
 
+// firebase init
+import admin, { ServiceAccount } from 'firebase-admin';
+import serviceAccount from './configs/admin-sdk-config.json';
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount as ServiceAccount),
+  // Todo: use securely like blew on production
+  // export GOOGLE_APPLICATION_CREDENTIALS="/media/fahim/hdd6/Refactor-Speaking/backend/src/configs/admin-sdk-config.json"
+  // credential: admin.credential.applicationDefault(),
+});
+
 process.on('uncaughtException', err => {
   errorLogger.error(err);
   process.exit(1);

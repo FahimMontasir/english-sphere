@@ -24,12 +24,9 @@ export default {
       expires_in: process.env.JWT_USER_EXPIRES_IN,
     },
   },
-  agent: {
-    app: process.env.AGENT_APP,
-    cc: process.env.AGENT_CC,
-  },
+
   apiKey: {
-    app: process.env.APP_API_KEY,
-    cc: process.env.CC_API_KEY,
+    cc: process.env.API_KEY_CC,
+    app: process.env.API_KEY_APP,
   },
 };

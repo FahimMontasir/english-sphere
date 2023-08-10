@@ -9,16 +9,10 @@ import { logger } from 'shared/logger';
 const auth =
   (...requiredRoles: IUserRoles[]) =>
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const userAgent = req.get('User-Agent');
-    logger.warn(userAgent);
-
     try {
-      if (userAgent !== configs.agent.cc || userAgent !== configs.agent.app) {
-        throw new ApiError(403, 'Forbidden: User agent mismatched!');
-      }
-
       //get authorization token
-      const token = req.headers.authorization;
+      const token = req.headers.authorization || (req.headers['Authorization'] as string);
+      logger.warn(token);
       if (!token) throw new ApiError(403, 'You are not authorized!');
 
       //verify token
