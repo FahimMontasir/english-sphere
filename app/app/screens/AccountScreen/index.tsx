@@ -15,7 +15,10 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
   _props,
 ) {
   const {
-    authenticationStore: { logout },
+    userStore: {
+      logout,
+      user: { coverUrl, fullName, imageUrl },
+    },
   } = useStores()
   const { navigation } = _props
 
@@ -26,11 +29,11 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
       contentContainerStyle={$contentContainerStyle}
       preset="scroll"
     >
-      <Cover logout={logout} />
+      <Cover logout={logout} coverUrl={coverUrl} fullName={fullName} imageUrl={imageUrl} />
 
       {/* position section */}
       <View style={$positionTextContainer}>
-        <Text tx="accountScreen.position" />
+        <Text text="icon upvotes and downvots" />
         <Text text="400" />
       </View>
 

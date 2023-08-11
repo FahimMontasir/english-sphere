@@ -34,7 +34,7 @@ export async function setupRootStore(rootStore: RootStore) {
 
     restoredState = {
       ...others,
-      authenticationStore: { ...others.authenticationStore, authToken: secureToken },
+      userStore: { ...others.userStore, authToken: secureToken },
     } as RootStoreSnapshot | null
 
     applySnapshot(rootStore, restoredState)
@@ -49,7 +49,11 @@ export async function setupRootStore(rootStore: RootStore) {
   if (_disposer) _disposer()
 
   // track changes & save to AsyncStorage
-  _disposer = onSnapshot(rootStore, (snapshot) => storage.save(ROOT_STATE_STORAGE_KEY, snapshot))
+  _disposer = onSnapshot(rootStore, (snapshot) => {
+    const modifiedSnapshot = { ...snapshot, userStore: { ...snapshot.userStore, authToken: "" } }
+
+    storage.save(ROOT_STATE_STORAGE_KEY, modifiedSnapshot)
+  })
 
   const unsubscribe = () => {
     _disposer()

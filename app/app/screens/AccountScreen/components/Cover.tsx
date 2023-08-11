@@ -4,37 +4,32 @@ import { ImageBackground, ImageStyle, View, ViewStyle } from "react-native"
 import { Icon, Text } from "app/components"
 import { colors, spacing } from "app/theme"
 import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
-import { SECURE_JWT_KEY, secureDelete } from "app/utils/storage/secureStorageAsync"
 import CameraVerification from "app/components/CameraVerification"
 import { CameraType } from "expo-camera"
-import { GoogleSignin } from "@react-native-google-signin/google-signin"
-import Toast from "react-native-toast-message"
+import { AuthApi } from "app/services/api/auth"
 
 interface ICover {
   logout: () => void
+  coverUrl: string
+  fullName: string
+  imageUrl: string
 }
 
-const Cover = observer(function Cover({ logout }: ICover) {
+const Cover = observer(function Cover({ logout, coverUrl, imageUrl, fullName }: ICover) {
   const [closedCameraP, setClosedCameraP] = React.useState(true)
   const [closedCameraC, setClosedCameraC] = React.useState(true)
 
   const $coverContainerInsets = useSafeAreaInsetsStyle(["top"])
 
   const handleLogout = async () => {
-    await secureDelete(SECURE_JWT_KEY)
-    await GoogleSignin.signOut()
-    logout()
-    Toast.show({
-      type: "info",
-      text1: "You have logged out!",
-    })
+    await AuthApi.logoutUser(logout)
   }
 
   return (
     <>
       <ImageBackground
         style={$coverContainer}
-        source={{ uri: "https://i.pravatar.cc/300" }}
+        source={{ uri: coverUrl || "https://i.pravatar.cc/300" }}
         resizeMode="cover"
       >
         <View style={[$coverLeftContentContainer, $coverContainerInsets]}>
@@ -46,7 +41,7 @@ const Cover = observer(function Cover({ logout }: ICover) {
             color={colors.palette.white}
           />
           <View style={$userNameContainer}>
-            <Text text="Fahim Montasir" preset="subheading" numberOfLines={1} />
+            <Text text={fullName} preset="subheading" numberOfLines={1} />
             <Icon icon="pen" size={20} color={colors.palette.black} />
           </View>
         </View>
@@ -62,7 +57,7 @@ const Cover = observer(function Cover({ logout }: ICover) {
           <ImageBackground
             imageStyle={$profilePhotoImage}
             style={$profilePhotoContainer}
-            source={{ uri: "https://i.pravatar.cc/300" }}
+            source={{ uri: imageUrl }}
             resizeMode="cover"
           >
             <Icon

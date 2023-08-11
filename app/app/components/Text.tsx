@@ -54,7 +54,7 @@ export interface TextProps extends RNTextProps {
  */
 export const Text = observer(function Text(props: TextProps) {
   const {
-    authenticationStore: { lang },
+    userStore: { lang },
   } = useStores()
   i18n.locale = lang
 

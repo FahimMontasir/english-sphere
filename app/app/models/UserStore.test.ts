@@ -1,4 +1,4 @@
-import { AuthenticationStoreModel } from "./AuthenticationStore"
+import { UserStoreModel } from "./UserStore"
 
 const data = {
   authToken: "lkdfjsdklfjsdlkfjsdkfjsdklfjsdlkfjsld",
@@ -6,7 +6,7 @@ const data = {
   lang: null || "en",
 }
 
-const auth = AuthenticationStoreModel.create(data)
+const auth = UserStoreModel.create(data)
 
 test("auth token format", () => {
   expect(auth.authToken).toBe("lkdfjsdklfjsdlkfjsdkfjsdklfjsdlkfjsld")

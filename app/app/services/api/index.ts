@@ -6,7 +6,7 @@ import axios from "axios"
  */
 const api = axios.create({
   baseURL: Config.API_URL,
-  timeout: 1000 * 15, // 15sc
+  timeout: 1000 * 60, // 1m
 })
 
 export default api

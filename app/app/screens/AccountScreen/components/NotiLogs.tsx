@@ -9,7 +9,7 @@ import { useStores } from "app/models"
 
 const NotiLogs = observer(function NotiLogs() {
   const {
-    authenticationStore: { toggleLang, lang },
+    userStore: { toggleLang, lang },
   } = useStores()
 
   // Toast.show({

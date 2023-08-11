@@ -12,10 +12,10 @@ export const LoginScreen: FC<AppStackScreenProps<"Login">> = observer(function L
   const { navigation } = _props
 
   const {
-    authenticationStore: { setAuthToken },
+    userStore: { setAuthTokenWithUser },
   } = useStores()
 
-  const { signIn, isLoading } = useLoginScreen(setAuthToken)
+  const { signIn, isLoading } = useLoginScreen(setAuthTokenWithUser)
 
   const handleLogin = async () => {
     await signIn()

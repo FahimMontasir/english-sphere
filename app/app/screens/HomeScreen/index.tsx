@@ -11,12 +11,13 @@ import { LSCard } from "./components/LSCard"
 import { useHomeScreen } from "./useHomeScreen"
 import { FastImage, FastImageStyle } from "app/components/FastImage"
 import { openLinkInBrowser } from "app/utils/openLinkInBrowser"
-// import { useStores } from "app/models"
+import { useStores } from "app/models"
 
 export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function HomeScreen(_props) {
   const { navigation } = _props
-  // MST stores
-  // const { somestore } = useStores()
+  const {
+    userStore: { user },
+  } = useStores()
 
   const { data, handleRefresh, refreshing } = useHomeScreen()
 
@@ -27,7 +28,7 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
           <>
             <View style={$topContainer}>
               <TouchableOpacity style={$avatar} onPress={() => navigation.navigate("Account")}>
-                <FastImage uri="https://i.pravatar.cc/50" priority="high" style={$avatarImg} />
+                <FastImage uri={user.imageUrl} priority="high" style={$avatarImg} />
               </TouchableOpacity>
               <Icon
                 icon="leaderBoard"

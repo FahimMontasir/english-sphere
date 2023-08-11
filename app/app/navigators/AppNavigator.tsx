@@ -13,6 +13,7 @@ import * as Screens from "app/screens"
 import Config from "../config"
 import { useStores } from "../models"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
+import api from "app/services/api"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -62,11 +63,14 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
   const {
-    authenticationStore: { isAuthenticated, authToken },
+    userStore: { isAuthenticated, authToken, user },
   } = useStores()
 
-  console.log({ authToken, isAuthenticated })
-  // Todo: set jwtToken, api-key from here!
+  console.log({ authToken, isAuthenticated, user })
+
+  if (isAuthenticated) {
+    api.defaults.headers.common.Authorization = authToken
+  }
 
   return (
     <Stack.Navigator
