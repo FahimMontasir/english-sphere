@@ -1,8 +1,10 @@
 import { Model, Document, Types } from 'mongoose';
 import { IBadge, IGender, IUserRoles } from '../../../../interfaces/user';
 
+export type IFcmToken = { token: string; device: string };
+
 export type IAppUser = Document & {
-  fcmTokens: string[];
+  fcmTokens: IFcmToken[];
   fullName: string;
   imageUrl: string;
   coverUrl?: string;

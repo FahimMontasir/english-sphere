@@ -9,9 +9,10 @@ import { getCountryByTimezone } from './auth.app.utils';
 import { IAppUser } from 'modules/rest/user/app/user.app.interface';
 import { JwtHelper } from 'shared/jwtHelper';
 import configs from 'configs';
-import { IUserRoles } from 'interfaces/user';
+import { IDecodedUser, IUserRoles } from 'interfaces/user';
 import { Secret } from 'jsonwebtoken';
 import { pick } from 'lodash';
+import { NOTIFICATION_TOPIC } from 'shared/pushNotification';
 
 const login = async (
   body: IReq
@@ -51,7 +52,12 @@ const login = async (
   // check if user exists
   const userExists = await AppUser.findOne({ email: decoded.email });
   if (userExists) {
-    const fcmTokens = [...new Set([...userExists.fcmTokens, fcmToken])];
+    const checkFcm = userExists.fcmTokens.filter(v => v.device !== fcmToken.device);
+    if (checkFcm.length) {
+      //Todo: send notification to existing device
+    }
+
+    const fcmTokens = [...checkFcm, fcmToken];
     const country = {
       name: countryName,
       code: countryCodeISO,
@@ -79,6 +85,9 @@ const login = async (
     );
   }
 
+  // subscribe user to update topic
+  await admin.messaging().subscribeToTopic(fcmToken.token, NOTIFICATION_TOPIC.UPDATE);
+
   return {
     createdUser: pick(createdUser.toObject(), [
       'fcmTokens',
@@ -98,6 +107,25 @@ const login = async (
   };
 };
 
+const logout = async (decodedUser: IDecodedUser, fcmDevice: string): Promise<void> => {
+  const { _id } = decodedUser;
+
+  const userExists = await AppUser.findById(_id);
+  if (userExists) {
+    const removedToken = userExists.fcmTokens.find(v => v.device === fcmDevice);
+    // unsubscribe user from update topic
+    if (removedToken) {
+      await admin.messaging().unsubscribeFromTopic(removedToken.token, NOTIFICATION_TOPIC.UPDATE);
+    }
+
+    const fcmTokens = [...userExists.fcmTokens.filter(v => v.device !== fcmDevice)];
+    userExists.fcmTokens = fcmTokens;
+
+    await userExists.save();
+  }
+};
+
 export const AppAuthService = {
   login,
+  logout,
 };

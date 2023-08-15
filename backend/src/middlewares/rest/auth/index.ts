@@ -4,7 +4,6 @@ import configs from 'configs';
 import ApiError from 'errors/ApiError';
 import { IUserRoles } from 'interfaces/user';
 import { JwtHelper } from 'shared/jwtHelper';
-import { logger } from 'shared/logger';
 
 const auth =
   (...requiredRoles: IUserRoles[]) =>
@@ -12,7 +11,6 @@ const auth =
     try {
       //get authorization token
       const token = req.headers.authorization || (req.headers['Authorization'] as string);
-      logger.warn(token);
       if (!token) throw new ApiError(403, 'You are not authorized!');
 
       //verify token

@@ -13,6 +13,17 @@ const login = catchAsync(async (req, res) => {
   });
 });
 
+const logout = catchAsync(async (req, res) => {
+  await AppAuthService.logout(req.user, req.body.fcmDevice);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User logged out successfully',
+  });
+});
+
 export const AppAuthController = {
   login,
+  logout,
 };

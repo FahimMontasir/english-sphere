@@ -5,7 +5,12 @@ import { GENDER } from '../../../../constants/gender';
 
 const appUserSchema = new Schema<IAppUser>(
   {
-    fcmTokens: [String],
+    fcmTokens: [
+      {
+        token: String,
+        device: String,
+      },
+    ],
     fullName: {
       type: String,
       required: true,
