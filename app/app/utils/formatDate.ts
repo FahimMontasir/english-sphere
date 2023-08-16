@@ -1,4 +1,4 @@
-import { Locale, format, parseISO } from "date-fns"
+import { Locale, format, parseISO, formatDistanceToNow } from "date-fns"
 import I18n from "i18n-js"
 
 import bn from "date-fns/locale/bn"
@@ -18,4 +18,8 @@ export const formatDate = (date: string, dateFormat?: string, options?: Options)
     locale,
   }
   return format(parseISO(date), dateFormat ?? "MMM dd, yyyy", dateOptions)
+}
+
+export const fromNow = (v: string) => {
+  return formatDistanceToNow(new Date(v), { addSuffix: true })
 }

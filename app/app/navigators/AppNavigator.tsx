@@ -4,7 +4,13 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native"
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+  NavigationProp,
+  useNavigation,
+} from "@react-navigation/native"
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
@@ -14,6 +20,7 @@ import Config from "../config"
 import { useStores } from "../models"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import api from "app/services/api"
+import useNotificationEvents from "app/services/pushNotification/useEvents"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -63,11 +70,11 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
   const {
-    userStore: { isAuthenticated, authToken, user },
+    userStore: { isAuthenticated, authToken },
   } = useStores()
 
-  console.log({ authToken, isAuthenticated, user })
-
+  const navigation = useNavigation<NavigationProp<AppStackParamList>>()
+  useNotificationEvents(navigation)
   if (isAuthenticated) {
     api.defaults.headers.common.Authorization = authToken
   }

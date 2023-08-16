@@ -23,12 +23,9 @@ import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import { setupReactotron } from "./services/reactotron"
 import Config from "./config"
-import { registerGlobals } from "react-native-webrtc"
 import { useOnlineManager } from "./services/tanStack/hooks/useOnlineManager"
 import { useAppState } from "./services/tanStack/hooks/useAppState"
 import TanStackProvider from "./services/tanStack"
-
-registerGlobals()
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
 // React Native apps. Learn more here: https://github.com/infinitered/reactotron

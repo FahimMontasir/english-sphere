@@ -3,6 +3,7 @@ import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-si
 import auth from "@react-native-firebase/auth"
 import messaging from "@react-native-firebase/messaging"
 import * as Localization from "expo-localization"
+import * as Device from "expo-device"
 import Toast from "react-native-toast-message"
 import Config from "app/config"
 import { SECURE_JWT_KEY, secureSave } from "app/utils/storage/secureStorageAsync"
@@ -34,11 +35,14 @@ export const useLoginScreen = (setAuthTokenWithUser: (token: string, user: InitU
         const user = await auth().signInWithCredential(credential)
 
         const token = await user?.user.getIdToken(true)
-        const fcmToken = await messaging().getToken()
+        const fcm = await messaging().getToken()
 
         const data = {
           token,
-          fcmToken,
+          fcmToken: {
+            token: fcm,
+            device: Device.modelName,
+          },
           timezone,
         }
 

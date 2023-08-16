@@ -73,7 +73,7 @@ const login = async (
     accessToken = JwtHelper.createToken(
       { _id: userExists._id, role: userExists.role as IUserRoles },
       configs.jwt.secret as Secret,
-      configs.jwt.user.expires_in as string
+      configs.jwt.app.expires_in as string
     );
   } else {
     createdUser = await AppUser.create(data);
@@ -81,7 +81,7 @@ const login = async (
     accessToken = JwtHelper.createToken(
       { _id: createdUser._id, role: createdUser.role as IUserRoles },
       configs.jwt.secret as Secret,
-      configs.jwt.user.expires_in as string
+      configs.jwt.app.expires_in as string
     );
   }
 

@@ -2,7 +2,7 @@ import { loadString, saveString } from "app/utils/storage"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
 const User = types.model("User", {
-  fcmTokens: types.array(types.string),
+  fcmTokens: types.array(types.model({ token: types.string, device: types.string })),
   fullName: types.string,
   imageUrl: types.string,
   coverUrl: types.maybe(types.string),
@@ -16,6 +16,10 @@ const User = types.model("User", {
 })
 
 export interface InitUser extends Instance<typeof User> {}
+export interface FcmToken {
+  token: string
+  device: string
+}
 
 export const UserStoreModel = types
   .model("UserStore")
@@ -39,6 +43,12 @@ export const UserStoreModel = types
     },
     setUserInterest(value: string) {
       store.user.interests.push(value)
+    },
+    setUserFcmToken(value: FcmToken) {
+      store.user.fcmTokens = [
+        ...store.user.fcmTokens.filter((v) => v.device !== value.device),
+        value,
+      ] as any
     },
     logout() {
       store.authToken = undefined

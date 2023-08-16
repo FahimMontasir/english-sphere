@@ -16,10 +16,10 @@ import { useStores } from "app/models"
 export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function HomeScreen(_props) {
   const { navigation } = _props
   const {
-    userStore: { user },
+    userStore: { user, setUserFcmToken },
   } = useStores()
 
-  const { data, handleRefresh, refreshing } = useHomeScreen()
+  const { data, handleRefresh, refreshing } = useHomeScreen(user, setUserFcmToken)
 
   return (
     <Screen contentContainerStyle={$screenContentContainer} preset="fixed" safeAreaEdges={["top"]}>

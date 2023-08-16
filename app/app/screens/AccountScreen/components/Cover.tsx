@@ -18,10 +18,12 @@ interface ICover {
 const Cover = observer(function Cover({ logout, coverUrl, imageUrl, fullName }: ICover) {
   const [closedCameraP, setClosedCameraP] = React.useState(true)
   const [closedCameraC, setClosedCameraC] = React.useState(true)
+  const [disableLogout, setDisableLogout] = React.useState(false)
 
   const $coverContainerInsets = useSafeAreaInsetsStyle(["top"])
 
   const handleLogout = async () => {
+    setDisableLogout(true)
     await AuthApi.logoutUser(logout)
   }
 
@@ -48,6 +50,7 @@ const Cover = observer(function Cover({ logout, coverUrl, imageUrl, fullName }: 
 
         <View style={[$coverRightContentContainer, $coverContainerInsets]}>
           <Icon
+            disabled={disableLogout}
             onPress={handleLogout}
             icon="logout"
             size={25}

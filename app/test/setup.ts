@@ -23,14 +23,49 @@ jest.doMock("react-native", () => {
   )
 })
 
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
-
 jest.mock("i18n-js", () => ({
   currentLocale: () => "en",
   t: (key: string, params: Record<string, string>) => {
     return `${key} ${JSON.stringify(params)}`
+  },
+}))
+
+jest.mock("react-native-mmkv", () => ({
+  MMKV: function () {
+    const storage = new Map<string, string | boolean | number>()
+
+    return {
+      set: (key: string, value: string): void => {
+        storage.set(key, value)
+      },
+      getString: (key: string): string | undefined => {
+        const result = storage.get(key)
+        if (typeof result === "string") return result
+        else return undefined
+      },
+      getNumber: (key: string): number | undefined => {
+        const result = storage.get(key)
+        if (typeof result === "number") return result
+        else return undefined
+      },
+      getBoolean: (key: string): boolean | undefined => {
+        const result = storage.get(key)
+        if (typeof result === "boolean") return result
+        else return undefined
+      },
+      contains: (key: string): boolean => storage.has(key),
+      delete: (key: string) => {
+        storage.delete(key)
+      },
+      getAllKeys: () => storage.keys(),
+      clearAll: () => storage.clear(),
+      recrypt: () => {
+        console.warn("Encryption is not supported in mocked MMKV instances!")
+      },
+      addOnValueChangedListener: () => {
+        console.warn("Value-changed listeners are not supported in mocked MMKV instances!")
+      },
+    }
   },
 }))
 

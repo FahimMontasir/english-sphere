@@ -20,8 +20,8 @@ export default {
       refresh_secret: process.env.JWT_REFRESH_SECRET,
       refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
     },
-    user: {
-      expires_in: process.env.JWT_USER_EXPIRES_IN,
+    app: {
+      expires_in: process.env.JWT_APP_EXPIRES_IN,
     },
   },
 
