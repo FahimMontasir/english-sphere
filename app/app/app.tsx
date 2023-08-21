@@ -12,7 +12,7 @@
 import "./i18n"
 import "./utils/ignoreWarnings"
 import { useFonts } from "expo-font"
-import React from "react"
+import React, { useEffect } from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import * as Linking from "expo-linking"
 import Toast from "react-native-toast-message"
@@ -26,6 +26,7 @@ import Config from "./config"
 import { useOnlineManager } from "./services/tanStack/hooks/useOnlineManager"
 import { useAppState } from "./services/tanStack/hooks/useAppState"
 import TanStackProvider from "./services/tanStack"
+import { notificationOnAppBoots } from "./services/pushNotification/useEvents"
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
 // React Native apps. Learn more here: https://github.com/infinitered/reactotron
@@ -64,6 +65,9 @@ interface AppProps {
  * This is the root component of our app.
  */
 function App(props: AppProps) {
+  useEffect(() => {
+    notificationOnAppBoots()
+  }, [])
   // required for tan stack query
   useOnlineManager()
   useAppState()

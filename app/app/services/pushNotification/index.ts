@@ -3,6 +3,10 @@ import messaging from "@react-native-firebase/messaging"
 import { fromNow } from "app/utils/formatDate"
 import { NOTI_TYPE, NotiPayload } from "./types"
 
+notifee.onBackgroundEvent(async () => {
+  // handle all events inside onBackgroundHandler
+})
+
 const onMessageReceived = async (message) => {
   const { data, notification, sentTime } = message as NotiPayload
   console.log(fromNow(sentTime), data)
@@ -104,6 +108,3 @@ const onMessageReceived = async (message) => {
 
 messaging().onMessage(onMessageReceived)
 messaging().setBackgroundMessageHandler(onMessageReceived)
-notifee.onBackgroundEvent(async () => {
-  // handle all events inside onBackgroundHandler
-})

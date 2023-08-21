@@ -31,7 +31,7 @@ async function onBackgroundEventHandler(navigation: NavigationProp<AppStackParam
   }
 }
 
-async function onAppBoots() {
+export async function notificationOnAppBoots() {
   if (Platform.OS === "android") {
     await notifee.createChannel({
       id: NOTI_TYPE.DEFAULT,
@@ -116,6 +116,4 @@ export default function useNotificationEvents(navigation: NavigationProp<AppStac
     onBackgroundEventHandler(navigation)
     return onForegroundEventHandler(navigation)
   }, [])
-
-  onAppBoots()
 }

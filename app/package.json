@@ -2,7 +2,6 @@
   "name": "app",
   "version": "0.0.1",
   "private": true,
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "react-native start",
     "ios": "react-native run-ios",
@@ -100,7 +99,7 @@
     "babel-loader": "8.2.5",
     "babel-plugin-root-import": "^6.6.0",
     "eslint": "8.17.0",
-    "eslint-config-prettier": "8.5.0",
+    "eslint-config-prettier": "8.5.0", 
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "^15.0.0",
