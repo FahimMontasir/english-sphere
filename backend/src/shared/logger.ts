@@ -1,9 +1,8 @@
-import path from 'path';
+// import path from 'path';
 import { createLogger, format, transports } from 'winston';
-import DailyRotateFile from 'winston-daily-rotate-file';
-import configs from 'configs';
+// import DailyRotateFile from 'winston-daily-rotate-file';
+// import configs from 'configs';
 
-// todo: change this to previous logging system (this is not good as before)
 const { combine, timestamp, label, printf } = format;
 
 const customFormat = printf(({ level, message, label, timestamp }) => {
@@ -14,28 +13,29 @@ const customFormat = printf(({ level, message, label, timestamp }) => {
   return `${level}: [${date.toDateString()} ${hours}:${minutes}:${seconds}] ${label}: ${message}`;
 });
 
-const isProduction = configs.env === 'production';
+// const isProduction = configs.env === 'production';
 
 const logger = createLogger({
   level: 'info',
-  format: combine(format.colorize(), label({ label: 'RSE' }), timestamp(), customFormat),
+  format: combine(format.colorize(), label({ label: 'ESP' }), timestamp(), customFormat),
   transports: [new transports.Console()],
   exitOnError: false,
 });
 
 const errorLogger = createLogger({
   level: 'error',
-  format: combine(format.colorize(), label({ label: 'RSE-ERROR' }), timestamp(), customFormat),
+  format: combine(format.colorize(), label({ label: 'ESP-ERROR' }), timestamp(), customFormat),
   transports: [
-    isProduction
-      ? new DailyRotateFile({
-          filename: path.join(process.cwd(), 'logs', 'errors', 'rse-%DATE%-error.log'),
-          datePattern: 'YYYY-DD-MM-HH',
-          zippedArchive: true,
-          maxSize: '20m',
-          maxFiles: '7d',
-        })
-      : new transports.Console(),
+    // isProduction
+    //   ? new DailyRotateFile({
+    //       filename: path.join(process.cwd(), 'logs', 'errors', 'esp-%DATE%-error.log'),
+    //       datePattern: 'YYYY-DD-MM-HH',
+    //       zippedArchive: true,
+    //       maxSize: '20m',
+    //       maxFiles: '7d',
+    //     })
+    //   : new transports.Console(),
+    new transports.Console(),
   ],
   exitOnError: false,
 });

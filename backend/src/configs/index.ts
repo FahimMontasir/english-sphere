@@ -24,9 +24,9 @@ export default {
       expires_in: process.env.JWT_APP_EXPIRES_IN,
     },
   },
-
   apiKey: {
     cc: process.env.API_KEY_CC,
     app: process.env.API_KEY_APP,
   },
+  firebase_service_account_key: process.env.FIREBASE_SERVICE_ACCOUNT_KEY,
 };
