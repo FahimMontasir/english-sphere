@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/SairaCondensed-Bold.ttf",
+      "sha1": "7079e5186abb283f65dcd3d7f79810bfb1e5c8d3"
+    },
+    {
+      "path": "assets/fonts/SairaCondensed-ExtraLight.ttf",
+      "sha1": "be290e56c2eaa5b32913c26d22a15a78590444c1"
+    },
+    {
+      "path": "assets/fonts/SairaCondensed-Medium.ttf",
+      "sha1": "3a479cbb0c70c05923e7d496a98368e2e6c6fb7d"
+    },
+    {
+      "path": "assets/fonts/SairaCondensed-Regular.ttf",
+      "sha1": "f0d71eb21ee380cc3ecb8e9847d2d750e398f054"
+    },
+    {
+      "path": "assets/fonts/SairaCondensed-SemiBold.ttf",
+      "sha1": "ad45be5949c81609aa207b5c027ebd8fe67b3744"
+    }
+  ]
+}

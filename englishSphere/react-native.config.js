@@ -1,5 +1,7 @@
 module.exports = {
-  assets: [
-    // TODO: link documentation about fonts to this section
-  ],
-};
+  project: {
+    ios: {},
+    android: {},
+  },
+  assets: ["./assets/fonts/"],
+}

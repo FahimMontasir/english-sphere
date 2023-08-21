@@ -1,113 +1,59 @@
+import "./i18n"
+import "./utils/ignoreWarnings"
 import React from "react"
-import type { PropsWithChildren } from "react"
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from "react-native"
+import { Config as RNBConfig } from "react-native-bootsplash"
+import Toast from "react-native-toast-message"
+import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
+import Config from "./config"
+import * as storage from "./utils/storage"
+import { useInitialRootStore } from "./models"
+import { AppNavigator, useNavigationPersistence } from "./navigators"
+import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
+import TanStackProvider from "./services/tanStack"
+import { useOnlineManager } from "./services/tanStack/hooks/useOnlineManager"
+import { useAppState } from "./services/tanStack/hooks/useAppState"
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from "react-native/Libraries/NewAppScreen"
-import RNBootSplash from "react-native-bootsplash"
-
-type SectionProps = PropsWithChildren<{
-  title: string
-}>
-
-function Section({ children, title }: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === "dark"
-  RNBootSplash.hide({ fade: true, duration: 300 })
-
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}
-      >
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}
-      >
-        {children}
-      </Text>
-    </View>
-  )
+export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
+interface IApp {
+  hideSplashScreen: (config?: RNBConfig) => Promise<void>
 }
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === "dark"
+function App({ hideSplashScreen }: IApp) {
+  // required for tan stack query
+  useOnlineManager()
+  useAppState()
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const {
+    initialNavigationState,
+    onNavigationStateChange,
+    isRestored: isNavigationStateRestored,
+  } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
+
+  const { rehydrated } = useInitialRootStore()
+
+  if (__DEV__) {
+    if (!rehydrated || !isNavigationStateRestored) return null
+  } else {
+    if (!rehydrated) return null
   }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? "light-content" : "dark-content"}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}
-        >
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then come
-            back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">Read the docs to discover what to do next:</Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        <ErrorBoundary catchErrors={Config.catchErrors}>
+          <TanStackProvider>
+            <AppNavigator
+              onReady={() => hideSplashScreen({ fade: true, duration: 500 })}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </TanStackProvider>
+        </ErrorBoundary>
+      </SafeAreaProvider>
+
+      <Toast />
+    </>
   )
 }
-
-const styles = StyleSheet.create({
-  highlight: {
-    fontWeight: "700",
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionDescription: {
-    fontSize: 18,
-    fontWeight: "400",
-    marginTop: 8,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "600",
-  },
-})
 
 export default App

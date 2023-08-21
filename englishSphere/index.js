@@ -1,4 +1,4 @@
-// import "./app/services/pushNotification"
+import "src/services/pushNotification"
 import React from "react"
 import { AppRegistry } from "react-native"
 import RNBootSplash from "react-native-bootsplash"

@@ -12,12 +12,12 @@
     "noUnusedLocals": false,
     "sourceMap": true,
     "target": "esnext",
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext"],
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "baseUrl": "./"
   },
   "exclude": ["node_modules"],
-  "include": ["index.js", "App.js", "src", "__test__", "*.js"],
+  "include": ["index.js", "App.js", "src", "__tests__", "*.js"],
   "extends": "@tsconfig/react-native/tsconfig.json"
 }
