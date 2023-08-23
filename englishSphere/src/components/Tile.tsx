@@ -14,6 +14,7 @@ import { Text } from "./Text"
 import { Icon } from "./Icon"
 import { TxKeyPath, translate } from "src/i18n"
 import { FastImage, FastImageStyle } from "./FastImage"
+import { truncateText } from "src/utils/formatString"
 
 export interface TileProps extends TouchableOpacityProps {
   style?: StyleProp<ViewStyle>
@@ -25,22 +26,28 @@ export interface TileProps extends TouchableOpacityProps {
   rightCaption?: string
   msg?: string
   position?: number
+  unread?: boolean
 }
 
 export const Tile = observer(function Tile(props: TileProps) {
   const {
     style,
     isNoti,
-    imgUri = "https://i.pravatar.cc/300",
+    imgUri,
     headingTxOptions,
     heading = "Elon Musk",
     headingTx,
     rightCaption = "1h ago...",
-    msg = "the app is still in active development. Wait for a while!",
+    msg,
     position,
+    unread,
     ...WrapperProps
   } = props
-  const $styles = [$container, style]
+  const $styles = [
+    $container,
+    style,
+    { backgroundColor: unread ? colors.palette.gray : colors.palette.white },
+  ]
 
   const i18nText = headingTx && translate(headingTx, headingTxOptions)
   const headingContent = i18nText || heading
@@ -53,29 +60,34 @@ export const Tile = observer(function Tile(props: TileProps) {
       <View style={$topContainer}>
         <View style={$userContainer}>
           {isNoti ? (
-            <Icon icon="bell" containerStyle={$notiIconContainer} size={30} />
+            <>
+              {imgUri ? (
+                <FastImage uri={imgUri} style={$image} />
+              ) : (
+                <Icon icon="bell" containerStyle={$notiIconContainer} size={30} />
+              )}
+            </>
           ) : (
-            <FastImage uri={imgUri} style={$image} />
+            <FastImage uri={imgUri || ""} style={$image} />
           )}
-          <Text text={headingContent} preset="subheading" />
+          <Text text={truncateText(headingContent, 26, "...")} preset="subheading" />
         </View>
         {position && <Text text={String(position)} />}
         <Text text={rightCaption} />
       </View>
-      {isNoti && <Text style={$notiDes} text={msg} />}
+      {isNoti && msg && <Text style={$notiDes} text={truncateText(msg, 100, "...See more!")} />}
     </Wrapper>
   )
 })
 
 const $container: ViewStyle = {
-  backgroundColor: colors.palette.gray,
   borderRadius: spacing.md,
   padding: spacing.xs,
   elevation: 1,
   width: "100%",
 }
 
-const $image: FastImageStyle = { height: 40, width: 40, borderRadius: 40 }
+const $image: FastImageStyle = { height: 40, width: 40, borderRadius: 40, marginRight: 3 }
 
 const $topContainer: ViewStyle = {
   flexDirection: "row",
@@ -91,6 +103,7 @@ const $notiIconContainer: ViewStyle = {
   borderRadius: 40,
   justifyContent: "center",
   alignItems: "center",
+  marginRight: 3,
 }
 
 const $notiDes: TextStyle = {

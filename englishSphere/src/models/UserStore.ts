@@ -57,6 +57,7 @@ export const UserStoreModel = types
     logout() {
       store.authToken = undefined
       store.user = undefined
+      store.lang = "en"
     },
     toggleLang() {
       const toggled = store.lang === "en" ? "bn" : "en"

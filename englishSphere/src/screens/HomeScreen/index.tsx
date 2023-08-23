@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ViewStyle, TouchableOpacity, ScrollView, TextStyle } from "react-native"
-import { FlashList } from "@shopify/flash-list"
+import { View, ViewStyle, ScrollView, TextStyle } from "react-native"
+import { ContentStyle, FlashList } from "@shopify/flash-list"
 import { AppStackScreenProps } from "src/navigators"
 import { spacing } from "src/theme"
 // components
@@ -9,10 +9,11 @@ import { Button, Icon, MaterialCard, Screen, Text } from "src/components"
 import { LSCard } from "./components/LSCard"
 // hooks
 import { useHomeScreen } from "./useHomeScreen"
-import { FastImage, FastImageStyle } from "src/components/FastImage"
 import { openLinkInBrowser } from "src/utils/openLinkInBrowser"
 import { useStores } from "src/models"
 import { onAppReadyForNotification } from "src/services/pushNotification/onAppReady"
+import { Avatar } from "./components/Avatar"
+import { InitUser } from "src/models/UserStore"
 
 export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function HomeScreen(_props) {
   onAppReadyForNotification()
@@ -22,7 +23,8 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
     userStore: { user, setUserFcmToken },
   } = useStores()
 
-  const { data, handleRefresh, refreshing } = useHomeScreen(user, setUserFcmToken)
+  const { data, handleRefresh, refreshing } = useHomeScreen(user as InitUser, setUserFcmToken)
+  const { imageUrl } = user as InitUser
 
   return (
     <Screen contentContainerStyle={$screenContentContainer} preset="fixed" safeAreaEdges={["top"]}>
@@ -30,9 +32,7 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
         ListHeaderComponent={
           <>
             <View style={$topContainer}>
-              <TouchableOpacity style={$avatar} onPress={() => navigation.navigate("Account")}>
-                <FastImage uri={user.imageUrl} priority="high" style={$avatarImg} />
-              </TouchableOpacity>
+              <Avatar imageUrl={imageUrl} navigation={navigation} />
               <Icon
                 icon="leaderBoard"
                 size={45}
@@ -103,12 +103,6 @@ const $topContainer: ViewStyle = {
   paddingHorizontal: 20,
 }
 
-const $avatar: ViewStyle = {
-  borderRadius: 50,
-  overflow: "hidden",
-}
-const $avatarImg: FastImageStyle = { width: 50, height: 50 }
-
 const $instaTalkContainer: ViewStyle = {
   alignItems: "center",
   paddingVertical: 40,
@@ -137,7 +131,7 @@ const $goLsContainer: ViewStyle = {
   marginTop: spacing.sm,
 }
 
-const $flatListContentContainer: ViewStyle = {
+const $flatListContentContainer: ContentStyle = {
   paddingVertical: spacing.xl,
   paddingHorizontal: spacing.sm,
 }

@@ -8,17 +8,16 @@ import { colors, spacing } from "src/theme"
 import Skill from "./components/Skill"
 import NotiLogs from "./components/NotiLogs"
 import { useStores } from "src/models"
+import { InitUser } from "src/models/UserStore"
 
 export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(function AccountScreen(
   _props,
 ) {
   const {
-    userStore: {
-      logout,
-      user: { coverUrl, fullName, imageUrl },
-    },
+    userStore: { logout, user },
   } = useStores()
   const { navigation } = _props
+  const { coverUrl, fullName, imageUrl } = user as InitUser
 
   return (
     <Screen
@@ -27,7 +26,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
         hidden: true,
       }}
       contentContainerStyle={$contentContainerStyle}
-      preset="scroll"
+      preset="fixed"
     >
       <Cover logout={logout} coverUrl={coverUrl} fullName={fullName} imageUrl={imageUrl} />
 
@@ -47,7 +46,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
 
       <Skill />
 
-      <NotiLogs />
+      <NotiLogs navigation={navigation} />
     </Screen>
   )
 })

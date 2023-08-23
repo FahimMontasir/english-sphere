@@ -7,7 +7,7 @@
  */
 export default {
   // API_URL: "http://192.168.0.108:5000/api/v1",
-  API_URL: "https://backend-eight-sandy.vercel.app/api/v1",
+  API_URL: "http://192.168.0.108:5000/api/v1",
   GOOGLE_CLIENT_ID: "780892283384-rk6kf97p0q3uvr02refo3cefrjgv431j.apps.googleusercontent.com",
   API_KEY: "changeitlaterwithsuperpowerfullkey",
 }

@@ -65,6 +65,8 @@ export interface ButtonProps extends PressableProps {
    * Children components.
    */
   children?: React.ReactNode
+
+  disabled?: boolean
 }
 
 /**
@@ -85,6 +87,7 @@ export function Button(props: ButtonProps) {
     children,
     RightAccessory,
     LeftAccessory,
+    disabled,
     ...rest
   } = props
 
@@ -97,6 +100,7 @@ export function Button(props: ButtonProps) {
       $viewPresets[preset],
       $viewStyleOverride,
       !!pressed && [$pressedViewPresets[preset], $pressedViewStyleOverride],
+      { opacity: disabled ? 0.2 : 1 },
     ]
   }
   function $textStyle({ pressed }) {

@@ -9,7 +9,7 @@ import { AuthApi } from "src/services/api/auth"
 
 interface ICover {
   logout: () => void
-  coverUrl: string
+  coverUrl?: string
   fullName: string
   imageUrl: string
 }

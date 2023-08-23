@@ -2,13 +2,22 @@ import admin from 'firebase-admin';
 import { v4 as uuidv4 } from 'uuid';
 import { IFcmToken } from 'modules/rest/user/app/user.app.interface';
 
-type NotiType = 'default' | 'app-update' | 'materials' | 'insta' | 'message' | 'message-request';
+export const NOTI_TYPE = [
+  'default',
+  'app-update',
+  'materials',
+  'insta',
+  'message',
+  'message-request',
+] as const;
+type NotiType = (typeof NOTI_TYPE)[number];
 
 export type INotiPayload = {
   type?: NotiType;
   title: string;
   body: string;
   data: {
+    screenId?: string;
     imageUrl?: string;
     banner?: string;
     bigText?: string;
@@ -27,14 +36,28 @@ const send = async (fcmTokens: IFcmToken[], payload: INotiPayload) => {
   try {
     await admin.messaging().sendEachForMulticast({
       tokens,
-      notification: { title: payload.title, body: payload.body },
       data: {
+        title: payload.title,
+        body: payload.body,
         id: uuidv4(),
         type: payload.type || 'default',
         ...payload.data,
       },
-      // android: {},
-      // apns: {},
+      android: {
+        priority: 'high',
+      },
+      apns: {
+        payload: {
+          aps: {
+            contentAvailable: true,
+          },
+        },
+        headers: {
+          'apns-push-type': 'background',
+          'apns-priority': '5',
+          'apns-topic': 'com.englishsphere', // your app bundle identifier
+        },
+      },
     });
   } catch (error) {
     throw new Error('Sending push notification failed');

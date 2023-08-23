@@ -5,6 +5,7 @@ import messaging from "@react-native-firebase/messaging"
 import auth from "@react-native-firebase/auth"
 import Toast from "react-native-toast-message"
 import DeviceInfo from "react-native-device-info"
+import { HandleNotiData } from "src/services/pushNotification/handleNotificationData"
 
 const loginUser = async <T>(input: T) => {
   const { data } = await api.post("/auth/app/login", input, {
@@ -25,6 +26,7 @@ const logoutUser = async (logout: () => void) => {
     GoogleSignin.configure({})
     await GoogleSignin.signOut()
     await auth().signOut()
+    HandleNotiData.clearAllOnLogOut()
     logout()
     Toast.show({
       type: "info",

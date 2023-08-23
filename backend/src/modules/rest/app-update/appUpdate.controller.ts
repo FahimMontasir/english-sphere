@@ -12,6 +12,17 @@ const sendAll = catchAsync(async (req, res) => {
   });
 });
 
+const sendMulticast = catchAsync(async (req, res) => {
+  await AppUpdateService.sendMulticast(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'App update send successfully-multicast!!!',
+  });
+});
+
 export const AppUpdateController = {
   sendAll,
+  sendMulticast,
 };

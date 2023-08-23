@@ -13,4 +13,11 @@ router.post(
   AppUpdateController.sendAll
 );
 
+router.post(
+  '/send-multicast',
+  auth('admin', 'superAdmin'),
+  validateRequest(AppUpdateValidation.notiPayloadZodSchema),
+  AppUpdateController.sendMulticast
+);
+
 export const AppUpdateRoutes = router;

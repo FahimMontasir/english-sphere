@@ -15,7 +15,7 @@ const en = {
     position: "Position:",
     skill: "Skill",
     logNHistory: "Insta Logs and Notifications",
-    loadBtn: "Load More",
+    loadBtn: "Load All",
   },
   chatScreen: {
     search: "Search chat...",

@@ -10,7 +10,10 @@ export enum NOTI_TYPE {
 export interface NotiPayload {
   data: {
     id: string
+    screenId?: string
     type: NOTI_TYPE
+    title?: string
+    body?: string
     imageUrl?: string
     banner?: string
     bigText?: string
