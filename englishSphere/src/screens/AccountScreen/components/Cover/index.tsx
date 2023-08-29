@@ -1,36 +1,46 @@
-import * as React from "react"
+import React from "react"
 import { observer } from "mobx-react-lite"
-import { ImageBackground, ImageStyle, View, ViewStyle } from "react-native"
-import { Icon, Text } from "src/components"
-import { colors, spacing } from "src/theme"
+import { ImageBackground, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import { Icon, Text, TextField, TextFieldAccessoryProps, Camera } from "src/components"
+import { colors, spacing, typography } from "src/theme"
 import { useSafeAreaInsetsStyle } from "src/utils/useSafeAreaInsetsStyle"
-import CameraVerification from "src/components/CameraVerification"
-import { AuthApi } from "src/services/api/auth"
+import { useStores } from "src/models"
+import { useCover } from "./useCover"
 
-interface ICover {
-  logout: () => void
-  coverUrl?: string
-  fullName: string
-  imageUrl: string
-}
-
-const Cover = observer(function Cover({ logout, coverUrl, imageUrl, fullName }: ICover) {
-  const [closedCameraP, setClosedCameraP] = React.useState(true)
-  const [closedCameraC, setClosedCameraC] = React.useState(true)
-  const [disableLogout, setDisableLogout] = React.useState(false)
-
+const Cover = observer(function Cover() {
   const $coverContainerInsets = useSafeAreaInsetsStyle(["top"])
 
-  const handleLogout = async () => {
-    setDisableLogout(true)
-    await AuthApi.logoutUser(logout)
+  const {
+    userStore: { logout, user, setUser },
+  } = useStores()
+
+  const {
+    onChangeName,
+    handleLogout,
+    setClosedCameraC,
+    setClosedCameraP,
+    closedCameraC,
+    closedCameraP,
+    disableLogout,
+    penPressed,
+    setPenPressed,
+    userEnteredName,
+    setUserEnteredName,
+  } = useCover({ logout, setUser })
+
+  const SkillAddIcon = (props: TextFieldAccessoryProps) => {
+    return <Icon onPress={onChangeName} containerStyle={props.style} icon="plus" />
   }
 
   return (
     <>
       <ImageBackground
         style={$coverContainer}
-        source={{ uri: coverUrl || "https://i.pravatar.cc/300" }}
+        source={
+          user?.coverUrl
+            ? { uri: user.coverUrl }
+            : require("../../../../../assets/images/bootsplash_logo_original.png")
+        }
         resizeMode="cover"
       >
         <View style={[$coverLeftContentContainer, $coverContainerInsets]}>
@@ -42,8 +52,27 @@ const Cover = observer(function Cover({ logout, coverUrl, imageUrl, fullName }: 
             color={colors.palette.white}
           />
           <View style={$userNameContainer}>
-            <Text text={fullName} preset="subheading" numberOfLines={1} />
-            <Icon icon="pen" size={20} color={colors.palette.black} />
+            {penPressed ? (
+              <TextField
+                placeholder="Type here..."
+                value={userEnteredName}
+                onChangeText={(v) => setUserEnteredName(v)}
+                containerStyle={$nameInputContainer}
+                inputWrapperStyle={$nameInputWrapper}
+                style={$nameInput}
+                RightAccessory={SkillAddIcon}
+              />
+            ) : (
+              <>
+                <Text text={user?.fullName} preset="subheading" numberOfLines={1} />
+                <Icon
+                  icon="pen"
+                  size={20}
+                  color={colors.palette.black}
+                  onPress={() => setPenPressed(true)}
+                />
+              </>
+            )}
           </View>
         </View>
 
@@ -59,7 +88,7 @@ const Cover = observer(function Cover({ logout, coverUrl, imageUrl, fullName }: 
           <ImageBackground
             imageStyle={$profilePhotoImage}
             style={$profilePhotoContainer}
-            source={{ uri: imageUrl }}
+            source={{ uri: user?.imageUrl }}
             resizeMode="cover"
           >
             <Icon
@@ -73,9 +102,9 @@ const Cover = observer(function Cover({ logout, coverUrl, imageUrl, fullName }: 
         </View>
       </ImageBackground>
 
-      {!closedCameraP && <CameraVerification handleCloseCamera={setClosedCameraP} />}
+      {!closedCameraP && <Camera setIsClosed={setClosedCameraP} isClosed={closedCameraP} />}
       {!closedCameraC && (
-        <CameraVerification handleCloseCamera={setClosedCameraC} cameraType={"back"} />
+        <Camera setIsClosed={setClosedCameraC} isClosed={closedCameraC} cameraType={"back"} />
       )}
     </>
   )
@@ -140,4 +169,13 @@ const $profilePhotoCameraContainer: ViewStyle = {
   borderRadius: 30,
   justifyContent: "center",
   alignItems: "center",
+}
+
+const $nameInput: TextStyle = { marginHorizontal: 0, fontFamily: typography.primary.medium }
+
+const $nameInputContainer: ViewStyle = { width: "100%" }
+
+const $nameInputWrapper: ViewStyle = {
+  backgroundColor: "transparent",
+  borderColor: "transparent",
 }

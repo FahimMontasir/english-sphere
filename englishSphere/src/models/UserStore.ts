@@ -27,6 +27,9 @@ export const UserStoreModel = types
     authToken: types.maybe(types.string),
     user: types.maybe(User),
     lang: loadString("lang") || "en",
+    badges: types.array(types.string),
+    upVotes: types.maybe(types.number),
+    downVotes: types.maybe(types.number),
   })
   .views((store) => ({
     get isAuthenticated() {
@@ -38,8 +41,8 @@ export const UserStoreModel = types
       store.authToken = value
       store.user = user
     },
-    setUser(value: InitUser) {
-      store.user = { ...store.user, ...value }
+    setUser(value: Partial<InitUser>) {
+      store.user = { ...store.user, ...value } as any
     },
     setUserInterest(value: string) {
       if (store.user) {
@@ -63,6 +66,27 @@ export const UserStoreModel = types
       const toggled = store.lang === "en" ? "bn" : "en"
       store.lang = toggled
       saveString("lang", toggled)
+    },
+    setBadges(value: string[]) {
+      store.badges = value as any
+    },
+    increaseUpVotes() {
+      if (store.upVotes) {
+        store.upVotes = store.upVotes + 1
+      } else {
+        store.upVotes = 1
+      }
+    },
+    increaseDownVotes() {
+      if (store.downVotes) {
+        store.downVotes = store.downVotes + 1
+      } else {
+        store.downVotes = 1
+      }
+    },
+    setUpVotesDownVotes(upVotes: number, downVotes: number) {
+      store.upVotes = upVotes
+      store.downVotes = downVotes
     },
   }))
 
