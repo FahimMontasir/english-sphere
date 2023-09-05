@@ -13,7 +13,7 @@ const en = {
   },
   accountScreen: {
     position: "Position:",
-    skill: "Skill",
+    skill: "Skills and Interests",
     logNHistory: "Insta Logs and Notifications",
     loadBtn: "Load All",
   },

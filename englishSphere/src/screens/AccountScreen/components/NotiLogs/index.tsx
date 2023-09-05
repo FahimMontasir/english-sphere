@@ -114,7 +114,7 @@ const NotiLogs: FC<INotiLogs> = observer(function NotiLogs({ navigation }) {
 export default NotiLogs
 
 const $logsHeadingContainer: TextStyle = {
-  marginHorizontal: spacing.xs,
+  marginHorizontal: spacing.sm,
   marginBottom: spacing.sm,
   flexDirection: "row",
   justifyContent: "space-between",

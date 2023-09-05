@@ -34,7 +34,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
         onPress={() => navigation.navigate("Chat")}
         containerStyle={$chatIcon}
         icon="chat"
-        size={30}
+        size={35}
         color={colors.palette.black}
       />
 
@@ -51,7 +51,7 @@ const $contentContainerStyle: ViewStyle = {
 
 const $positionTextContainer: TextStyle = {
   marginTop: spacing.xxs,
-  marginLeft: spacing.xs,
+  marginLeft: spacing.sm,
   flexDirection: "row",
   gap: spacing.xxs,
   width: "50%",
