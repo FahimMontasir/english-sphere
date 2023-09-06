@@ -55,6 +55,8 @@ export const Camera = observer(function Camera(props: ICamera) {
               }}
             />
           </View>
+          <View style={$gutter} />
+          <View style={$gutterBottom} />
         </>
       ) : (
         <Image
@@ -79,4 +81,14 @@ const $buttonContainer: ViewStyle = {
   width: "100%",
   justifyContent: "center",
   alignItems: "center",
+  zIndex: 99,
 }
+
+const $gutter: ViewStyle = {
+  position: "absolute",
+  width: "100%",
+  height: "25%",
+  backgroundColor: colors.palette.transparentGrayUltra,
+}
+
+const $gutterBottom = [$gutter, { bottom: 0 }]

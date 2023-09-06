@@ -107,7 +107,7 @@ const $instaTalkContainer: ViewStyle = {
   alignItems: "center",
   paddingVertical: 40,
   flexShrink: 1,
-  flexGrow: 1,
+  flexGrow: 0,
   flexBasis: "25%",
 }
 
@@ -122,13 +122,11 @@ const $materialContainer: ViewStyle = {
 }
 
 const $goLsContainer: ViewStyle = {
-  flexShrink: 1,
-  flexGrow: 0,
-  flexBasis: "5%",
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
   marginTop: spacing.sm,
+  marginBottom: spacing.xxs,
 }
 
 const $flatListContentContainer: ContentStyle = {
@@ -138,7 +136,7 @@ const $flatListContentContainer: ContentStyle = {
 
 const $footerContainer: ViewStyle = {
   flexDirection: "row",
-  marginTop: spacing.xxxl,
+  marginTop: spacing.xxl,
   alignSelf: "center",
 }
 

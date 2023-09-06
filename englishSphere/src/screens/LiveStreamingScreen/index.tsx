@@ -15,7 +15,7 @@ export const LiveStreamingScreen: FC<AppStackScreenProps<"LiveStreaming">> = obs
     const { navigation } = _props
 
     return (
-      <Screen contentContainerStyle={$root} preset="fixed" safeAreaEdges={["top"]}>
+      <Screen contentContainerStyle={$root} preset="auto" safeAreaEdges={["top", "bottom"]}>
         <Icon
           onPress={() => navigation.navigate("Home")}
           style={$endIcon}
@@ -68,24 +68,33 @@ export const LiveStreamingScreen: FC<AppStackScreenProps<"LiveStreaming">> = obs
 )
 
 const $root: ViewStyle = {
-  // flex: 1,
+  flex: 1,
   marginHorizontal: spacing.sm,
 }
 
-const $endIcon: ImageStyle = { alignSelf: "flex-end", marginTop: spacing.md }
+const $endIcon: ImageStyle = {
+  alignSelf: "flex-end",
+  marginTop: spacing.md,
+}
 
 const $userVideo: FastImageStyle = {
+  flexBasis: "25%",
+  flexGrow: 1,
+  flexShrink: 1,
   height: 250,
   width: "100%",
   borderRadius: spacing.xs,
-  marginTop: spacing.xl,
+  marginTop: spacing.sm,
 }
 
 const $othersVideoContainer: ViewStyle = {
+  flexBasis: "10%",
+  flexGrow: 0,
+  flexShrink: 1,
   marginTop: spacing.md,
   flexDirection: "row",
   justifyContent: "space-evenly",
-  marginBottom: spacing.xxxl,
+  marginBottom: spacing.xl,
 }
 
 const $othersVideo: FastImageStyle = {

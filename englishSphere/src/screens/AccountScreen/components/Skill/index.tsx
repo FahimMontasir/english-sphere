@@ -1,35 +1,21 @@
-import React, { useState } from "react"
+import React from "react"
 import { observer } from "mobx-react-lite"
 import { View, ViewStyle } from "react-native"
 import { Icon, Modal, Text, TextField, TextFieldAccessoryProps } from "src/components"
 import { spacing } from "src/theme"
-import SkillElement from "./SkillElement"
+import { Element } from "../../Element"
 import { useStores } from "src/models"
 import { Settings } from "../Settings"
+import { truncateText } from "src/utils/formatString"
+import { useSkill } from "./useSkill"
 
 const Skill = observer(function Skill() {
   const {
     userStore: { user, setUser },
   } = useStores()
-  const [newSkill, setNewSkill] = useState("")
-  const [modalVisible, setModalVisible] = useState(false)
 
-  const onAddSkill = () => {
-    // Todo: save to db
-    if (user?.interests) {
-      setUser({ interests: [...user.interests, newSkill] as any })
-    } else {
-      setUser({ interests: [newSkill] as any })
-    }
-
-    setNewSkill("")
-  }
-
-  const onDeletePress = (v: string) => {
-    // Todo: delete from db
-    console.log("delete", v)
-    setUser({ interests: user?.interests.filter((i) => i !== v) as any })
-  }
+  const { onAddSkill, onDeletePress, newSkill, setNewSkill, modalVisible, setModalVisible } =
+    useSkill({ setUser, user })
 
   const SkillAddIcon = (props: TextFieldAccessoryProps) => {
     return <Icon onPress={onAddSkill} containerStyle={props.style} icon="plus" />
@@ -54,7 +40,11 @@ const Skill = observer(function Skill() {
       </View>
       <View style={$skillsContainer}>
         {user?.interests?.map((v) => (
-          <SkillElement value={v} key={v} onDeletePress={onDeletePress} />
+          <Element
+            value={truncateText(v, 14, "..")}
+            key={v}
+            onDeletePress={() => onDeletePress(v)}
+          />
         ))}
       </View>
       <Modal modalVisible={modalVisible} setModalVisible={setModalVisible}>
@@ -79,6 +69,9 @@ const $skillInputContainer: ViewStyle = {
 }
 
 const $skillsContainer: ViewStyle = {
+  flexBasis: "7%",
+  flexGrow: 0,
+  flexShrink: 0,
   flexDirection: "row",
   flexWrap: "wrap",
   columnGap: 5,
@@ -86,4 +79,5 @@ const $skillsContainer: ViewStyle = {
   justifyContent: "center",
   marginTop: 10,
   marginBottom: 30,
+  marginHorizontal: spacing.sm,
 }

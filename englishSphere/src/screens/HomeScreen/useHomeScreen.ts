@@ -36,6 +36,14 @@ export const useHomeScreen = (user: InitUser, setUserFcmToken: (v: FcmToken) => 
         return handleFcmRefreshToken(token)
       })
 
+    // todo: check jwt expiration and user info (name, images, skills, banned,user up down votes, badges, home materials) update store accordingly
+
+    // jwt expire
+    // is banned
+    // badges changes
+    // home materials changes
+    // name, images, skills and up/down votes changes
+
     return messaging().onTokenRefresh((token) => {
       handleFcmRefreshToken(token)
     })

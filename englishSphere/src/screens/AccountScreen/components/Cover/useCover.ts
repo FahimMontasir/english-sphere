@@ -6,9 +6,10 @@ import { truncateText } from "src/utils/formatString"
 interface IUseCover {
   logout: () => void
   setUser: (value: Partial<InitUser>) => void
+  user: InitUser | undefined
 }
 
-export function useCover({ logout, setUser }: IUseCover) {
+export function useCover({ logout, setUser, user }: IUseCover) {
   const [closedCameraP, setClosedCameraP] = useState(true)
   const [closedCameraC, setClosedCameraC] = useState(true)
   const [disableLogout, setDisableLogout] = useState(false)
@@ -21,9 +22,13 @@ export function useCover({ logout, setUser }: IUseCover) {
   }
 
   const onChangeName = () => {
+    const prevFullName = user?.fullName
     const updatedFullName = truncateText(userEnteredName, 18, "")
     setUser({ fullName: updatedFullName })
     // Todo: update to backend
+
+    // if failed restore the prev one prevFullName
+    console.log({ prevFullName })
 
     setPenPressed(false)
     setUserEnteredName("")
