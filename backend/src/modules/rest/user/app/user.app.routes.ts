@@ -12,5 +12,32 @@ router.post(
   validateRequest(AppUserValidation.refreshFcmTokenZodSchema),
   AppUserController.refreshFcmToken
 );
+router.post(
+  '/add-skill',
+  auth('user', 'userN'),
+  validateRequest(AppUserValidation.addSkillZodSchema),
+  AppUserController.addSkill
+);
+
+router.patch(
+  '/update-user',
+  auth('user', 'userN'),
+  validateRequest(AppUserValidation.updateUserZodSchema),
+  AppUserController.updateUser
+);
+
+router.delete(
+  '/remove-skill',
+  auth('user', 'userN'),
+  validateRequest(AppUserValidation.removeSkillZodSchema),
+  AppUserController.removeSkill
+);
+
+router.delete(
+  '/remove-other-user',
+  auth('user', 'userN'),
+  validateRequest(AppUserValidation.removeFcmTokenZodSchema),
+  AppUserController.removeOtherUser
+);
 
 export const AppUserRoutes = router;

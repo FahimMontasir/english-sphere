@@ -1,1 +1,1 @@
-export const BADGE = ['silver', 'gold', 'diamond', 'ruby'] as const;
+export const BADGES = ['silver', 'gold', 'diamond', 'guard'] as const;
