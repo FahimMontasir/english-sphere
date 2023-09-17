@@ -3,6 +3,16 @@ import { sendResponse } from 'shared/sendResponse';
 import { AppUserService } from './user.app.service';
 
 // -------------------------------get-------------------------------
+const getUpdatedInfo = catchAsync(async (req, res) => {
+  const data = await AppUserService.getUpdatedInfo(req.user);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Retrieved user updated info successfully!!!',
+    data,
+  });
+});
 
 // ----------------------------------add----------------------------
 const refreshFcmToken = catchAsync(async (req, res) => {
@@ -58,6 +68,7 @@ const removeOtherUser = catchAsync(async (req, res) => {
 });
 
 export const AppUserController = {
+  getUpdatedInfo,
   refreshFcmToken,
   addSkill,
   updateUser,

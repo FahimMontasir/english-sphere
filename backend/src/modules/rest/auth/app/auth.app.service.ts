@@ -12,7 +12,7 @@ import configs from 'configs';
 import { IDecodedUser, IUserRoles } from 'interfaces/user';
 import { Secret } from 'jsonwebtoken';
 import { pick } from 'lodash';
-import { NOTIFICATION_TOPIC } from 'shared/pushNotification';
+import { NOTIFICATION_TOPIC, PushNotification } from 'shared/pushNotification';
 
 const login = async (
   body: IReq
@@ -54,7 +54,13 @@ const login = async (
   if (userExists) {
     const checkFcm = userExists.fcmTokens.filter(v => v.device !== fcmToken.device);
     if (checkFcm.length) {
-      //Todo: send notification to existing device
+      // send notification to existing device
+      PushNotification.send(checkFcm, {
+        type: 'app-update',
+        title: 'New device login!',
+        body: `Device Name: ${fcmToken.device}`,
+        data: { screenId: 'setting-modal' },
+      });
     }
 
     const fcmTokens = [...checkFcm, fcmToken];

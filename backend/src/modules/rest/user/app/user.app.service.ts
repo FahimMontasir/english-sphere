@@ -6,7 +6,49 @@ import { NOTIFICATION_TOPIC } from 'shared/pushNotification';
 import ApiError from 'errors/ApiError';
 
 // ---------------get----------------------
+const getUpdatedInfo = async (decodedUser: IDecodedUser) => {
+  const { _id } = decodedUser;
 
+  const userData = await AppUser.findById(_id)
+    .select('-_id fcmTokens fullName imageUrl coverUrl interests badges upVotes downVotes isBanned')
+    .lean();
+  // todo: remove this dummy data with proper data
+  const materialSections = [
+    {
+      title: 'English basic for beginner',
+      thumbnail:
+        'https://t3.ftcdn.net/jpg/03/70/42/66/360_F_370426690_Pejt9KxjWTHPklsKwripaxr0iA17zupF.jpg',
+    },
+    {
+      title: 'English for web developer',
+      thumbnail:
+        'https://www.fluentu.com/blog/english/wp-content/uploads/sites/4/2022/08/how-to-speak-english-fluently-1024x683.jpg',
+    },
+    {
+      title: 'Advance English grammar',
+      thumbnail:
+        'https://www.21kschool.com/blog/wp-content/uploads/2022/10/The-Importance-of-Grammar-in-Learning-the-English-Language.png',
+    },
+    {
+      title: 'English for daily conversation',
+      thumbnail:
+        'https://t3.ftcdn.net/jpg/03/70/42/66/360_F_370426690_Pejt9KxjWTHPklsKwripaxr0iA17zupF.jpg',
+    },
+    {
+      title: 'English for Business Communication',
+      thumbnail:
+        'https://www.fluentu.com/blog/english/wp-content/uploads/sites/4/2022/08/how-to-speak-english-fluently-1024x683.jpg',
+    },
+  ];
+
+  return {
+    userData: {
+      ...userData,
+      fcmTokens: userData?.fcmTokens.map(t => ({ token: t.token, device: t.device })),
+    },
+    materialSections,
+  };
+};
 // -------------------add------------------
 const refreshFcmToken = async (decodedUser: IDecodedUser, fcmToken: IFcmToken): Promise<void> => {
   const { _id } = decodedUser;
@@ -71,6 +113,7 @@ const removeOtherUser = async (decodedUser: IDecodedUser, device: string): Promi
 };
 
 export const AppUserService = {
+  getUpdatedInfo,
   refreshFcmToken,
   addSkill,
   updateUser,

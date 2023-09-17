@@ -6,6 +6,8 @@ import { AppUserController } from './user.app.controller';
 
 const router = express.Router();
 
+router.get('/updated-info', auth('user', 'userN'), AppUserController.getUpdatedInfo);
+
 router.post(
   '/refresh-fcm-token',
   auth('user', 'userN'),
@@ -32,7 +34,6 @@ router.delete(
   validateRequest(AppUserValidation.removeSkillZodSchema),
   AppUserController.removeSkill
 );
-
 router.delete(
   '/remove-other-user',
   auth('user', 'userN'),
