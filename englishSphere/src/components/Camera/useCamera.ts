@@ -4,6 +4,7 @@ import Toast from "react-native-toast-message"
 import { blobToBase64, uriToBlob } from "src/utils/uriToBlob"
 import Config from "src/config"
 import { InitUser } from "src/models/UserStore"
+import { UserApi } from "src/services/api/user"
 
 interface IUseCamera {
   cameraType: "front" | "back"
@@ -45,7 +46,7 @@ export function useCamera({ setIsClosed, cameraType, setUser }: IUseCamera) {
         const photo = await camera.current.takeSnapshot({
           skipMetadata: true,
           flash: "off",
-          quality: 80,
+          quality: 90,
         })
 
         setImageSource(photo.path)
@@ -62,24 +63,34 @@ export function useCamera({ setIsClosed, cameraType, setUser }: IUseCamera) {
           body: data,
         })
         const json = await upload.json()
-
-        // update local state
-        setUser(
+        const imageExactUrl =
           cameraType === "back"
             ? { coverUrl: json.data?.display_url }
-            : { imageUrl: json.data?.display_url },
-        )
+            : { imageUrl: json.data?.display_url }
 
-        // Todo: update backend
-
-        Toast.show({
-          type: "success",
-          text1: "Your image uploaded successfully!",
-          onHide: () => {
-            // stop camera screen
-            setIsClosed(true)
-          },
-        })
+        UserApi.updateUserInfo(imageExactUrl)
+          .then(() =>
+            Toast.show({
+              type: "success",
+              text1: "Your image uploaded successfully!",
+              onHide: () => {
+                // update local state
+                setUser(imageExactUrl)
+                // stop camera screen
+                setIsClosed(true)
+              },
+            }),
+          )
+          .catch(() =>
+            Toast.show({
+              type: "error",
+              text1: "Your image uploaded failed!",
+              onHide: () => {
+                // stop camera screen
+                setIsClosed(true)
+              },
+            }),
+          )
       } catch {
         Toast.show({
           type: "error",

@@ -1,8 +1,8 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
 const Material = types.model("Material", {
-  fullName: types.string,
-  imageUrl: types.string,
+  title: types.string,
+  thumbnail: types.string,
 })
 
 export interface InitMaterial extends Instance<typeof Material> {}
@@ -10,11 +10,11 @@ export interface InitMaterial extends Instance<typeof Material> {}
 export const MaterialStoreModel = types
   .model("MaterialStore")
   .props({
-    material: types.array(Material),
+    materialSections: types.array(Material),
   })
   .actions((store) => ({
-    setAuthTokenWithMaterial(materials: InitMaterial[]) {
-      store.material = materials as any
+    setMaterialSections(materials: InitMaterial[]) {
+      store.materialSections = materials as any
     },
   }))
 

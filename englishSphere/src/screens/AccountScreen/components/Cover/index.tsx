@@ -113,9 +113,6 @@ const Cover = observer(function Cover() {
 export default Cover
 
 const $coverContainer: ImageStyle = {
-  flexBasis: "17.6%",
-  flexGrow: 0,
-  flexShrink: 0,
   height: 150,
   flexDirection: "row",
   justifyContent: "space-between",

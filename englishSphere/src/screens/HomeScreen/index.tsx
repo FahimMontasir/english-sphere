@@ -20,10 +20,33 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
 
   const { navigation } = _props
   const {
-    userStore: { user, setUserFcmToken },
+    userStore: {
+      user,
+      setUserFcmToken,
+      logout,
+      badges,
+      upVotes,
+      downVotes,
+      setBadges,
+      setUpVotesDownVotes,
+      setUser,
+    },
+    materialStore: { materialSections, setMaterialSections },
   } = useStores()
 
-  const { data, handleRefresh, refreshing } = useHomeScreen(user as InitUser, setUserFcmToken)
+  const { data, handleRefresh, refreshing } = useHomeScreen(
+    user as InitUser,
+    setUserFcmToken,
+    logout,
+    materialSections,
+    setMaterialSections,
+    badges,
+    upVotes,
+    downVotes,
+    setBadges,
+    setUpVotesDownVotes,
+    setUser,
+  )
   const { imageUrl } = user as InitUser
 
   return (
@@ -49,11 +72,14 @@ export const HomeScreen: FC<AppStackScreenProps<"Home">> = observer(function Hom
             <Text preset="heading" tx="homeScreen.learning" />
             <ScrollView horizontal>
               <View style={$materialContainer}>
-                {Array(5)
-                  .fill(0)
-                  .map((_, i) => (
-                    <MaterialCard key={i} onPress={() => navigation.navigate("Material")} />
-                  ))}
+                {materialSections.map((m) => (
+                  <MaterialCard
+                    key={m.title}
+                    title={m.title}
+                    thumbnail={m.thumbnail}
+                    onPress={() => navigation.navigate("Material")}
+                  />
+                ))}
               </View>
             </ScrollView>
 

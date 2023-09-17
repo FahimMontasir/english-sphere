@@ -14,7 +14,7 @@ const loginUser = async <T>(input: T) => {
   return data.data
 }
 
-const logoutUser = async (logout: () => void) => {
+const logoutUser = async (logout: () => void, clearNotifications = true) => {
   try {
     Toast.show({
       type: "info",
@@ -26,7 +26,7 @@ const logoutUser = async (logout: () => void) => {
     GoogleSignin.configure({})
     await GoogleSignin.signOut()
     await auth().signOut()
-    HandleNotiData.clearAllOnLogOut()
+    clearNotifications && HandleNotiData.clearAllOnLogOut()
     logout()
     Toast.show({
       type: "info",

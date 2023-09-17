@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { View, ViewStyle } from "react-native"
 import { Icon, Modal, Text, TextField, TextFieldAccessoryProps } from "src/components"
 import { spacing } from "src/theme"
-import { Element } from "../../Element"
+import { Element } from "../Element"
 import { useStores } from "src/models"
 import { Settings } from "../Settings"
 import { truncateText } from "src/utils/formatString"
@@ -69,9 +69,6 @@ const $skillInputContainer: ViewStyle = {
 }
 
 const $skillsContainer: ViewStyle = {
-  flexBasis: "7%",
-  flexGrow: 0,
-  flexShrink: 0,
   flexDirection: "row",
   flexWrap: "wrap",
   columnGap: 5,

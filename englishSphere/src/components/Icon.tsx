@@ -108,6 +108,10 @@ export const iconRegistry = {
   ban: require("../../assets/icons/ban.png"),
   eng: require("../../assets/icons/eng.png"),
   google: require("../../assets/icons/google.png"),
+  guard: require("../../assets/icons/guard.png"),
+  diamond: require("../../assets/icons/diamond.png"),
+  gold: require("../../assets/icons/gold.png"),
+  silver: require("../../assets/icons/silver.png"),
 }
 
 const $imageStyle: ImageStyle = {

@@ -28,8 +28,8 @@ export const UserStoreModel = types
     user: types.maybe(User),
     lang: loadString("lang") || "en",
     badges: types.array(types.string),
-    upVotes: types.maybe(types.number),
-    downVotes: types.maybe(types.number),
+    upVotes: 0,
+    downVotes: 0,
   })
   .views((store) => ({
     get isAuthenticated() {
@@ -46,7 +46,9 @@ export const UserStoreModel = types
     },
     setUserInterest(value: string) {
       if (store.user) {
-        store.user.interests.push(value)
+        if (!store.user.interests.find((i) => i !== value)) {
+          store.user.interests.push(value)
+        }
       }
     },
     setUserFcmToken(value: FcmToken) {

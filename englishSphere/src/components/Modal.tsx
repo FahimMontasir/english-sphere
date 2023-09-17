@@ -3,6 +3,7 @@ import { StyleProp, ViewStyle, Modal as RNModal, View, ViewProps, ScrollView } f
 import { observer } from "mobx-react-lite"
 import { Icon } from "./Icon"
 import { colors, spacing } from "src/theme"
+import Toast from "react-native-toast-message"
 
 export type ModalProps = ViewProps & {
   style?: StyleProp<ViewStyle>
@@ -34,6 +35,7 @@ export const Modal = observer(function Modal(props: ModalProps) {
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
       </View>
+      <Toast />
     </RNModal>
   )
 })

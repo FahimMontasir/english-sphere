@@ -1,6 +1,8 @@
 import { useState } from "react"
+import Toast from "react-native-toast-message"
 import { InitUser } from "src/models/UserStore"
 import { AuthApi } from "src/services/api/auth"
+import { UserApi } from "src/services/api/user"
 import { truncateText } from "src/utils/formatString"
 
 interface IUseCover {
@@ -22,13 +24,21 @@ export function useCover({ logout, setUser, user }: IUseCover) {
   }
 
   const onChangeName = () => {
+    if (!userEnteredName) return
+
     const prevFullName = user?.fullName
     const updatedFullName = truncateText(userEnteredName, 18, "")
     setUser({ fullName: updatedFullName })
-    // Todo: update to backend
 
-    // if failed restore the prev one prevFullName
-    console.log({ prevFullName })
+    UserApi.updateUserInfo({ fullName: updatedFullName }).catch(() => {
+      // if failed restore the prev one prevFullName
+      Toast.show({
+        type: "error",
+        text1: "Failed to change name!",
+        text2: "Please try again.",
+      })
+      setUser({ fullName: prevFullName })
+    })
 
     setPenPressed(false)
     setUserEnteredName("")

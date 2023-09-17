@@ -9,6 +9,7 @@ const palette = {
   indigo: "#3B82F6",
   yellow: "#FBBF24",
   red: "#F43F5E",
+
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
   neutral300: "#D7CEC9",

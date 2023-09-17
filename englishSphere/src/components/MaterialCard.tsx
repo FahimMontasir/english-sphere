@@ -14,18 +14,20 @@ import { FastImage, FastImageStyle } from "./FastImage"
 
 export interface MaterialCardProps extends TouchableOpacityProps {
   style?: StyleProp<FastImageStyle>
+  title: string
+  thumbnail: string
 }
 
 export const MaterialCard = observer(function MaterialCard(props: MaterialCardProps) {
-  const { style, ...others } = props
+  const { style, title, thumbnail, ...others } = props
   const $styles = [$container, style]
 
   return (
     <TouchableOpacity activeOpacity={0.8} style={$touchableContainer} {...others}>
-      <FastImage style={$styles} uri="https://i.pravatar.cc/300" priority="high">
+      <FastImage style={$styles} uri={thumbnail} priority="high">
         <View style={$textContainer}>
           <Text numberOfLines={1} preset="subheading" style={$text}>
-            English for Web developers
+            {title}
           </Text>
         </View>
       </FastImage>
