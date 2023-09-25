@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors, { CorsOptions } from 'cors';
 import helmet from 'helmet';
 import { createServer } from 'http';
@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import routes from 'routes';
 import globalErrorHandler from 'middlewares/rest/globalErrorHandler';
 import { logger } from 'shared/logger';
+import swaggerUi from 'swagger-ui-express';
 
 const app: Application = express();
 
@@ -30,6 +31,11 @@ app.use('/api/v1', routes);
 
 // error middleware
 app.use(globalErrorHandler);
+
+//doc
+app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) => {
+  return res.send(swaggerUi.generateHTML(await import('./doc/swagger.json')));
+});
 
 // handle not found error
 app.use((req, res) => {

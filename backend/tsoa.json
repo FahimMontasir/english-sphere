@@ -1,0 +1,20 @@
+{
+  "entryFile": "src/server.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/**/*.doc.ts"],
+  "spec": {
+    "outputDirectory": "src/doc",
+    "specVersion": 3,
+    "basePath": "/api/v1/",
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "access_token",
+        "in": "query"
+      }
+    },
+    "name": "English Sphere",
+    "description": "All api documentation",
+    "license": "License: Apache 2.0"
+  }
+}

@@ -1,0 +1,257 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"FlattenMaps_T_": {
+				"properties": {},
+				"type": "object"
+			},
+			"Document": {
+				"$ref": "#/components/schemas/FlattenMaps_T_",
+				"description": "Generic types for Document:\n*  T - the type of _id\n*  TQueryHelpers - Object with any helpers that should be mixed into the Query type\n*  DocType - the type of the actual Document created"
+			},
+			"IFcmToken": {
+				"properties": {
+					"device": {
+						"type": "string"
+					},
+					"token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"device",
+					"token"
+				],
+				"type": "object"
+			},
+			"IUserRoles": {
+				"type": "string",
+				"enum": [
+					"user",
+					"userN",
+					"superAdmin",
+					"admin",
+					"contentW"
+				]
+			},
+			"IGender": {
+				"type": "string",
+				"enum": [
+					"male",
+					"female",
+					"unknown"
+				]
+			},
+			"IBadge": {
+				"type": "string",
+				"enum": [
+					"silver",
+					"gold",
+					"diamond",
+					"guard"
+				]
+			},
+			"Types.ObjectId": {
+				"type": "string"
+			},
+			"IAppUser": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/Document"
+					},
+					{
+						"properties": {
+							"isBanned": {
+								"type": "boolean"
+							},
+							"friends": {
+								"items": {
+									"$ref": "#/components/schemas/Types.ObjectId"
+								},
+								"type": "array"
+							},
+							"downVotes": {
+								"type": "number",
+								"format": "double"
+							},
+							"upVotes": {
+								"type": "number",
+								"format": "double"
+							},
+							"badges": {
+								"items": {
+									"$ref": "#/components/schemas/IBadge"
+								},
+								"type": "array"
+							},
+							"interests": {
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							},
+							"currency": {
+								"type": "string"
+							},
+							"country": {
+								"properties": {
+									"code": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"code",
+									"name"
+								],
+								"type": "object"
+							},
+							"age": {
+								"type": "number",
+								"format": "double"
+							},
+							"gender": {
+								"$ref": "#/components/schemas/IGender"
+							},
+							"role": {
+								"$ref": "#/components/schemas/IUserRoles"
+							},
+							"email": {
+								"type": "string"
+							},
+							"coverUrl": {
+								"type": "string"
+							},
+							"imageUrl": {
+								"type": "string"
+							},
+							"fullName": {
+								"type": "string"
+							},
+							"fcmTokens": {
+								"items": {
+									"$ref": "#/components/schemas/IFcmToken"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"currency",
+							"country",
+							"gender",
+							"email",
+							"imageUrl",
+							"fullName",
+							"fcmTokens"
+						],
+						"type": "object"
+					}
+				]
+			}
+		},
+		"securitySchemes": {
+			"api_key": {
+				"type": "apiKey",
+				"name": "access_token",
+				"in": "query"
+			}
+		}
+	},
+	"info": {
+		"title": "English Sphere",
+		"version": "1.0.0",
+		"description": "All api documentation",
+		"license": {
+			"name": "License: Apache 2.0"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/users/app/{userId}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IAppUser"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users/app": {
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"201": {
+						"description": "Created"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"name": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"name"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api/v1"
+		}
+	]
+}

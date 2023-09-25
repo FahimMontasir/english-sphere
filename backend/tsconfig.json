@@ -1,6 +1,6 @@
 {
   "include": ["src"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "gen", "**/*.test.ts", "**/*.doc.ts"],
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
@@ -12,6 +12,23 @@
     "strict": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    /* Basic Options */
+    "incremental": true,
+    /* Strict Type-Checking Options */
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    /* Module Resolution Options */
+    "moduleResolution": "node"
   }
 }

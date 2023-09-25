@@ -1,6 +1,6 @@
-import { BADGES } from 'constants/badge';
-import { GENDER } from 'constants/gender';
-import { USER_ROLES } from 'constants/roles';
+import { BADGES } from '../constants/badge';
+import { GENDER } from '../constants/gender';
+import { USER_ROLES } from '../constants/roles';
 
 export type IUserRoles = (typeof USER_ROLES)[number];
 
