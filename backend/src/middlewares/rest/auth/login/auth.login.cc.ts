@@ -1,5 +1,5 @@
-import configs from 'configs';
-import ApiError from 'errors/ApiError';
+import configs from '../../../../configs';
+import ApiError from '../../../../errors/ApiError';
 import { RequestHandler } from 'express';
 import { RateLimiterMemory } from 'rate-limiter-flexible';
 // doc: https://github.com/animir/node-rate-limiter-flexible
@@ -31,7 +31,7 @@ const limitRate: RequestHandler = (req, res, next) => {
     });
 };
 
-const checkRequest: RequestHandler = (req, res, next) => {
+const checkRequest: RequestHandler = (req, _res, next) => {
   try {
     // need to be secured inside next js app as well
     if (req.headers['x-api-key'] !== configs.apiKey.cc) {

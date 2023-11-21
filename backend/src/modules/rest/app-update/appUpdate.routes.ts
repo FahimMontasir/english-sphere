@@ -1,6 +1,6 @@
 import express from 'express';
-import validateRequest from 'middlewares/rest/validateRequest';
-import auth from 'middlewares/rest/auth';
+import validateRequest from '../../../middlewares/rest/validateRequest';
+import auth from '../../../middlewares/rest/auth';
 import { AppUpdateValidation } from './appUpdate.validation';
 import { AppUpdateController } from './appUpdate.controller';
 

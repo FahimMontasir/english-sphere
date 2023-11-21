@@ -2,7 +2,7 @@ import { logger } from '../../../../shared/logger';
 // import { UserSocketService } from './user.service';
 import { UserEventServer, UserEventSocket } from './user.interface';
 
-export const userEvent = (io: UserEventServer, socket: UserEventSocket) => {
+export const userEvent = (_io: UserEventServer, socket: UserEventSocket) => {
   logger.info(`user connected ${socket.id}`);
 
   // UserSocketService.newConnectionHandler(socket);

@@ -1,6 +1,6 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import { IJwtPayload } from '../interfaces/common';
-import { IDecodedUser } from 'interfaces/user';
+import { IDecodedUser } from '../interfaces/user';
 
 const createToken = (payload: IJwtPayload, secret: Secret, expireTime: string): string => {
   return jwt.sign(payload, secret, { expiresIn: expireTime });

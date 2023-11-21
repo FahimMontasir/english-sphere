@@ -6,161 +6,177 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"FlattenMaps_T_": {
-				"properties": {},
-				"type": "object"
-			},
-			"Document": {
-				"$ref": "#/components/schemas/FlattenMaps_T_",
-				"description": "Generic types for Document:\n*  T - the type of _id\n*  TQueryHelpers - Object with any helpers that should be mixed into the Query type\n*  DocType - the type of the actual Document created"
-			},
-			"IFcmToken": {
-				"properties": {
-					"device": {
-						"type": "string"
-					},
-					"token": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"device",
-					"token"
-				],
-				"type": "object"
-			},
-			"IUserRoles": {
-				"type": "string",
-				"enum": [
-					"user",
-					"userN",
-					"superAdmin",
-					"admin",
-					"contentW"
-				]
-			},
-			"IGender": {
-				"type": "string",
-				"enum": [
-					"male",
-					"female",
-					"unknown"
-				]
-			},
-			"IBadge": {
-				"type": "string",
-				"enum": [
-					"silver",
-					"gold",
-					"diamond",
-					"guard"
-				]
-			},
 			"Types.ObjectId": {
 				"type": "string"
 			},
-			"IAppUser": {
-				"allOf": [
-					{
-						"$ref": "#/components/schemas/Document"
+			"ISomeConstant": {
+				"type": "string",
+				"enum": [
+					"userRole",
+					"gender",
+					"anything unchangeable"
+				]
+			},
+			"IBoilerplateCode": {
+				"properties": {
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
 					},
-					{
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"constant": {
+						"$ref": "#/components/schemas/ISomeConstant"
+					},
+					"removeIt": {
+						"type": "boolean"
+					},
+					"anyRef": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					},
+					"_id": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					}
+				},
+				"required": [
+					"constant",
+					"removeIt",
+					"anyRef"
+				],
+				"type": "object"
+			},
+			"IApiResponse_IBoilerplateCode_": {
+				"properties": {
+					"data": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/IBoilerplateCode"
+							}
+						],
+						"nullable": true
+					},
+					"meta": {
 						"properties": {
-							"isBanned": {
-								"type": "boolean"
-							},
-							"friends": {
-								"items": {
-									"$ref": "#/components/schemas/Types.ObjectId"
-								},
-								"type": "array"
-							},
-							"downVotes": {
+							"total": {
 								"type": "number",
 								"format": "double"
 							},
-							"upVotes": {
+							"limit": {
 								"type": "number",
 								"format": "double"
 							},
-							"badges": {
-								"items": {
-									"$ref": "#/components/schemas/IBadge"
-								},
-								"type": "array"
-							},
-							"interests": {
-								"items": {
-									"type": "string"
-								},
-								"type": "array"
-							},
-							"currency": {
-								"type": "string"
-							},
-							"country": {
-								"properties": {
-									"code": {
-										"type": "string"
-									},
-									"name": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"code",
-									"name"
-								],
-								"type": "object"
-							},
-							"age": {
+							"page": {
 								"type": "number",
 								"format": "double"
-							},
-							"gender": {
-								"$ref": "#/components/schemas/IGender"
-							},
-							"role": {
-								"$ref": "#/components/schemas/IUserRoles"
-							},
-							"email": {
-								"type": "string"
-							},
-							"coverUrl": {
-								"type": "string"
-							},
-							"imageUrl": {
-								"type": "string"
-							},
-							"fullName": {
-								"type": "string"
-							},
-							"fcmTokens": {
-								"items": {
-									"$ref": "#/components/schemas/IFcmToken"
-								},
-								"type": "array"
 							}
 						},
 						"required": [
-							"currency",
-							"country",
-							"gender",
-							"email",
-							"imageUrl",
-							"fullName",
-							"fcmTokens"
+							"total",
+							"limit",
+							"page"
 						],
-						"type": "object"
+						"type": "object",
+						"nullable": true
+					},
+					"message": {
+						"type": "string",
+						"nullable": true
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"statusCode": {
+						"type": "number",
+						"format": "double"
 					}
-				]
+				},
+				"required": [
+					"success",
+					"statusCode"
+				],
+				"type": "object"
+			},
+			"IApiResponse_null_": {
+				"properties": {
+					"data": {
+						"anyOf": [],
+						"nullable": true
+					},
+					"meta": {
+						"properties": {
+							"total": {
+								"type": "number",
+								"format": "double"
+							},
+							"limit": {
+								"type": "number",
+								"format": "double"
+							},
+							"page": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"total",
+							"limit",
+							"page"
+						],
+						"type": "object",
+						"nullable": true
+					},
+					"message": {
+						"type": "string",
+						"nullable": true
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"success",
+					"statusCode"
+				],
+				"type": "object"
+			},
+			"Partial_IBoilerplateCode_": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					},
+					"anyRef": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					},
+					"removeIt": {
+						"type": "boolean"
+					},
+					"constant": {
+						"$ref": "#/components/schemas/ISomeConstant"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
 			}
 		},
 		"securitySchemes": {
 			"api_key": {
 				"type": "apiKey",
-				"name": "access_token",
-				"in": "query"
+				"name": "authorization",
+				"in": "header"
 			}
 		}
 	},
@@ -175,39 +191,40 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/users/app/{userId}": {
+		"/boilerplateCode/{userId}": {
 			"get": {
-				"operationId": "GetUser",
+				"operationId": "GetBoilerplateCode",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IAppUser"
+									"$ref": "#/components/schemas/IApiResponse_IBoilerplateCode_"
 								}
 							}
 						}
 					}
 				},
+				"description": "Retrieves the details of an existing user.",
 				"tags": [
-					"User"
+					"BoilerplateCodeController"
 				],
 				"security": [],
 				"parameters": [
 					{
-						"in": "path",
-						"name": "userId",
+						"in": "header",
+						"name": "X-Access-Token",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					},
 					{
-						"in": "query",
-						"name": "name",
-						"required": false,
+						"description": "Supply the valid user mongodb ID.",
+						"in": "path",
+						"name": "userId",
+						"required": true,
 						"schema": {
 							"type": "string"
 						}
@@ -215,31 +232,130 @@
 				]
 			}
 		},
-		"/users/app": {
+		"/boilerplateCode": {
 			"post": {
-				"operationId": "CreateUser",
+				"operationId": "AddBoilerplateCode",
 				"responses": {
 					"201": {
-						"description": "Created"
+						"description": "created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IApiResponse_null_"
+								}
+							}
+						}
 					}
 				},
+				"description": "Adds a new user by providing required request body.",
 				"tags": [
-					"User"
+					"BoilerplateCodeController"
 				],
 				"security": [],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "_id, createdAt and updated are optional fields",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IBoilerplateCode",
+								"description": "_id, createdAt and updated are optional fields"
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"operationId": "UpdateBoilerplateCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IApiResponse_null_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Patch docs here",
+				"tags": [
+					"BoilerplateCodeController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_IBoilerplateCode_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "RemoveBoilerplateCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IApiResponse_null_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Delete docs here",
+				"tags": [
+					"BoilerplateCodeController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
 								"properties": {
-									"name": {
+									"value": {
 										"type": "string"
 									}
 								},
 								"required": [
-									"name"
+									"value"
 								],
 								"type": "object"
 							}

@@ -1,6 +1,6 @@
 import admin from 'firebase-admin';
 import { v4 as uuidv4 } from 'uuid';
-import { IFcmToken } from 'modules/rest/user/app/user.app.interface';
+import { IFcmToken } from '../modules/rest/user/app/user.app.interface';
 
 export const NOTI_TYPE = [
   'default',

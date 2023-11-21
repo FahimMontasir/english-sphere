@@ -1,8 +1,8 @@
 import express from 'express';
-import validateRequest from 'middlewares/rest/validateRequest';
+import validateRequest from '../../../../middlewares/rest/validateRequest';
 // auth middlewares
-import { CCLoginAuth } from 'middlewares/rest/auth/login/auth.login.cc';
-import auth from 'middlewares/rest/auth';
+import { CCLoginAuth } from '../../../../middlewares/rest/auth/login/auth.login.cc';
+import auth from '../../../../middlewares/rest/auth';
 // module specific
 import { CCAuthValidation } from './auth.cc.validation';
 import { CCAuthController } from './auth.cc.controller';

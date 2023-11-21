@@ -1,4 +1,4 @@
-import { NOTI_TYPE } from 'shared/pushNotification';
+import { NOTI_TYPE } from '../../../shared/pushNotification';
 import { z } from 'zod';
 
 const notiPayloadZodSchema = z.object({

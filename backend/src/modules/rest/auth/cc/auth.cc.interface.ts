@@ -1,4 +1,4 @@
-import { ICCUser } from 'modules/rest/user/cc/user.cc.interface';
+import { ICCUser } from '../../../../modules/rest/user/cc/user.cc.interface';
 
 export type ICCLogin = {
   email: string;

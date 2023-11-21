@@ -50,6 +50,7 @@ const updateFriends = async (userId: string) => {
     //     });
     //   }
     // }
+    logger.info(userId);
   } catch (err) {
     logger.error(err);
   }

@@ -1,5 +1,5 @@
-import { catchAsync } from 'shared/catchAsync';
-import { sendResponse } from 'shared/sendResponse';
+import { catchAsync } from '../../../shared/catchAsync';
+import { sendResponse } from '../../../shared/sendResponse';
 import { AppUpdateService } from './appUpdate.service';
 
 const sendAll = catchAsync(async (req, res) => {

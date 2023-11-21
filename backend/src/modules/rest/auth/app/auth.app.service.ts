@@ -2,21 +2,19 @@
 // @ts-ignore
 import gender from 'gender-detection';
 import admin from 'firebase-admin';
-import ApiError from 'errors/ApiError';
-import { AppUser } from 'modules/rest/user/app/user.app.model';
+import ApiError from '../../../../errors/ApiError';
+import { AppUser } from '../../../../modules/rest/user/app/user.app.model';
 import { IReq } from './auth.app.interface';
 import { getCountryByTimezone } from './auth.app.utils';
-import { IAppUser } from 'modules/rest/user/app/user.app.interface';
-import { JwtHelper } from 'shared/jwtHelper';
-import configs from 'configs';
-import { IDecodedUser, IUserRoles } from 'interfaces/user';
+import { IAppUser } from '../../../../modules/rest/user/app/user.app.interface';
+import { JwtHelper } from '../../../../shared/jwtHelper';
+import configs from '../../../../configs';
+import { IDecodedUser, IUserRoles } from '../../../../interfaces/user';
 import { Secret } from 'jsonwebtoken';
 import { pick } from 'lodash';
-import { NOTIFICATION_TOPIC, PushNotification } from 'shared/pushNotification';
+import { NOTIFICATION_TOPIC, PushNotification } from '../../../../shared/pushNotification';
 
-const login = async (
-  body: IReq
-): Promise<{ createdUser: Partial<IAppUser>; accessToken: string } | null> => {
+const login = async (body: IReq): Promise<{ createdUser: Partial<IAppUser>; accessToken: string } | null> => {
   const { timezone, token, fcmToken } = body;
 
   // firebase authentication (eg. verify id using admin sdk)

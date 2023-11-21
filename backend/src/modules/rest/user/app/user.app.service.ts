@@ -1,9 +1,9 @@
 import admin from 'firebase-admin';
-import { IDecodedUser } from 'interfaces/user';
+import { IDecodedUser } from '../../../../interfaces/user';
 import { IAppUser, IFcmToken } from './user.app.interface';
 import { AppUser } from './user.app.model';
-import { NOTIFICATION_TOPIC } from 'shared/pushNotification';
-import ApiError from 'errors/ApiError';
+import { NOTIFICATION_TOPIC } from '../../../../shared/pushNotification';
+import ApiError from '../../../../errors/ApiError';
 
 // ---------------get----------------------
 const getUpdatedInfo = async (decodedUser: IDecodedUser) => {
@@ -16,8 +16,7 @@ const getUpdatedInfo = async (decodedUser: IDecodedUser) => {
   const materialSections = [
     {
       title: 'English basic for beginner',
-      thumbnail:
-        'https://t3.ftcdn.net/jpg/03/70/42/66/360_F_370426690_Pejt9KxjWTHPklsKwripaxr0iA17zupF.jpg',
+      thumbnail: 'https://t3.ftcdn.net/jpg/03/70/42/66/360_F_370426690_Pejt9KxjWTHPklsKwripaxr0iA17zupF.jpg',
     },
     {
       title: 'English for web developer',
@@ -31,8 +30,7 @@ const getUpdatedInfo = async (decodedUser: IDecodedUser) => {
     },
     {
       title: 'English for daily conversation',
-      thumbnail:
-        'https://t3.ftcdn.net/jpg/03/70/42/66/360_F_370426690_Pejt9KxjWTHPklsKwripaxr0iA17zupF.jpg',
+      thumbnail: 'https://t3.ftcdn.net/jpg/03/70/42/66/360_F_370426690_Pejt9KxjWTHPklsKwripaxr0iA17zupF.jpg',
     },
     {
       title: 'English for Business Communication',

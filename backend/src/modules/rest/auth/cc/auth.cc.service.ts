@@ -1,10 +1,10 @@
 import { Secret } from 'jsonwebtoken';
-import { ICCUser } from 'modules/rest/user/cc/user.cc.interface';
-import { CCUser } from 'modules/rest/user/cc/user.cc.model';
-import ApiError from 'errors/ApiError';
-import { JwtHelper } from 'shared/jwtHelper';
-import configs from 'configs/index';
-import { IDecodedUser } from 'interfaces/user';
+import { ICCUser } from '../../../../modules/rest/user/cc/user.cc.interface';
+import { CCUser } from '../../../../modules/rest/user/cc/user.cc.model';
+import ApiError from '../../../../errors/ApiError';
+import { JwtHelper } from '../../../../shared/jwtHelper';
+import configs from '../../../../configs/index';
+import { IDecodedUser } from '../../../../interfaces/user';
 import { ICCChangePassword, ICCLogin, ICCLoginResponse } from './auth.cc.interface';
 
 const register = async (body: ICCUser, localUser: IDecodedUser): Promise<void | null> => {

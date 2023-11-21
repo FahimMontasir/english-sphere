@@ -1,16 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
 import { Secret } from 'jsonwebtoken';
-import configs from 'configs';
-import ApiError from 'errors/ApiError';
-import { IUserRoles } from 'interfaces/user';
-import { JwtHelper } from 'shared/jwtHelper';
+import configs from '../../../configs';
+import ApiError from '../../../errors/ApiError';
+import { IUserRoles } from '../../../interfaces/user';
+import { JwtHelper } from '../../../shared/jwtHelper';
 
 const auth =
   (...requiredRoles: IUserRoles[]) =>
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     try {
       //get authorization token
-      const token = req.headers.authorization || (req.headers['Authorization'] as string);
+      const token =
+        req.headers.authorization ||
+        (req.headers['Authorization'] as string) ||
+        (req.headers['x-access-token'] as string);
       if (!token) throw new ApiError(403, 'You are not authorized!');
 
       //verify token

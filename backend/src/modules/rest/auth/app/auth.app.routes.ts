@@ -1,9 +1,9 @@
 import express from 'express';
-import validateRequest from 'middlewares/rest/validateRequest';
-import { AppLoginAuth } from 'middlewares/rest/auth/login/auth.login.app';
+import validateRequest from '../../../../middlewares/rest/validateRequest';
+import { AppLoginAuth } from '../../../../middlewares/rest/auth/login/auth.login.app';
 import { AppAuthValidation } from './auth.app.validation';
 import { AppAuthController } from './auth.app.controller';
-import auth from 'middlewares/rest/auth';
+import auth from '../../../../middlewares/rest/auth';
 
 const router = express.Router();
 

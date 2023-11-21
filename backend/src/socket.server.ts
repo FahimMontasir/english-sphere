@@ -2,11 +2,11 @@ import { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
 import { instrument } from '@socket.io/admin-ui';
 // namespaces
-import { onMainNamespaceConnect } from 'modules/socket/demo-all/main.namespace';
-import { onLeaderBoardNspConnect } from 'modules/socket/demo/leaderboard.namespace';
+import { onMainNamespaceConnect } from './modules/socket/demo-all/main.namespace';
+import { onLeaderBoardNspConnect } from './modules/socket/demo/leaderboard.namespace';
 // middlewares
-import { verifySocketToken } from 'middlewares/socket/auth';
-import configs from 'configs';
+import { verifySocketToken } from './middlewares/socket/auth';
+import configs from './configs';
 
 const registerServer = (server: HttpServer) => {
   const io = new Server(server, {
@@ -35,7 +35,7 @@ const registerServer = (server: HttpServer) => {
   // ----------other namespaces-----------
   const leaderBoardNsp = io.of('/leader-board');
   //middleware goose here
-  leaderBoardNsp.use((socket, next) => {
+  leaderBoardNsp.use((_socket, next) => {
     next();
   });
   leaderBoardNsp.on('connection', socket => onLeaderBoardNspConnect(leaderBoardNsp, socket));

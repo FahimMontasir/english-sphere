@@ -9,8 +9,8 @@
     "securityDefinitions": {
       "api_key": {
         "type": "apiKey",
-        "name": "access_token",
-        "in": "query"
+        "name": "authorization",
+        "in": "header"
       }
     },
     "name": "English Sphere",

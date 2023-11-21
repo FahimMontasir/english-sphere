@@ -1,15 +1,15 @@
 import { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
-import { logger } from 'shared/logger';
-import { IGenericErrorMessage } from 'interfaces/error';
-import handleValidationError from 'errors/ValidationError';
-import handleZodError from 'errors/ZodError';
-import handleCastError from 'errors/CastError';
-import ApiError from 'errors/ApiError';
-import configs from 'configs';
+import { logger } from '../../shared/logger';
+import { IGenericErrorMessage } from '../../interfaces/error';
+import handleValidationError from '../../errors/ValidationError';
+import handleZodError from '../../errors/ZodError';
+import handleCastError from '../../errors/CastError';
+import ApiError from '../../errors/ApiError';
+import configs from '../../configs';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   logger.error(err);
 
   let statusCode = 500;

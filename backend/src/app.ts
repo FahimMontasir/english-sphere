@@ -3,12 +3,12 @@ import cors, { CorsOptions } from 'cors';
 import helmet from 'helmet';
 import { createServer } from 'http';
 import cookieParser from 'cookie-parser';
-import routes from 'routes';
-import globalErrorHandler from 'middlewares/rest/globalErrorHandler';
-import { logger } from 'shared/logger';
+import routes from './routes';
+import globalErrorHandler from './middlewares/rest/globalErrorHandler';
+import { logger } from './shared/logger';
 import swaggerUi from 'swagger-ui-express';
 
-const app: Application = express();
+export const app: Application = express();
 
 const corsOption: CorsOptions = {
   origin: 'http://localhost:3000',

@@ -4,7 +4,7 @@
     "ecmaVersion": 13,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "jest"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
 
   "rules": {
@@ -19,7 +19,8 @@
   "env": {
     // "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "globals": {
     "process": "readonly"

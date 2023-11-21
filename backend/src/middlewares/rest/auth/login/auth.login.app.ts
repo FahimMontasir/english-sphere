@@ -1,8 +1,8 @@
-import configs from 'configs';
-import ApiError from 'errors/ApiError';
+import configs from '../../../../configs';
+import ApiError from '../../../../errors/ApiError';
 import { RequestHandler } from 'express';
 
-const checkRequest: RequestHandler = (req, res, next) => {
+const checkRequest: RequestHandler = (req, _res, next) => {
   try {
     // not necessary though. we have firebase :)
     if (req.headers['x-api-key'] !== configs.apiKey.app) {

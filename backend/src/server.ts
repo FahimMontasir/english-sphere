@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import { Server } from 'http';
 import app from './app';
-import configs from 'configs';
-import { errorLogger, logger } from 'shared/logger';
+import configs from './configs';
+import { errorLogger, logger } from './shared/logger';
 import { SocketServer } from './socket.server';
 
 // firebase init
@@ -29,11 +29,13 @@ const connectDB = async () => {
     await mongoose.connect(configs.database_url as string);
     logger.info('Database connected successfully');
 
-    SocketServer.registerServer(app);
+    if (configs.env !== 'test') {
+      SocketServer.registerServer(app);
 
-    server = app.listen(configs.port, () => {
-      logger.info(`listening port ${configs.port}`);
-    });
+      server = app.listen(configs.port, () => {
+        logger.info(`listening port ${configs.port}`);
+      });
+    }
   } catch (error) {
     errorLogger.error('Database connection failed!', error);
   }
@@ -56,3 +58,5 @@ connectDB();
 //     server.close();
 //   }
 // });
+
+export const appTest = app;

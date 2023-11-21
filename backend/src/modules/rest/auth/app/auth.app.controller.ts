@@ -1,5 +1,5 @@
-import { catchAsync } from 'shared/catchAsync';
-import { sendResponse } from 'shared/sendResponse';
+import { catchAsync } from '../../../../shared/catchAsync';
+import { sendResponse } from '../../../../shared/sendResponse';
 import { AppAuthService } from './auth.app.service';
 
 const login = catchAsync(async (req, res) => {

@@ -1,4 +1,4 @@
-import { GENDER } from 'constants/gender';
+import { GENDER } from '../../../../constants/gender';
 import { z } from 'zod';
 
 const updateUserZodSchema = z.object({

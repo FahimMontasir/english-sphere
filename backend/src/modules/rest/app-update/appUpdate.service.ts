@@ -1,4 +1,4 @@
-import { NOTIFICATION_TOPIC, PushNotification, INotiPayload } from 'shared/pushNotification';
+import { NOTIFICATION_TOPIC, PushNotification, INotiPayload } from '../../../shared/pushNotification';
 import { AppUser } from '../user/app/user.app.model';
 
 const sendAll = async (payload: INotiPayload): Promise<void> => {

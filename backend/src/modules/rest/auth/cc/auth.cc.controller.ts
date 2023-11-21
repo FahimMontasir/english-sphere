@@ -1,7 +1,7 @@
 import { CookieOptions } from 'express';
-import { catchAsync } from 'shared/catchAsync';
-import { sendResponse } from 'shared/sendResponse';
-import configs from 'configs';
+import { catchAsync } from '../../../../shared/catchAsync';
+import { sendResponse } from '../../../../shared/sendResponse';
+import configs from '../../../../configs';
 import { CCAuthService } from './auth.cc.service';
 
 const register = catchAsync(async (req, res) => {
