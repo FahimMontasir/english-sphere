@@ -1,5 +1,8 @@
+import { PAGINATION_FIELDS } from '../../../../constants/pagination';
 import { catchAsync } from '../../../../shared/catchAsync';
+import pick from '../../../../shared/pick';
 import { sendResponse } from '../../../../shared/sendResponse';
+import { APP_USER_FILTERABLE } from './user.app.constant';
 import { AppUserService } from './user.app.service';
 
 // -------------------------------get-------------------------------
@@ -10,6 +13,20 @@ const getUpdatedInfo = catchAsync(async (req, res) => {
     statusCode: 200,
     success: true,
     message: 'Retrieved user updated info successfully!!!',
+    data,
+  });
+});
+
+const getLeadSearch = catchAsync(async (req, res) => {
+  const filters = pick(req.query, APP_USER_FILTERABLE);
+  const paginationOptions = pick(req.query, PAGINATION_FIELDS);
+
+  const data = await AppUserService.getLeadSearch(filters, paginationOptions);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Users retrieved successfully',
     data,
   });
 });
@@ -69,6 +86,7 @@ const removeOtherUser = catchAsync(async (req, res) => {
 
 export const AppUserController = {
   getUpdatedInfo,
+  getLeadSearch,
   refreshFcmToken,
   addSkill,
   updateUser,

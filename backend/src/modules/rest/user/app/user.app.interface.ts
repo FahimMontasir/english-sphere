@@ -3,6 +3,10 @@ import { IBadge, IGender, IUserRoles } from '../../../../interfaces/user';
 
 export type IFcmToken = { token: string; device: string };
 
+export type IAppUserFilters = {
+  searchTerm?: string;
+};
+
 export type IAppUser = Document & {
   fcmTokens: IFcmToken[];
   fullName: string;

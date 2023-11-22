@@ -1,9 +1,13 @@
 import admin from 'firebase-admin';
 import { IDecodedUser } from '../../../../interfaces/user';
-import { IAppUser, IFcmToken } from './user.app.interface';
+import { IAppUser, IAppUserFilters, IFcmToken } from './user.app.interface';
 import { AppUser } from './user.app.model';
 import { NOTIFICATION_TOPIC } from '../../../../shared/pushNotification';
 import ApiError from '../../../../errors/ApiError';
+import { APP_USER_FILTERABLE } from './user.app.constant';
+import { IGenericPaginationResponse, IPaginationOptions } from '../../../../interfaces/common';
+import { SortOrder } from 'mongoose';
+import { paginationHelpers } from '../../../../shared/pagination';
 
 // ---------------get----------------------
 const getUpdatedInfo = async (decodedUser: IDecodedUser) => {
@@ -47,6 +51,60 @@ const getUpdatedInfo = async (decodedUser: IDecodedUser) => {
     materialSections,
   };
 };
+
+const getLeadSearch = async (
+  filters: IAppUserFilters,
+  paginationOptions: IPaginationOptions
+): Promise<IGenericPaginationResponse<IAppUser[] | null>> => {
+  const { searchTerm, ...filtersData } = filters;
+  const { page, limit, skip, sortBy, sortOrder } = paginationHelpers.calculatePagination(paginationOptions);
+
+  const andConditions = [];
+  if (searchTerm) {
+    andConditions.push({
+      $or: APP_USER_FILTERABLE.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    });
+  }
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
+
+  const sortConditions: { [key: string]: SortOrder } = {};
+
+  if (sortBy && sortOrder) {
+    sortConditions[sortBy] = sortOrder;
+  } else {
+    sortConditions['upVotes'] = 'desc';
+  }
+
+  const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
+
+  const result = await AppUser.find(whereConditions).sort(sortConditions).skip(skip).limit(limit);
+
+  let total = 0;
+  if (searchTerm) {
+    total = await AppUser.countDocuments();
+  }
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
+};
+
 // -------------------add------------------
 const refreshFcmToken = async (decodedUser: IDecodedUser, fcmToken: IFcmToken): Promise<void> => {
   const { _id } = decodedUser;
@@ -112,6 +170,7 @@ const removeOtherUser = async (decodedUser: IDecodedUser, device: string): Promi
 
 export const AppUserService = {
   getUpdatedInfo,
+  getLeadSearch,
   refreshFcmToken,
   addSkill,
   updateUser,

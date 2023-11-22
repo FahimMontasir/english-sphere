@@ -7,6 +7,8 @@ import { AppUserController } from './user.app.controller';
 const router = express.Router();
 
 router.get('/updated-info', auth('user', 'userN'), AppUserController.getUpdatedInfo);
+// leader board, search user and infinite scroll
+router.get('/lead-search', auth('user', 'userN'), AppUserController.getLeadSearch);
 
 router.post(
   '/refresh-fcm-token',
