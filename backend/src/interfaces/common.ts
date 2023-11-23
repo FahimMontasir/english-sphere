@@ -10,6 +10,7 @@ export type IPaginationOptions = {
 export type IGenericPaginationResponse<T> = {
   meta: {
     page: number;
+    isLastPage: boolean;
     limit: number;
     total: number;
   };

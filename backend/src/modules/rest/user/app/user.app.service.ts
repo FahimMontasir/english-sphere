@@ -4,7 +4,7 @@ import { IAppUser, IAppUserFilters, IFcmToken } from './user.app.interface';
 import { AppUser } from './user.app.model';
 import { NOTIFICATION_TOPIC } from '../../../../shared/pushNotification';
 import ApiError from '../../../../errors/ApiError';
-import { APP_USER_FILTERABLE } from './user.app.constant';
+import { APP_USER_SEARCHABLE } from './user.app.constant';
 import { IGenericPaginationResponse, IPaginationOptions } from '../../../../interfaces/common';
 import { SortOrder } from 'mongoose';
 import { paginationHelpers } from '../../../../shared/pagination';
@@ -62,7 +62,7 @@ const getLeadSearch = async (
   const andConditions = [];
   if (searchTerm) {
     andConditions.push({
-      $or: APP_USER_FILTERABLE.map(field => ({
+      $or: APP_USER_SEARCHABLE.map(field => ({
         [field]: {
           $regex: searchTerm,
           $options: 'i',
@@ -72,32 +72,47 @@ const getLeadSearch = async (
   }
   if (Object.keys(filtersData).length) {
     andConditions.push({
-      $and: Object.entries(filtersData).map(([field, value]) => ({
-        [field]: value,
-      })),
+      $and: Object.entries(filtersData).map(([field, value]) => {
+        if (field === 'country') {
+          return {
+            'country.name': value,
+          };
+        } else {
+          return {
+            [field]: value,
+          };
+        }
+      }),
     });
   }
 
   const sortConditions: { [key: string]: SortOrder } = {};
 
   if (sortBy && sortOrder) {
-    sortConditions[sortBy] = sortOrder;
+    sortConditions[sortBy === 'date' ? 'createdAt' : sortBy] = sortOrder;
   } else {
     sortConditions['upVotes'] = 'desc';
   }
 
   const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
 
-  const result = await AppUser.find(whereConditions).sort(sortConditions).skip(skip).limit(limit);
+  const result = await AppUser.find(whereConditions)
+    .sort(sortConditions)
+    .skip(skip)
+    .limit(limit)
+    .select('_id fullName');
+
+  const isLastPage = result.length < limit;
 
   let total = 0;
   if (searchTerm) {
-    total = await AppUser.countDocuments();
+    total = await AppUser.countDocuments(whereConditions);
   }
 
   return {
     meta: {
       page,
+      isLastPage,
       limit,
       total,
     },

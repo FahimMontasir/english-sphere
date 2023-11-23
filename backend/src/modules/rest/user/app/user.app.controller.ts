@@ -27,7 +27,7 @@ const getLeadSearch = catchAsync(async (req, res) => {
     statusCode: 200,
     success: true,
     message: 'Users retrieved successfully',
-    data,
+    ...data,
   });
 });
 
