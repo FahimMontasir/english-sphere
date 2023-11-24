@@ -90,4 +90,5 @@ export const colors = {
    *
    */
   errorBackground: palette.angry100,
+  skeleton: "#D8D8D8",
 }

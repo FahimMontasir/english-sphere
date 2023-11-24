@@ -112,8 +112,24 @@ export const useHomeScreen = (
         }
       })
       .catch((error) => {
-        console.log(error.response?.data?.message)
-        // jwt expire
+        console.log(error.response?.data?.message, "====error=====", error.message)
+        // Network Error
+        if (error?.message === "Network Error") {
+          Toast.show({
+            type: "error",
+            text1: error?.message,
+          })
+        }
+        // jwt expired
+        if (error.response?.data?.message === "jwt expired") {
+          Toast.show({
+            type: "error",
+            text1: "Your session expired!",
+            text2: "Please login again with your google account.",
+          })
+          AuthApi.logoutUser(logout, false)
+        }
+        // unauthorized access
         if (error.response?.data?.message === "Forbidden") {
           AuthApi.logoutUser(logout, false)
         }

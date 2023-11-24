@@ -1,4 +1,6 @@
+import { formatQueryString } from "src/utils/formatQueryString"
 import api from ".."
+import { State } from "src/screens/LeaderBoardScreen/useLeaderBoard"
 export interface IUser {
   fcmTokens: { token: string; device: string }
   fullName: string
@@ -26,9 +28,29 @@ interface IGetUpdatedUserInfo {
   success: boolean
 }
 
+interface ISearchLead {
+  data: {
+    _id: string
+    fullName: string
+    imageUrl: string
+    badges: string[]
+    upVotes: number
+    downVotes: number
+    country: { name: string }
+  }[]
+  meta: { page: number; isLastPage: boolean; limit: number; total: number }
+}
+
 const getUpdatedUserInfo = async (): Promise<IGetUpdatedUserInfo> => {
   const res = await api.get("/user/app/updated-info")
   return res.data?.data
+}
+
+const getLeadSearch = async (query: State): Promise<ISearchLead> => {
+  const queryStr = formatQueryString(query)
+  const res = await api.get(`/user/app/lead-search?${queryStr}`)
+
+  return res.data
 }
 
 const saveRefreshedFcmToken = async <T>(input: T) => {
@@ -52,8 +74,9 @@ const removeOtherDevice = async (input: string) => {
 }
 
 export const UserApi = {
-  saveRefreshedFcmToken,
   getUpdatedUserInfo,
+  getLeadSearch,
+  saveRefreshedFcmToken,
   updateUserInfo,
   addSkill,
   removeSkill,

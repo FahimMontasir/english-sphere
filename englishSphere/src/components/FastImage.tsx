@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { StyleProp } from "react-native"
 import Fast, { FastImageProps, ImageStyle, Priority, ResizeMode } from "react-native-fast-image"
 
@@ -17,14 +17,19 @@ export const FastImage = ({
   priority = "normal",
   resizeMode = "cover",
   ...rest
-}: IFastImage) => (
-  <Fast
-    {...rest}
-    style={style}
-    source={{
-      uri,
-      priority,
-    }}
-    resizeMode={resizeMode}
-  />
-)
+}: IFastImage) => {
+  const [fallbackUri, setFallbackUri] = useState(uri)
+
+  return (
+    <Fast
+      {...rest}
+      style={style}
+      source={{
+        uri: fallbackUri,
+        priority,
+      }}
+      resizeMode={resizeMode}
+      onError={() => setFallbackUri("https://serpstat.com/files/img/34/1676542462.4999.png")}
+    />
+  )
+}

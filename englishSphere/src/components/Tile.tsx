@@ -15,6 +15,8 @@ import { Icon } from "./Icon"
 import { TxKeyPath, translate } from "src/i18n"
 import { FastImage, FastImageStyle } from "./FastImage"
 import { truncateText } from "src/utils/formatString"
+import { Badges } from "./Badges"
+import { UpDown } from "./UpDown"
 
 export interface TileProps extends TouchableOpacityProps {
   style?: StyleProp<ViewStyle>
@@ -25,8 +27,10 @@ export interface TileProps extends TouchableOpacityProps {
   heading?: string
   rightCaption?: string
   msg?: string
-  position?: number
+  badges?: string[]
   unread?: boolean
+
+  upVotes?: number
 }
 
 export const Tile = observer(function Tile(props: TileProps) {
@@ -35,12 +39,13 @@ export const Tile = observer(function Tile(props: TileProps) {
     isNoti,
     imgUri,
     headingTxOptions,
-    heading = "Elon Musk",
+    heading,
     headingTx,
-    rightCaption = "1h ago...",
+    rightCaption,
     msg,
-    position,
     unread,
+    badges,
+    upVotes,
     ...WrapperProps
   } = props
   const $styles = [
@@ -70,10 +75,22 @@ export const Tile = observer(function Tile(props: TileProps) {
           ) : (
             <FastImage uri={imgUri || ""} style={$image} />
           )}
-          <Text text={truncateText(headingContent, 26, "...")} preset="subheading" />
+          <View>
+            <Text text={truncateText(headingContent || "", 18, ".")} preset="subheading" />
+            {badges && (
+              <Badges
+                badges={badges}
+                badgeSize={22}
+                style={$badgeContainer}
+                moreTextStyle={$badgeMoreText}
+              />
+            )}
+          </View>
         </View>
-        {position && <Text text={String(position)} />}
-        <Text text={rightCaption} />
+        <View style={$upDownContainer}>
+          {!!upVotes && <UpDown upVotes={upVotes} />}
+          <Text text={rightCaption} />
+        </View>
       </View>
       {isNoti && msg && <Text style={$notiDes} text={truncateText(msg, 100, "...See more!")} />}
     </Wrapper>
@@ -110,3 +127,8 @@ const $notiDes: TextStyle = {
   marginTop: spacing.xs,
   marginHorizontal: spacing.sm,
 }
+
+const $badgeContainer: ViewStyle = { gap: 1 }
+const $badgeMoreText: TextStyle = { marginLeft: 0, fontSize: 10 }
+
+const $upDownContainer: ViewStyle = { alignItems: "flex-end" }

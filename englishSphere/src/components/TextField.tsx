@@ -154,7 +154,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
     ? translate(placeholderTx, placeholderTxOptions)
     : placeholder
 
-  const $containerStyles = [$containerStyleOverride]
+  const $containerStyles = [$defaultContainerStyle, $containerStyleOverride]
 
   const $labelStyles = [$labelStyle, LabelTextProps?.style]
 
@@ -190,67 +190,65 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
   useImperativeHandle(ref, () => input.current as TextInput)
 
   return (
-    <>
-      <TouchableOpacity
-        activeOpacity={1}
-        style={$containerStyles}
-        onPress={preset === "select" ? () => setIsSelectOpen((prev) => !prev) : focusInput}
-        accessibilityState={preset === "select" ? undefined : { disabled }}
-      >
-        {!!(label || labelTx) && (
-          <Text
-            preset="formLabel"
-            text={label}
-            tx={labelTx}
-            txOptions={labelTxOptions}
-            {...LabelTextProps}
-            style={$labelStyles}
-          />
-        )}
+    <TouchableOpacity
+      activeOpacity={1}
+      style={$containerStyles}
+      onPress={preset === "select" ? () => setIsSelectOpen((prev) => !prev) : focusInput}
+      accessibilityState={preset === "select" ? undefined : { disabled }}
+    >
+      {!!(label || labelTx) && (
+        <Text
+          preset="formLabel"
+          text={label}
+          tx={labelTx}
+          txOptions={labelTxOptions}
+          {...LabelTextProps}
+          style={$labelStyles}
+        />
+      )}
 
-        <View style={$inputWrapperStyles}>
-          {!!LeftAccessory && (
-            <LeftAccessory
-              style={$leftAccessoryStyle}
-              status={status}
-              editable={!disabled}
-              multiline={!!TextInputProps.multiline}
-            />
-          )}
-
-          <TextInput
-            ref={input as any}
-            underlineColorAndroid={colors.transparent}
-            textAlignVertical="top"
-            placeholder={placeholderContent}
-            placeholderTextColor={colors.palette.neutral400}
-            {...TextInputProps}
+      <View style={$inputWrapperStyles}>
+        {!!LeftAccessory && (
+          <LeftAccessory
+            style={$leftAccessoryStyle}
+            status={status}
             editable={!disabled}
-            style={$inputStyles as any}
-            selectionColor={colors.palette.gray} // cursor color
-          />
-
-          {!!RightAccessory && (
-            <RightAccessory
-              style={$rightAccessoryStyle}
-              status={status}
-              editable={!disabled}
-              multiline={!!TextInputProps.multiline}
-            />
-          )}
-        </View>
-
-        {!!(helper || helperTx) && (
-          <Text
-            preset="formHelper"
-            text={helper}
-            tx={helperTx}
-            txOptions={helperTxOptions}
-            {...HelperTextProps}
-            style={$helperStyles}
+            multiline={!!TextInputProps.multiline}
           />
         )}
-      </TouchableOpacity>
+
+        <TextInput
+          ref={input as any}
+          underlineColorAndroid={colors.transparent}
+          textAlignVertical="top"
+          placeholder={placeholderContent}
+          placeholderTextColor={colors.palette.neutral400}
+          {...TextInputProps}
+          editable={!disabled}
+          style={$inputStyles as any}
+          selectionColor={colors.palette.gray} // cursor color
+        />
+
+        {!!RightAccessory && (
+          <RightAccessory
+            style={$rightAccessoryStyle}
+            status={status}
+            editable={!disabled}
+            multiline={!!TextInputProps.multiline}
+          />
+        )}
+      </View>
+
+      {!!(helper || helperTx) && (
+        <Text
+          preset="formHelper"
+          text={helper}
+          tx={helperTx}
+          txOptions={helperTxOptions}
+          {...HelperTextProps}
+          style={$helperStyles}
+        />
+      )}
       {preset === "select" && isSelectOpen && (
         <ScrollView style={$optionsContainer}>
           {selectOptions?.map((item, index) => (
@@ -266,9 +264,11 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
           ))}
         </ScrollView>
       )}
-    </>
+    </TouchableOpacity>
   )
 })
+
+const $defaultContainerStyle: ViewStyle = { flex: 1 }
 
 const $labelStyle: TextStyle = {
   marginBottom: spacing.xs,
@@ -299,7 +299,8 @@ const $inputStyle: TextStyle = {
 }
 
 const $helperStyle: TextStyle = {
-  marginTop: spacing.xs,
+  marginTop: spacing.xxs,
+  marginLeft: spacing.xxs,
 }
 
 const $rightAccessoryStyle: ViewStyle = {
@@ -318,7 +319,7 @@ const $leftAccessoryStyle: ViewStyle = {
 const $optionsContainer: ViewStyle = {
   backgroundColor: colors.palette.white,
   position: "absolute",
-  bottom: -10,
+  bottom: -0.1,
   left: 10,
   zIndex: 9999,
   borderRadius: 5,

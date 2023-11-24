@@ -31,6 +31,7 @@ const Skill = observer(function Skill() {
         ) : (
           <View style={$skillInputContainer}>
             <TextField
+              containerStyle={$skillTextField}
               value={newSkill}
               onChangeText={(t) => setNewSkill(t)}
               RightAccessory={SkillAddIcon}
@@ -78,3 +79,5 @@ const $skillsContainer: ViewStyle = {
   marginBottom: 30,
   marginHorizontal: spacing.sm,
 }
+
+const $skillTextField: ViewStyle = { flex: 0 }

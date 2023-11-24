@@ -28,7 +28,7 @@ const en = {
     instruction: " • Replay to accept",
   },
   leaderBoardScreen: {
-    searchPlaceholder: "Search user...",
+    searchPlaceholder: "Search user by username...",
   },
   welcomeScreen: {
     postscript:
@@ -47,7 +47,7 @@ const en = {
   emptyStateComponent: {
     generic: {
       heading: "So empty... so sad",
-      content: "No data found yet. Try clicking the button to refresh or reload the app.",
+      content: "No data found yet. Try using other characters or check typo!",
       button: "Let's try this again",
     },
   },

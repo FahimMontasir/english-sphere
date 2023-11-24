@@ -76,7 +76,7 @@ export function Icon(props: IconProps) {
           size ? { width: size, height: size } : null,
           $imageStyleOverride,
         ]}
-        source={iconRegistry[icon]}
+        source={iconRegistry[icon] || iconRegistry.debug}
       />
     </Wrapper>
   )
@@ -112,6 +112,7 @@ export const iconRegistry = {
   diamond: require("../../assets/icons/diamond.png"),
   gold: require("../../assets/icons/gold.png"),
   silver: require("../../assets/icons/silver.png"),
+  filter: require("../../assets/icons/filter.png"),
 }
 
 const $imageStyle: ImageStyle = {

@@ -20,8 +20,8 @@ const logoutUser = async (logout: () => void, clearNotifications = true) => {
       type: "info",
       text1: "Your logout process started!",
     })
-    await api.post("/auth/app/logout", { fcmDevice: DeviceInfo.getModel() })
-    await messaging().deleteToken()
+    clearNotifications && (await api.post("/auth/app/logout", { fcmDevice: DeviceInfo.getModel() }))
+    clearNotifications && (await messaging().deleteToken())
     // to work sing out properly you need to configure again
     GoogleSignin.configure({})
     await GoogleSignin.signOut()

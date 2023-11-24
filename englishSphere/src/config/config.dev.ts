@@ -7,7 +7,7 @@
  */
 export default {
   // API_URL: "http://192.168.0.108:5000/api/v1",
-  API_URL: "http://192.168.0.103:5000/api/v1",
+  API_URL: "http://192.168.106.177:5000/api/v1",
   IMG_API_URL: "https://api.imgbb.com/1/upload?key=4ee92500539aec53d74737b7e5955151",
   GOOGLE_CLIENT_ID: "780892283384-rk6kf97p0q3uvr02refo3cefrjgv431j.apps.googleusercontent.com",
   API_KEY: "changeitlaterwithsuperpowerfullkey",

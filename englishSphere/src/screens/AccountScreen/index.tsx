@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "src/navigators"
-import { Button, Icon, IconTypes, Modal, Screen, Text, TextField } from "src/components"
+import { Badges, Button, Icon, Modal, Screen, Text, TextField, UpDown } from "src/components"
 import Cover from "./components/Cover"
 import { colors, spacing } from "src/theme"
 import Skill from "./components/Skill"
@@ -36,13 +36,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
       <Cover />
 
       {/* position section */}
-      <View style={$positionTextContainer}>
-        <Icon icon="dot" color={colors.palette.green} size={16} />
-        <Text text={upVotes ? String(upVotes) : "0"} />
-        <View style={$positionGutter} />
-        <Icon icon="dot" color={colors.palette.accent500} size={16} />
-        <Text text={downVotes ? String(downVotes) : "0"} />
-      </View>
+      <UpDown upVotes={upVotes} downVotes={downVotes} style={$upDownContainer} />
 
       <Icon
         onPress={() => navigation.navigate("Chat")}
@@ -51,15 +45,7 @@ export const AccountScreen: FC<AppStackScreenProps<"Account">> = observer(functi
         size={35}
         color={colors.palette.black}
       />
-      {/* show upto 4 badges then add show the count + */}
-      {!!badges.length && (
-        <View style={$badgesContainer}>
-          {badges.slice(0, 4).map((badge, index) => (
-            <Icon key={index} icon={badge as IconTypes} size={50} />
-          ))}
-          {badges.length > 4 && <Text text={`+${badges.length - 4}`} style={$moreBadges} />}
-        </View>
-      )}
+      <Badges badges={badges} style={$badgesContainer} />
 
       <Skill />
 
@@ -95,16 +81,11 @@ const $contentContainerStyle: ViewStyle = {
   flex: 1,
 }
 
-const $positionTextContainer: TextStyle = {
+const $upDownContainer: TextStyle = {
   marginTop: spacing.xxs,
   marginLeft: spacing.sm,
-  flexDirection: "row",
-  gap: 1,
   width: "50%",
-  alignItems: "center",
 }
-
-const $positionGutter: ViewStyle = { padding: 5 }
 
 const $chatIcon: ImageStyle = {
   alignSelf: "flex-end",
@@ -113,12 +94,9 @@ const $chatIcon: ImageStyle = {
 }
 
 const $badgesContainer: ViewStyle = {
-  flexDirection: "row",
   marginTop: -30,
   marginBottom: -15,
   marginLeft: spacing.sm,
-  gap: spacing.xs,
-  alignItems: "center",
 }
 
 const $modalContainer: ViewStyle = {
@@ -126,5 +104,3 @@ const $modalContainer: ViewStyle = {
   gap: spacing.sm,
   marginBottom: spacing.md,
 }
-
-const $moreBadges: TextStyle = { marginLeft: -10, alignSelf: "flex-end" }
