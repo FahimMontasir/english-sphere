@@ -31,6 +31,17 @@ const getLeadSearch = catchAsync(async (req, res) => {
   });
 });
 
+const getLeadSearchUser = catchAsync(async (req, res) => {
+  const data = await AppUserService.getLeadSearchUser(req.params.userId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User retrieved successfully',
+    data,
+  });
+});
+
 // ----------------------------------add----------------------------
 const refreshFcmToken = catchAsync(async (req, res) => {
   await AppUserService.refreshFcmToken(req.user, req.body.fcmToken);
@@ -87,6 +98,7 @@ const removeOtherUser = catchAsync(async (req, res) => {
 export const AppUserController = {
   getUpdatedInfo,
   getLeadSearch,
+  getLeadSearchUser,
   refreshFcmToken,
   addSkill,
   updateUser,

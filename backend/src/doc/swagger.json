@@ -73,8 +73,6 @@
 							}
 						},
 						"required": [
-							"total",
-							"limit",
 							"page"
 						],
 						"type": "object",
@@ -120,8 +118,6 @@
 							}
 						},
 						"required": [
-							"total",
-							"limit",
 							"page"
 						],
 						"type": "object",

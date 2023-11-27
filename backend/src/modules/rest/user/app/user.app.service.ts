@@ -100,24 +100,34 @@ const getLeadSearch = async (
     .sort(sortConditions)
     .skip(skip)
     .limit(limit)
-    .select('_id fullName');
+    .select('_id fullName imageUrl badges upVotes country.name');
 
   const isLastPage = result.length < limit;
 
-  let total = 0;
-  if (searchTerm) {
-    total = await AppUser.countDocuments(whereConditions);
-  }
+  // let total = 0;
+  // if (searchTerm) {
+  //   total = await AppUser.countDocuments(whereConditions);
+  // }
 
   return {
     meta: {
       page,
       isLastPage,
-      limit,
-      total,
+      // limit,
+      // total,
     },
     data: result,
   };
+};
+
+const getLeadSearchUser = async (userId: string) => {
+  const userData = await AppUser.findById(userId)
+    .select('-_id fullName imageUrl coverUrl badges upVotes downVotes interests')
+    .lean();
+
+  if (!userData) throw new ApiError(404, 'NOT FOUND');
+
+  return userData;
 };
 
 // -------------------add------------------
@@ -186,6 +196,7 @@ const removeOtherUser = async (decodedUser: IDecodedUser, device: string): Promi
 export const AppUserService = {
   getUpdatedInfo,
   getLeadSearch,
+  getLeadSearchUser,
   refreshFcmToken,
   addSkill,
   updateUser,
