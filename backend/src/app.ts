@@ -7,8 +7,20 @@ import routes from './routes';
 import globalErrorHandler from './middlewares/rest/globalErrorHandler';
 import { logger } from './shared/logger';
 import swaggerUi from 'swagger-ui-express';
+import { rateLimit } from 'express-rate-limit';
 
 export const app: Application = express();
+
+const limiter = rateLimit({
+  windowMs: 1000, // 1 sc
+  limit: 5, // Limit each IP to 5 requests per `window` (here, per 1sc).
+  standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+  // store: ... , // Use an external store for consistency across multiple server instances.
+});
+
+// Apply the rate limiting middleware to all requests.
+app.use(limiter);
 
 const corsOption: CorsOptions = {
   origin: 'http://localhost:3000',
