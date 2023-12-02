@@ -7,7 +7,7 @@ export interface IUser {
   imageUrl: string
   coverUrl?: string
   interests: string[]
-  badges?: "silver" | "gold" | "diamond" | "guard"[]
+  badges?: string[]
   upVotes?: number
   downVotes?: number
   isBanned?: boolean
@@ -53,6 +53,12 @@ const getLeadSearch = async (query: State): Promise<ISearchLead> => {
   return res.data
 }
 
+const getLeadSearchUser = async (userId: string): Promise<IUser> => {
+  const res = await api.get(`/user/app/lead-search/${userId}`)
+
+  return res.data?.data
+}
+
 const saveRefreshedFcmToken = async <T>(input: T) => {
   return await api.post("/user/app/refresh-fcm-token", { fcmToken: input })
 }
@@ -76,6 +82,7 @@ const removeOtherDevice = async (input: string) => {
 export const UserApi = {
   getUpdatedUserInfo,
   getLeadSearch,
+  getLeadSearchUser,
   saveRefreshedFcmToken,
   updateUserInfo,
   addSkill,

@@ -14,6 +14,7 @@ const en = {
   accountScreen: {
     position: "Position:",
     skill: "Skills and Interests",
+    badge: "All Achievements",
     logNHistory: "Insta Logs and Notifications",
     loadBtn: "Load All",
   },

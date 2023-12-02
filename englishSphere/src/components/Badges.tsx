@@ -10,10 +10,11 @@ export type BadgesProps = ViewProps & {
   moreTextStyle?: StyleProp<TextStyle>
   badges: string[]
   badgeSize?: number
+  isNoLimit?: boolean
 }
 
 export const Badges = observer(function Badges(props: BadgesProps) {
-  const { badges, badgeSize = 50, style, moreTextStyle, ...others } = props
+  const { badges, badgeSize = 50, style, moreTextStyle, isNoLimit = false, ...others } = props
   const $styles = [$badgesContainer, style]
   const $moreText = [$moreBadges, moreTextStyle]
   return (
@@ -21,10 +22,20 @@ export const Badges = observer(function Badges(props: BadgesProps) {
       {/* show upto 4 badges then add show the count + */}
       {!!badges.length && (
         <View style={$styles} {...others}>
-          {badges.slice(0, 4).map((badge, index) => (
-            <Icon key={index} icon={badge as IconTypes} size={badgeSize} />
-          ))}
-          {badges.length > 4 && <Text text={`+${badges.length - 4}`} style={$moreText} />}
+          {isNoLimit ? (
+            <>
+              {badges.map((badge, index) => (
+                <Icon key={index} icon={badge as IconTypes} size={badgeSize} />
+              ))}
+            </>
+          ) : (
+            <>
+              {badges.slice(0, 4).map((badge, index) => (
+                <Icon key={index} icon={badge as IconTypes} size={badgeSize} />
+              ))}
+              {badges.length > 4 && <Text text={`+${badges.length - 4}`} style={$moreText} />}
+            </>
+          )}
         </View>
       )}
     </>

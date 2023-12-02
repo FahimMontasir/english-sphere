@@ -17,6 +17,7 @@ const ar: Translations = {
   accountScreen: {
     position: "অবস্থান:",
     skill: "দক্ষতা",
+    badge: "All Achievements",
     logNHistory: "ইন্সটা টক লগ এবং বিজ্ঞপ্তি",
     loadBtn: "আরও দেখুন",
   },

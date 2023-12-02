@@ -110,7 +110,7 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
           // onEndReachedThreshold={0.10}
           renderItem={({ item }) => (
             <Tile
-              onPress={() => navigation.navigate("Account")}
+              onPress={() => navigation.navigate("UserDetails", { userId: item._id })}
               imgUri={item.imageUrl}
               heading={item.fullName}
               badges={item.badges}
@@ -119,7 +119,11 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
             />
           )}
           ListEmptyComponent={() =>
-            isLoading ? <TileSkeleton /> : !isFetching ? <EmptyState preset="generic" /> : null
+            isLoading ? (
+              <TileSkeleton elemCount={10} />
+            ) : !isFetching ? (
+              <EmptyState preset="generic" />
+            ) : null
           }
           ListFooterComponent={() => (isFetching && hasNextPage ? <TileSkeleton /> : null)}
           showsVerticalScrollIndicator={false}

@@ -1,6 +1,9 @@
 import React, { useState } from "react"
-import { StyleProp } from "react-native"
+import { StyleProp, View, ViewStyle } from "react-native"
 import Fast, { FastImageProps, ImageStyle, Priority, ResizeMode } from "react-native-fast-image"
+import { Skeleton } from "./Skeleton"
+
+const errorImage = require("../../assets/images/sad-face.png")
 
 export interface FastImageStyle extends ImageStyle {}
 
@@ -18,18 +21,29 @@ export const FastImage = ({
   resizeMode = "cover",
   ...rest
 }: IFastImage) => {
-  const [fallbackUri, setFallbackUri] = useState(uri)
+  const [isError, setIsError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
-    <Fast
-      {...rest}
-      style={style}
-      source={{
-        uri: fallbackUri,
-        priority,
-      }}
-      resizeMode={resizeMode}
-      onError={() => setFallbackUri("https://serpstat.com/files/img/34/1676542462.4999.png")}
-    />
+    <View>
+      <Fast
+        {...rest}
+        style={style}
+        source={
+          isError
+            ? errorImage
+            : {
+                uri,
+                priority,
+              }
+        }
+        resizeMode={resizeMode}
+        onError={() => setIsError(true)}
+        onLoadStart={() => setIsLoading(true)}
+        onLoadEnd={() => setIsLoading(false)}
+      />
+      {isLoading && <Skeleton style={[style, $skeleton]} />}
+    </View>
   )
 }
+const $skeleton: ViewStyle = { position: "absolute" }

@@ -46,6 +46,7 @@ export type AppStackParamList = {
   ChatReq: undefined
   Message: undefined
   LeaderBoard: undefined
+  UserDetails: { userId: string }
   Material: undefined
   MaterialDetails: undefined
   LiveStreaming: undefined
@@ -97,6 +98,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="ChatReq" component={Screens.ChatReqScreen} />
           <Stack.Screen name="Message" component={Screens.MessageScreen} />
           <Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
+          <Stack.Screen name="UserDetails" component={Screens.UserDetailsScreen} />
           <Stack.Screen name="Material" component={Screens.MaterialScreen} />
           <Stack.Screen name="MaterialDetails" component={Screens.MaterialDetailsScreen} />
           <Stack.Screen name="LiveStreaming" component={Screens.LiveStreamingScreen} />
