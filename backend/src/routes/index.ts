@@ -1,3 +1,4 @@
+import { MaterialsRoutes } from '../modules/rest/materials/materials.routes';
 import { BoilerplateCodeRoutes } from '../modules/rest/boilerplateCode/boilerplateCode.routes';
 import express, { Router } from 'express';
 import { AppUpdateRoutes } from '../modules/rest/app-update/appUpdate.routes';
@@ -20,6 +21,7 @@ const moduleRoutes: IModuleRoutes = [
   { path: '/user/app', route: AppUserRoutes },
   { path: '/app-update/cc', route: AppUpdateRoutes },
   { path: '/boilerplateCode', route: BoilerplateCodeRoutes },
+  { path: '/materials', route: MaterialsRoutes },
 ];
 
 moduleRoutes.map(r => router.use(r.path, r.route));

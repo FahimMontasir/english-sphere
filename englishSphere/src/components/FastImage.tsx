@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { StyleProp, View, ViewStyle } from "react-native"
+import { StyleProp, ViewStyle } from "react-native"
 import Fast, { FastImageProps, ImageStyle, Priority, ResizeMode } from "react-native-fast-image"
 import { Skeleton } from "./Skeleton"
 
@@ -19,31 +19,46 @@ export const FastImage = ({
   uri,
   priority = "normal",
   resizeMode = "cover",
+  children,
   ...rest
 }: IFastImage) => {
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   return (
-    <View>
-      <Fast
-        {...rest}
-        style={style}
-        source={
-          isError
-            ? errorImage
-            : {
-                uri,
-                priority,
-              }
-        }
-        resizeMode={resizeMode}
-        onError={() => setIsError(true)}
-        onLoadStart={() => setIsLoading(true)}
-        onLoadEnd={() => setIsLoading(false)}
-      />
-      {isLoading && <Skeleton style={[style, $skeleton]} />}
-    </View>
+    <Fast
+      {...rest}
+      style={style}
+      source={
+        isError
+          ? errorImage
+          : {
+              uri,
+              priority,
+            }
+      }
+      resizeMode={resizeMode}
+      onError={() => setIsError(true)}
+      onLoadStart={() => setIsLoading(true)}
+      onLoadEnd={() => setIsLoading(false)}
+    >
+      {children}
+      {isLoading && !children && <Skeleton style={$withoutChildrenSkelton} />}
+      {isLoading && children && <Skeleton style={$childrenSkelton} />}
+    </Fast>
   )
 }
-const $skeleton: ViewStyle = { position: "absolute" }
+
+const $withoutChildrenSkelton: ViewStyle = {
+  width: "100%",
+  height: "100%",
+  overflow: "hidden",
+  borderRadius: 0,
+}
+const $childrenSkelton: ViewStyle = {
+  width: "100%",
+  height: "100%",
+  position: "absolute",
+  overflow: "hidden",
+  borderRadius: 0,
+}

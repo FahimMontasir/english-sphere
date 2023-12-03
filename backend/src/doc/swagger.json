@@ -166,6 +166,111 @@
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
+			},
+			"IMaterials": {
+				"properties": {
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"constant": {
+						"$ref": "#/components/schemas/ISomeConstant"
+					},
+					"removeIt": {
+						"type": "boolean"
+					},
+					"anyRef": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					},
+					"_id": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					}
+				},
+				"required": [
+					"constant",
+					"removeIt",
+					"anyRef"
+				],
+				"type": "object"
+			},
+			"IApiResponse_IMaterials_": {
+				"properties": {
+					"data": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/IMaterials"
+							}
+						],
+						"nullable": true
+					},
+					"meta": {
+						"properties": {
+							"total": {
+								"type": "number",
+								"format": "double"
+							},
+							"limit": {
+								"type": "number",
+								"format": "double"
+							},
+							"page": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"page"
+						],
+						"type": "object",
+						"nullable": true
+					},
+					"message": {
+						"type": "string",
+						"nullable": true
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"success",
+					"statusCode"
+				],
+				"type": "object"
+			},
+			"Partial_IMaterials_": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					},
+					"anyRef": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					},
+					"removeIt": {
+						"type": "boolean"
+					},
+					"constant": {
+						"$ref": "#/components/schemas/ISomeConstant"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
 			}
 		},
 		"securitySchemes": {
@@ -328,6 +433,179 @@
 				"description": "Delete docs here",
 				"tags": [
 					"BoilerplateCodeController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"value": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"value"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/materials/{userId}": {
+			"get": {
+				"operationId": "GetMaterials",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IApiResponse_IMaterials_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves the details of an existing user.",
+				"tags": [
+					"MaterialsController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Supply the valid user mongodb ID.",
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/materials": {
+			"post": {
+				"operationId": "AddMaterials",
+				"responses": {
+					"201": {
+						"description": "created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IApiResponse_null_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Adds a new user by providing required request body.",
+				"tags": [
+					"MaterialsController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "_id, createdAt and updated are optional fields",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IMaterials",
+								"description": "_id, createdAt and updated are optional fields"
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"operationId": "UpdateMaterials",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IApiResponse_null_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Patch docs here",
+				"tags": [
+					"MaterialsController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_IMaterials_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "RemoveMaterials",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IApiResponse_null_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Delete docs here",
+				"tags": [
+					"MaterialsController"
 				],
 				"security": [],
 				"parameters": [

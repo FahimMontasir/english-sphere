@@ -48,6 +48,7 @@ const $container: FastImageStyle = {
 
 const $textContainer: ViewStyle = {
   backgroundColor: colors.palette.transparentGray,
+  zIndex: 99,
 }
 
 const $text: TextStyle = {

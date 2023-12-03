@@ -117,7 +117,7 @@ export const MessageScreen: FC<AppStackScreenProps<"Message">> = observer(functi
         onPressIn={onPressInHandler}
         value={text}
         onChangeText={(t) => setText(t)}
-        inputWrapperStyle={$sendInputWrapper}
+        containerStyle={$sendInputWrapper}
         RightAccessory={(props) => (
           <Icon onPress={sendMessage} containerStyle={props.style} icon="send" size={25} />
         )}

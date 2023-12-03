@@ -160,6 +160,7 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
             <Text text="Sort By:" preset="heading" />
             <View style={$sortByContainer}>
               <TextField
+                containerStyle={$sortInputContainer}
                 value={state.sortBy}
                 onSelect={(v) => updateValue("sortBy", v)}
                 selectOptions={[
@@ -174,6 +175,7 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
                 RightAccessory={(p) => <Icon icon="view" style={p.style} color={colors.textDim} />}
               />
               <TextField
+                containerStyle={$sortInputContainer}
                 value={state.sortOrder}
                 onSelect={(v) => updateValue("sortOrder", v)}
                 selectOptions={[{ value: "asc" }, { value: "desc" }]}
@@ -213,3 +215,4 @@ const $modalContainer: ViewStyle = {
 }
 
 const $sortByContainer: ViewStyle = { flexDirection: "row", columnGap: spacing.sm }
+const $sortInputContainer: ViewStyle = { flex: 1 }

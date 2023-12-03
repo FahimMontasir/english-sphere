@@ -154,7 +154,8 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
     ? translate(placeholderTx, placeholderTxOptions)
     : placeholder
 
-  const $containerStyles = [$defaultContainerStyle, $containerStyleOverride]
+  // const $containerStyles = [$defaultContainerStyle, $containerStyleOverride]
+  const $containerStyles = [$containerStyleOverride]
 
   const $labelStyles = [$labelStyle, LabelTextProps?.style]
 
@@ -268,7 +269,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
   )
 })
 
-const $defaultContainerStyle: ViewStyle = { flex: 1 }
+// const $defaultContainerStyle: ViewStyle = { flex: 1 }
 
 const $labelStyle: TextStyle = {
   marginBottom: spacing.xs,
