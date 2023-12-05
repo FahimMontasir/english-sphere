@@ -1,3 +1,1 @@
-
-  export const SOME_CONSTANTS = ['userRole', 'gender', 'anything unchangeable'] as const;
-  
+export const STATUS = ['published', 'drafted', 'removed'] as const;
