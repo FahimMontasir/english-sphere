@@ -20,7 +20,12 @@ router.patch(
   validateRequest(MaterialsValidation.updateMaterialsCategoryZodSchema),
   MaterialsController.getMaterials
 );
-router.delete('/category/remove', auth('admin', 'superAdmin'), MaterialsController.getMaterials);
+router.delete(
+  '/category/remove',
+  auth('admin', 'superAdmin'),
+  validateRequest(MaterialsValidation.removeMaterialsCategoryZodSchema),
+  MaterialsController.getMaterials
+);
 
 // materials
 router.get('/request', auth('contentW', 'admin', 'superAdmin'), MaterialsController.getMaterials);
@@ -36,7 +41,7 @@ router.post(
 router.post(
   '/request',
   auth('user', 'userN'),
-  validateRequest(MaterialsValidation.addMaterialsZodSchema),
+  validateRequest(MaterialsValidation.requestMaterialsZodSchema),
   MaterialsController.addMaterials
 );
 
