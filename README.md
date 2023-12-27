@@ -1,4 +1,5 @@
-# English Sphere: Live, Breathe, Speak English. 
+# English Sphere: Live, Breathe, Speak English.
+
 `English Sphere` is where you dive into English. Imagine it as your personal world where you're surrounded by the language. The tagline reminds you to make English a part of you, not just something you study occasionally. Like breathing, let it flow naturally. This makes your speaking strong and confident. So, adopt English every day, and soon, you'll be fluent and awesome!
 
 [![](https://markdown-videos.vercel.app/youtube/JOazi1u6M7g)](https://youtu.be/JOazi1u6M7g)
@@ -19,7 +20,6 @@ This app is still `in active development`.
 
 6. 📚 **Curated Book Marketplace:** Immerse yourself in a marketplace tailored to language learners, offering a range of enriching materials including books that spark inspiration and fuel your language journey.
 
-
 ## `Design File:` [FIGMA](https://www.figma.com/file/AAmi8RVuUCNjv4Yt4Q7Gs4/refactor-speaking?node-id=0%3A1)
 
 ## `All Live Links`
@@ -30,3 +30,5 @@ This app is still `in active development`.
 1. [RSE: WEB](https://rse-by-fahim-montasir.netlify.app/)
 1. [RSE-SHOP: DASHBOARD](https://rse-shop-by-fahim-montasir.netlify.app/dashboard)
 1. [RSE-SHOP: WEB](https://rse-shop-by-fahim-montasir.netlify.app/)
+
+Contributors
