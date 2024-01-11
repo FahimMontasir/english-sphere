@@ -31,17 +31,11 @@ This app is still `in active development`.
 1. [RSE-SHOP: DASHBOARD](https://rse-shop-by-fahim-montasir.netlify.app/dashboard)
 1. [RSE-SHOP: WEB](https://rse-shop-by-fahim-montasir.netlify.app/)
 
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-[![All Contributors](https://img.shields.io/github/all-contributors/FahimMontasir/english-sphere?color=ee8449&style=flat-square)](#contributors)
-
 ### [Contributors guide](https://docs.google.com/document/d/1-Az4toFIeWPUh8gmZ5NkNPGAcNj-npHkCqeZ994KrCo/edit?usp=sharing)
+
+<!-- ## Contributors -->
+
+<!-- to update contributors profile https://contrib.rocks/preview?repo=angular%2Fangular-ja -->
+<!-- <a href="https://github.com/FahimMontasir/english-sphere/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=FahimMontasir/english-sphere" />
+</a> -->
