@@ -1,6 +1,12 @@
+/**
+ * Configuration module for the application.
+ * Handles the loading of environment variables and provides a structured configuration object.
+ */
+
 import dotenv from 'dotenv';
 import path from 'path';
 
+// Load environment variables based on the environment we running
 const dotenvFile = process.env.NODE_ENV === 'test' ? '.env.test' : '.env';
 
 dotenv.config({ path: path.join(process.cwd(), dotenvFile) });
