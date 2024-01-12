@@ -39,3 +39,7 @@ This app is still `in active development`.
 <!-- <a href="https://github.com/FahimMontasir/english-sphere/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=FahimMontasir/english-sphere" />
 </a> -->
+
+# contributors list
+
+- mahidul
