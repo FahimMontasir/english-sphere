@@ -71,3 +71,4 @@ To learn more about React Native, take a look at the following resources:
 - [`react-native-webrtc`](https://www.npmjs.com/package/react-native-webrtc) - A WebRTC module for React Native.
 - [`react-query`](https://tanstack.com/query/v3/) - Powerful asynchronous state management for TS/JS, React, Solid, Vue and Svelte
 - [`socket.io-client`](https://socket.io/docs/v4/client-api/) - realtime communication
+- [`maestro`](https://maestro.mobile.dev/) - Maestro is the simplest and most effective mobile UI testing framework.
