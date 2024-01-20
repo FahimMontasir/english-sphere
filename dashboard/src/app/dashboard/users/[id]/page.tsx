@@ -1,11 +1,11 @@
+"use client";
 import { Icon, Image, Modal, Text } from "@/components/common";
-import DashboardLayout from "@/components/layout";
 import Message from "@/components/user-details/Message";
 import NotiList from "@/components/user-details/NotiList";
 import UDButton from "@/components/user-details/UDButton";
 import { useState } from "react";
 
-const UserDetailsPage = () => {
+export default function Page() {
   const [openChat, setOpenChat] = useState(false);
 
   return (
@@ -214,10 +214,4 @@ const UserDetailsPage = () => {
       </Modal>
     </div>
   );
-};
-
-UserDetailsPage.getLayout = function getLayout(page: React.ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
-};
-
-export default UserDetailsPage;
+}

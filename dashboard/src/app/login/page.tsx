@@ -1,5 +1,6 @@
+"use client";
 import { Button, Image } from "@/components/common";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function Login() {
   const router = useRouter();
@@ -21,7 +22,7 @@ function Login() {
           placeholder="Type your password here..."
           className="h-[50px] w-full rounded-rounded-md bg-white-c p-[22px] text-black-c placeholder-gray-600 shadow-default focus:outline-none"
         />
-        <Button className="h-[50px]" onClick={() => router.push("/")}>
+        <Button className="h-[50px]" onClick={() => router.push("/dashboard")}>
           LOG IN
         </Button>
       </div>

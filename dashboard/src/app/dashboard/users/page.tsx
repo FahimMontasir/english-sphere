@@ -1,14 +1,9 @@
-import { ReactElement } from "react";
-import DashboardLayout from "@/components/layout";
+"use client";
 import { Button, Filter, Icon, Text } from "@/components/common";
 import List from "@/components/users/LIst";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-interface Props {
-  props: React.ReactNode;
-}
-
-function UsersPage({ props }: Props) {
+export default function Page() {
   const router = useRouter();
 
   return (
@@ -45,7 +40,10 @@ function UsersPage({ props }: Props) {
           {Array(10)
             .fill(1)
             .map((_, i) => (
-              <List onClick={() => router.push(`/users/dsfd${i}`)} key={i} />
+              <List
+                onClick={() => router.push(`/dashboard/users/dsfd${i}`)}
+                key={i}
+              />
             ))}
         </ul>
         <Button className="mt-[10px] h-[50px] md:mt-[20px]">LOAD MORE</Button>
@@ -53,9 +51,3 @@ function UsersPage({ props }: Props) {
     </>
   );
 }
-
-UsersPage.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
-};
-
-export default UsersPage;

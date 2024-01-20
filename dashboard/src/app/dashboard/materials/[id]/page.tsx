@@ -1,9 +1,8 @@
 import { Text } from "@/components/common";
-import DashboardLayout from "@/components/layout";
 import HCard from "@/components/materials/HCard";
 import SquareCard from "@/components/materials/SquareCard";
 
-const MaterialDetails = () => {
+export default function Page() {
   return (
     <>
       <Text variant="h1" className="text-center">
@@ -36,10 +35,4 @@ const MaterialDetails = () => {
       </section>
     </>
   );
-};
-
-MaterialDetails.getLayout = function getLayout(page: React.ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
-};
-
-export default MaterialDetails;
+}

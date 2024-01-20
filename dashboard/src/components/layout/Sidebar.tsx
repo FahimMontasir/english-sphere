@@ -1,24 +1,24 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { IconName } from "../common/Icon";
 import { Image, Text, Icon } from "../common";
 
 type TabType = { link: string; name: string; iconName: IconName };
 
 const routesConf: TabType[] = [
-  { link: "/", name: "Home", iconName: "home" },
-  { link: "/users", name: "Users", iconName: "user" },
-  { link: "/materials", name: "Materials", iconName: "materials" },
+  { link: "/dashboard", name: "Home", iconName: "home" },
+  { link: "/dashboard/users", name: "Users", iconName: "user" },
+  { link: "/dashboard/materials", name: "Materials", iconName: "materials" },
 ];
 
 const Tab = (props: TabType) => {
-  const router = useRouter();
-  const pathname = router.pathname.includes("[")
-    ? router.pathname.replace(/\[[^\]]+\]/, "").replace(/\/$/, "")
-    : router.pathname;
+  const pathname = usePathname();
+  const pathnameMatch = pathname?.includes("[")
+    ? pathname.replace(/\[[^\]]+\]/, "").replace(/\/$/, "")
+    : pathname;
 
   const active =
-    pathname === props.link ? "bg-bgwhite" : "shadow-tab hover:bg-bgwhite";
+    pathnameMatch === props.link ? "bg-bgwhite" : "shadow-tab hover:bg-bgwhite";
   return (
     <Link href={props.link}>
       <span
