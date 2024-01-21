@@ -1,5 +1,11 @@
+import { Metadata } from "next";
 import Card from "@/components/home/Card";
 import Materials from "@/components/common/Materials";
+
+export const metadata: Metadata = {
+  title: "ES Dashboard",
+  description: "English Sphere Dashboard",
+};
 
 export default function Page() {
   const TOP_CARD = [

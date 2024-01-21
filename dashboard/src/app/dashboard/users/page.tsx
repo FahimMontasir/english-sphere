@@ -1,7 +1,7 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { Button, Filter, Icon, Text } from "@/components/common";
 import List from "@/components/users/LIst";
-import { useRouter } from "next/navigation";
 
 export default function Page() {
   const router = useRouter();

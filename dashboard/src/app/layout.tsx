@@ -2,8 +2,11 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "Welcome to Next.js",
+  title: "ES Dashboard",
+  description: "English Sphere Dashboard",
+  authors: [{ name: "Fahim Montasir", url: "https://moontasir.web.app/" }],
+  keywords:
+    "ES Dashboard, English Sphere Dashboard, English Sphere content center",
 };
 
 export default function RootLayout({
