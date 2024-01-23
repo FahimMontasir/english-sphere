@@ -1,24 +1,12 @@
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { IconName } from "../common/Icon";
-import { Image, Text, Icon } from "../common";
-
-type TabType = { link: string; name: string; iconName: IconName };
-
-const routesConf: TabType[] = [
-  { link: "/dashboard", name: "Home", iconName: "home" },
-  { link: "/dashboard/users", name: "Users", iconName: "user" },
-  { link: "/dashboard/materials", name: "Materials", iconName: "materials" },
-];
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Image, Text, Icon } from '../common';
+import { TabType, routesConf } from '@/constants/sidebar';
 
 const Tab = (props: TabType) => {
   const pathname = usePathname();
-  const pathnameMatch = pathname?.includes("[")
-    ? pathname.replace(/\[[^\]]+\]/, "").replace(/\/$/, "")
-    : pathname;
 
-  const active =
-    pathnameMatch === props.link ? "bg-bgwhite" : "shadow-tab hover:bg-bgwhite";
+  const active = pathname == props.link ? 'bg-bgwhite' : 'shadow-tab hover:bg-bgwhite';
   return (
     <Link href={props.link}>
       <span
@@ -48,13 +36,8 @@ function Sidebar() {
         Routes
       </Text>
       <nav className="ml-[20px]">
-        {routesConf.map((route) => (
-          <Tab
-            key={route.link}
-            link={route.link}
-            name={route.name}
-            iconName={route.iconName}
-          />
+        {routesConf.map(route => (
+          <Tab key={route.link} link={route.link} name={route.name} iconName={route.iconName} />
         ))}
       </nav>
     </aside>
