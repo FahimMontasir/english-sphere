@@ -1,12 +1,12 @@
-import "@/styles/globals.css";
-import { Metadata } from "next";
+import Providers from '@/lib/Providers';
+import '@/styles/globals.css';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "ES Dashboard",
-  description: "English Sphere Dashboard",
-  authors: [{ name: "Fahim Montasir", url: "https://moontasir.web.app/" }],
-  keywords:
-    "ES Dashboard, English Sphere Dashboard, English Sphere content center",
+  title: 'ES Dashboard',
+  description: 'English Sphere Dashboard',
+  authors: [{ name: 'Fahim Montasir', url: 'https://moontasir.web.app/' }],
+  keywords: 'ES Dashboard, English Sphere Dashboard, English Sphere content center',
 };
 
 export default function RootLayout({
@@ -18,7 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
