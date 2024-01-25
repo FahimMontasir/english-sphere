@@ -30,7 +30,7 @@ export const removeUserInfo = (key: string) => {
 
 export const getNewAccessToken = async () => {
   return await axiosInstance({
-    url: `${getBaseUrl()}/auth/refresh-token`,
+    url: `${getBaseUrl()}/auth/cc/refresh-token`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true,

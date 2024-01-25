@@ -6,6 +6,8 @@ import axios from 'axios';
 const instance = axios.create();
 instance.defaults.headers.post['Content-Type'] = 'application/json';
 instance.defaults.headers['Accept'] = 'application/json';
+instance.defaults.headers['x-api-key'] =
+  'dkjlksdfjklsdf32342kldfjsklfjlsjlkj23123123$%434324kldsfjsfjkdfowieumnskdfk';
 instance.defaults.timeout = 60000;
 
 // Add a request interceptor

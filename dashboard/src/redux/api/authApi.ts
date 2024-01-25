@@ -1,6 +1,6 @@
 import { tagTypes } from '../tag-types';
 import { baseApi } from './baseApi';
-const AUTH_URL = '/auth';
+const AUTH_URL = '/auth/cc';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: build => ({
