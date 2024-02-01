@@ -1,8 +1,6 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
-
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
 
@@ -11,10 +9,7 @@ First, you will need to start **Metro**, the JavaScript _bundler_ that ships _wi
 To start Metro, run the following command from the _root_ of your React Native project:
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
+yarn adb
 yarn start
 ```
 
@@ -25,9 +20,6 @@ Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _roo
 ### For Android
 
 ```bash
-# using npm
-npm run android
-
 # OR using Yarn
 yarn android
 ```
@@ -35,9 +27,6 @@ yarn android
 ### For iOS
 
 ```bash
-# using npm
-npm run ios
-
 # OR using Yarn
 yarn ios
 ```
@@ -50,7 +39,7 @@ This is one way to run your app — you can also run it directly from within And
 
 Now that you have successfully run the app, let's modify it.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
+1. Open `screens/HomeScreen/index.tsx` in your text editor of choice and edit some lines.
 2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
 
    For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
@@ -58,11 +47,6 @@ Now that you have successfully run the app, let's modify it.
 ## Congratulations! :tada:
 
 You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
 
 # Troubleshooting
 
@@ -77,3 +61,14 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [`@notifee/react-native`](https://notifee.app/) - A feature rich notifications library for React Native
+- [`@react-native-firebase`](https://rnfirebase.io/) - Firebase for rn
+- [`@react-navigation`](https://reactnavigation.org/) - React Navigation: Routing and navigation for Expo and React Native apps.
+- [`@shopify/flash-list`](https://shopify.github.io/flash-list/) - Fast & Performant React Native List. No more blank cells. Swap from FlatList in seconds. Get instant performance.
+- [`mobx-state-tree`](https://mobx-state-tree.js.org/intro/welcome) - Full-featured reactive state management without the boilerplate.
+- [`react-native-mmkv`](https://github.com/mrousavy/react-native-mmkv) - ⚡️ The fastest key/value storage for React Native. ~30x faster than AsyncStorage!
+- [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) - performant animation
+- [`react-native-webrtc`](https://www.npmjs.com/package/react-native-webrtc) - A WebRTC module for React Native.
+- [`react-query`](https://tanstack.com/query/v3/) - Powerful asynchronous state management for TS/JS, React, Solid, Vue and Svelte
+- [`socket.io-client`](https://socket.io/docs/v4/client-api/) - realtime communication
+- [`maestro`](https://maestro.mobile.dev/) - Maestro is the simplest and most effective mobile UI testing framework.

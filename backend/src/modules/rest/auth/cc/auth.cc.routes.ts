@@ -33,7 +33,7 @@ router.post(
 
 router.post(
   '/refresh-token',
-  auth('superAdmin', 'admin', 'contentW'),
+  // auth('superAdmin', 'admin', 'contentW'),
   validateRequest(CCAuthValidation.refreshTokenZodSchema),
   CCAuthController.refreshToken
 );

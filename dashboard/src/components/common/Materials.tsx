@@ -1,5 +1,6 @@
+"use client";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import MaterialInput from "../home/MaterialInput";
 import { Button, Image, Modal, Text } from "./index";
 import HCard from "../materials/HCard";
@@ -27,7 +28,10 @@ const Materials = () => {
         {Array(4)
           .fill(0)
           .map((_, i) => (
-            <HCard key={i} onClick={() => router.push(`/materials/dlk-${i}`)} />
+            <HCard
+              key={i}
+              onClick={() => router.push(`/dashboard/materials/dlk-${i}`)}
+            />
           ))}
       </div>
       {/* add materials */}

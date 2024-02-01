@@ -29,6 +29,7 @@ export const LoginScreen: FC<AppStackScreenProps<"Login">> = observer(function L
         style={$topText}
       />
       <TouchableOpacity
+        testID="google-login-icon"
         disabled={isLoading}
         onPress={handleLogin}
         style={$iconContainer}

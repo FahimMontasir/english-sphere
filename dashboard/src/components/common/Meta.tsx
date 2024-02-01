@@ -1,6 +1,7 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import React from 'react';
+"use client";
+import Head from "next/head";
+import { usePathname } from "next/navigation";
+import React from "react";
 interface IProps {
   title: string;
   keywords: string;
@@ -8,7 +9,7 @@ interface IProps {
   imgContent: string;
 }
 const Meta = ({ title, keywords, description, imgContent }: IProps) => {
-  const router = useRouter();
+  const pathname = usePathname();
   return (
     <Head>
       <title>{title}</title>
@@ -22,10 +23,7 @@ const Meta = ({ title, keywords, description, imgContent }: IProps) => {
       <meta property="og:title" content={title} />
       <meta property="og:type" content="article" />
       <meta property="og:image" content={imgContent} />
-      <meta
-        property="og:url"
-        content={'http://localhost:3000' + router.asPath}
-      />
+      <meta property="og:url" content={"http://localhost:3000" + pathname} />
       <meta property="og:description" content={description} />
 
       {/* <!-- for Twitter -->           */}
