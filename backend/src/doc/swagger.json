@@ -167,6 +167,44 @@
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
+			"IStatus": {
+				"type": "string",
+				"enum": [
+					"published",
+					"drafted",
+					"removed"
+				]
+			},
+			"IMaterialsCategory": {
+				"properties": {
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"coverUrl": {
+						"type": "string"
+					},
+					"thumbnailUrl": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"_id": {
+						"$ref": "#/components/schemas/Types.ObjectId"
+					}
+				},
+				"required": [
+					"coverUrl",
+					"thumbnailUrl",
+					"title"
+				],
+				"type": "object"
+			},
 			"IMaterials": {
 				"properties": {
 					"updatedAt": {
@@ -177,23 +215,42 @@
 						"type": "string",
 						"format": "date-time"
 					},
-					"constant": {
-						"$ref": "#/components/schemas/ISomeConstant"
+					"category": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/Types.ObjectId"
+							},
+							{
+								"$ref": "#/components/schemas/IMaterialsCategory"
+							}
+						]
 					},
-					"removeIt": {
-						"type": "boolean"
+					"status": {
+						"$ref": "#/components/schemas/IStatus"
 					},
-					"anyRef": {
-						"$ref": "#/components/schemas/Types.ObjectId"
+					"description": {
+						"type": "string"
+					},
+					"coverUrl": {
+						"type": "string"
+					},
+					"thumbnailUrl": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
 					},
 					"_id": {
 						"$ref": "#/components/schemas/Types.ObjectId"
 					}
 				},
 				"required": [
-					"constant",
-					"removeIt",
-					"anyRef"
+					"category",
+					"status",
+					"description",
+					"coverUrl",
+					"thumbnailUrl",
+					"title"
 				],
 				"type": "object"
 			},
@@ -251,14 +308,30 @@
 					"_id": {
 						"$ref": "#/components/schemas/Types.ObjectId"
 					},
-					"anyRef": {
-						"$ref": "#/components/schemas/Types.ObjectId"
+					"title": {
+						"type": "string"
 					},
-					"removeIt": {
-						"type": "boolean"
+					"thumbnailUrl": {
+						"type": "string"
 					},
-					"constant": {
-						"$ref": "#/components/schemas/ISomeConstant"
+					"coverUrl": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"status": {
+						"$ref": "#/components/schemas/IStatus"
+					},
+					"category": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/Types.ObjectId"
+							},
+							{
+								"$ref": "#/components/schemas/IMaterialsCategory"
+							}
+						]
 					},
 					"createdAt": {
 						"type": "string",
