@@ -24,6 +24,12 @@ const data = [
     timestamps: "1m",
   },
   {
+    replay: true,
+    message:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae distinctio alias, eum laudantium nisi architecto est, accusamus quam excepturi commodi ea ullam accusantium iusto et id qui animi officiis fugiat autem temporibus quas. Perspiciatis maiores aut, aliquam, omnis labore consequatur unde consequuntur veniam architecto ex ipsum! Eveniet temporibus quisquam eligendi? ",
+    timestamps: "1m",
+  },
+  {
     replay: false,
     message:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae distinctio alias, eum laudantium nisi architecto est, accusamus quam excepturi commodi ea ullam accusantium iusto et id qui animi officiis fugiat autem temporibus quas. Perspiciatis maiores aut, aliquam, omnis labore consequatur unde consequuntur veniam architecto ex ipsum! Eveniet temporibus quisquam eligendi? ",
@@ -84,7 +90,7 @@ export const MessageScreen: FC<AppStackScreenProps<"Message">> = observer(functi
     }
 
     // Scroll to the end after the component has been rendered
-    const timeoutId = setTimeout(scrollToBottom, 200)
+    const timeoutId = setTimeout(scrollToBottom, 300)
 
     return () => {
       clearTimeout(timeoutId)
@@ -93,7 +99,11 @@ export const MessageScreen: FC<AppStackScreenProps<"Message">> = observer(functi
   }, [])
 
   return (
-    <Screen contentContainerStyle={$contentContainer} preset="fixed" safeAreaEdges={["top"]}>
+    <Screen
+      contentContainerStyle={$contentContainer}
+      preset="fixed"
+      safeAreaEdges={["top", "bottom"]}
+    >
       <View style={$headerContainer}>
         <FastImage uri="https://i.pravatar.cc/300" style={$image} />
         <Text text="Fahim Montasir" preset="subheading" />
@@ -102,7 +112,6 @@ export const MessageScreen: FC<AppStackScreenProps<"Message">> = observer(functi
           <Text text="Active now" />
         </View>
       </View>
-
       <FlatList
         onScroll={handleOnScroll}
         ref={flatListRef}

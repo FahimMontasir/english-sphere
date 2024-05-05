@@ -21,7 +21,7 @@ const en = {
   chatScreen: {
     search: "Search chat...",
     instaChat: "Insta Chat",
-    instaMsg: "Start chatting with users",
+    instaMsg: "Start chatting with random users",
     friends: "Friends",
   },
   chatReqScreen: {

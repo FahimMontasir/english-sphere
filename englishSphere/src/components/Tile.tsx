@@ -76,7 +76,10 @@ export const Tile = observer(function Tile(props: TileProps) {
             <FastImage uri={imgUri || ""} style={$image} />
           )}
           <View>
-            <Text text={truncateText(headingContent || "", 18, ".")} preset="subheading" />
+            <Text
+              text={headingTx ? headingContent : truncateText(headingContent || "", 18, ".")}
+              preset="subheading"
+            />
             {badges && (
               <Badges
                 badges={badges}

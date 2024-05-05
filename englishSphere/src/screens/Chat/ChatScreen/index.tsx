@@ -35,6 +35,7 @@ export const ChatScreen: FC<AppStackScreenProps<"Chat">> = observer(function Cha
         headingTx="chatScreen.instaMsg"
         rightCaption="Active: 200"
         imgUri="https://i.ibb.co/592yx4h/windows-p74ndn-YWRY4-unsplash.jpg"
+        onPress={() => navigation.navigate("Message")}
       />
 
       {/* chat user list section */}

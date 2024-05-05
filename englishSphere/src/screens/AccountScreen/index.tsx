@@ -90,11 +90,11 @@ const $upDownContainer: TextStyle = {
 const $chatIcon: ImageStyle = {
   alignSelf: "flex-end",
   marginRight: spacing.lg,
-  marginTop: spacing.xs,
+  marginTop: spacing.lg,
 }
 
 const $badgesContainer: ViewStyle = {
-  marginTop: -30,
+  marginTop: -45,
   marginBottom: -15,
   marginLeft: spacing.sm,
 }

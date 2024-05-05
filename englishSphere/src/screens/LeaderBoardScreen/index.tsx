@@ -162,6 +162,7 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
               <TextField
                 value={state.sortBy}
                 onSelect={(v) => updateValue("sortBy", v)}
+                containerStyle={$optionContainer}
                 selectOptions={[
                   { value: "upVotes" },
                   { value: "downVotes" },
@@ -175,6 +176,7 @@ export const LeaderBoardScreen: FC<AppStackScreenProps<"LeaderBoard">> = observe
               />
               <TextField
                 value={state.sortOrder}
+                containerStyle={$optionContainer}
                 onSelect={(v) => updateValue("sortOrder", v)}
                 selectOptions={[{ value: "asc" }, { value: "desc" }]}
                 preset="select"
@@ -213,3 +215,5 @@ const $modalContainer: ViewStyle = {
 }
 
 const $sortByContainer: ViewStyle = { flexDirection: "row", columnGap: spacing.sm }
+
+const $optionContainer: ViewStyle = { flex: 1 }
