@@ -62,43 +62,6 @@ async function ensureService(url: string, label: string, command: string[], time
   await waitFor(() => canFetch(url), label, timeoutMs, child);
 }
 
-async function hasAndroidDevice() {
-  const child = Bun.spawn(["adb", "devices"], { cwd: workspace, stdout: "pipe", stderr: "pipe" });
-  const output = await new Response(child.stdout).text();
-  return (await child.exited) === 0 && output.split("\n").some((line) => line.endsWith("	device"));
-}
-
-async function isAndroidBooted() {
-  const child = Bun.spawn(["adb", "shell", "getprop", "sys.boot_completed"], {
-    cwd: workspace,
-    stdout: "pipe",
-    stderr: "pipe",
-  });
-  const output = await new Response(child.stdout).text();
-  return (await child.exited) === 0 && output.trim() === "1";
-}
-
-async function startAndroidDevice() {
-  const androidHome = Bun.env.ANDROID_HOME ?? Bun.env.ANDROID_SDK_ROOT;
-  if (androidHome) {
-    const emulator = `${androidHome}/emulator/emulator`;
-    const list = Bun.spawn([emulator, "-list-avds"], {
-      cwd: workspace,
-      stdout: "pipe",
-      stderr: "pipe",
-    });
-    const avds = (await new Response(list.stdout).text()).trim().split("\n").filter(Boolean);
-    if ((await list.exited) === 0 && avds[0]) {
-      const child = start([emulator, "-avd", avds[0], "-no-boot-anim", "-no-snapshot-save"]);
-      await waitFor(isAndroidBooted, `Android emulator ${avds[0]}`, 300_000, child);
-      return;
-    }
-  }
-
-  await run(["maestro", "start-device", "--platform", "android"]);
-  await waitFor(isAndroidBooted, "Maestro Android emulator", 300_000);
-}
-
 async function isAndroidAppInstalled() {
   const child = Bun.spawn(["adb", "shell", "pm", "path", "com.englishsphere.mobile"], {
     cwd: workspace,
@@ -109,16 +72,13 @@ async function isAndroidAppInstalled() {
   return (await child.exited) === 0 && output.includes("package:");
 }
 
-function expoE2EEnvironment() {
+function maestroE2EArguments() {
   const email = Bun.env.BOOTSTRAP_USER_EMAIL;
   const password = Bun.env.BOOTSTRAP_USER_PASSWORD;
   if (!email || !password) {
     throw new Error("BOOTSTRAP_USER_EMAIL and BOOTSTRAP_USER_PASSWORD are required");
   }
-  return {
-    EXPO_PUBLIC_E2E_BOOTSTRAP_EMAIL: email,
-    EXPO_PUBLIC_E2E_BOOTSTRAP_PASSWORD: password,
-  };
+  return ["-e", `E2E_EMAIL=${email}`, "-e", `E2E_PASSWORD=${password}`];
 }
 
 function cleanup() {
@@ -160,16 +120,9 @@ try {
   }
 
   if (mode === "android") {
-    if (!(await hasAndroidDevice())) {
-      await startAndroidDevice();
-    }
-
+    await run(["maestro", "start-device", "--platform", "android"]);
     await run(["adb", "reverse", "tcp:3000", "tcp:3000"]);
-    const native = start(
-      ["bun", "run", "--cwd", "apps/native", "android"],
-      workspace,
-      expoE2EEnvironment(),
-    );
+    const native = start(["bun", "run", "--cwd", "apps/native", "android"]);
     await Promise.all([
       waitFor(
         () => canFetch("http://localhost:8081/status"),
@@ -179,7 +132,7 @@ try {
       ),
       waitFor(isAndroidAppInstalled, "Android development build", 1_200_000, native),
     ]);
-    await run(["maestro", "test", "apps/native/.maestro/android.yaml"]);
+    await run(["maestro", "test", ...maestroE2EArguments(), "apps/native/.maestro/android.yaml"]);
   }
 } finally {
   cleanup();

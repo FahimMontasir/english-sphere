@@ -10,10 +10,17 @@ bun run test:e2e:android
 ```
 
 Both root commands start infrastructure, apply the database schema, start the API, and start the
-required Expo target. The Android command starts a Maestro Android emulator when no Android device
-is connected, installs the Expo development build, and reverses port 3000 through ADB.
+required Expo target. Following Maestro's Android setup, the Android command runs
+`maestro start-device --platform android`, installs the Expo development build, and reverses port
+3000 through ADB. Maestro's Android SDK prerequisites must be installed so it can create its
+supported emulator.
+
+Before the first Android run, install Android Studio's SDK Platform Tools, Emulator, and SDK
+Command-Line Tools under `ANDROID_HOME`. Running `maestro start-device --platform android` once will
+then offer to install Maestro's supported system image and create its managed Pixel emulator. Do not
+substitute an arbitrary AVD with an unsupported API level.
 
 The credentials are the development-only `BOOTSTRAP_USER_*` values in `apps/server/.env`; the runner
-passes them only to the temporary Android Expo process so the flow does not depend on emulator text
-injection. They are not committed or used by normal builds. Install Maestro using its official
-Homebrew tap. Maestro downloads managed Chromium on the first web run.
+passes them to Maestro with `-e` for the Android sign-in steps. They are not committed or embedded
+in the app bundle. Install Maestro using its official Homebrew tap. Maestro downloads managed
+Chromium on the first web run.

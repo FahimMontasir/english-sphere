@@ -4,6 +4,15 @@ appId: com.englishsphere.mobile
     when:
       platform: Android
     commands:
+      - tapOn:
+          id: "sign-in-email"
+      - inputText: ${E2E_EMAIL}
+      - tapOn:
+          id: "sign-in-password"
+      - inputText: ${E2E_PASSWORD}
+      - hideKeyboard
+      - tapOn:
+          id: "sign-in-submit"
       - assertVisible: "Welcome, English Sphere Test Learner"
       - openLink: "english-sphere://materials"
 - assertVisible: "Basic English for Speaking"
