@@ -1,0 +1,23 @@
+appId: com.englishsphere.mobile
+---
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - assertVisible: "Welcome, English Sphere Test Learner"
+      - openLink: "english-sphere://materials"
+- assertVisible: "Basic English for Speaking"
+- assertVisible: "Important Materials"
+- assertVisible: "Recent Materials"
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - openLink: "english-sphere://materials/basic-speaking-starters"
+- runFlow:
+    when:
+      platform: Web
+    commands:
+      - openLink: "http://localhost:8081/materials/basic-speaking-starters"
+- assertVisible: "Basic English for Speaking"
+- assertVisible: "Start short everyday conversations with practical greetings and responses."

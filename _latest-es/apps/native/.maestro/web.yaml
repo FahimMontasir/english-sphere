@@ -1,0 +1,5 @@
+url: http://localhost:3000/api/test-auth?redirect=/materials
+---
+- launchApp:
+    clearState: true
+- runFlow: flows/materials.yaml

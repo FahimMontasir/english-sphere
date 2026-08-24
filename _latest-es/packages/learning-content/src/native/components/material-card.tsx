@@ -15,17 +15,20 @@ interface MaterialCardProps {
 export function MaterialCard({ compact = false, material, onPress }: MaterialCardProps) {
   const { isDarkColorScheme } = useColorScheme();
   const theme = isDarkColorScheme ? NAV_THEME.dark : NAV_THEME.light;
+  const selector = `material-card-${material.id}-${compact ? "important" : "recent"}`;
 
   return (
     <Pressable
+      accessibilityLabel={`Open ${material.title}`}
       accessibilityRole="button"
+      nativeID={selector}
       onPress={onPress}
       style={({ pressed }) => [
         styles.card,
         compact && styles.compactCard,
         { backgroundColor: theme.card, borderColor: theme.border, opacity: pressed ? 0.75 : 1 },
       ]}
-      testID={`material-card-${material.id}`}
+      testID={selector}
     >
       <View style={[styles.badge, { backgroundColor: theme.primary }]}>
         <Text style={styles.badgeText}>{formatMaterialMeta(material)}</Text>

@@ -66,7 +66,7 @@ tests. `packages/_ui` owns shared Expo UI and React Native presentation primitiv
 
 ## Git Hooks and Formatting
 
-- Optional native Vite+ hooks: `bun run hooks:setup`
+- Install the repository pre-commit hook: `bun run hooks:setup`
 - Docs: [Vite+ commit hooks](https://viteplus.dev/guide/commit-hooks)
 - Run checks: `bun run check`
 
@@ -99,13 +99,14 @@ _latest-es/
 - `bun run db:generate`: Generate database client/types
 - `bun run db:migrate`: Run database migrations
 - `bun run db:studio`: Open database studio UI
-- `bun run check`: Run Vite+ format/lint checks and workspace TypeScript checks
-- `bun run test`: Run Bun unit and HTTP route tests
-- `bun run test:routes`: Start infrastructure, apply the schema, and run authenticated route tests
-- `bun run test:e2e`: Start dependencies and run authenticated Maestro web flows
-- `bun run test:all`: Run unit, authenticated route, and Maestro web suites
+- `bun run check`: Fix formatting/lint, check workspace types, then run the complete pre-commit test gate
+- `bun run test`: Run unit, integration, and Maestro web tests
+- `bun run test:unit`: Run every package test under `__tests__/unit`
+- `bun run test:integration`: Start the API and native server, then run every package integration test
+- `bun run test:e2e:web`: Start dependencies and run the shared Maestro scenario in Chromium
+- `bun run test:e2e:android`: Start dependencies and run the shared Maestro scenario on Android
+- `bun run test:all`: Run the pre-commit test gate plus Android E2E
 - `bun run dkr:start` / `dkr:stop` / `dkr:down`: Manage the complete local service stack
-- `bun run test:e2e:native`: Run the retained native Maestro flow against an installed build
 - `bun run lint`: Run Vite+ lint checks
 - `bun run format`: Run Vite+ formatting
 - `bun run staged`: Run Vite+ checks against staged files

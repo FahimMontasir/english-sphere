@@ -1,2 +1,1 @@
-cd _latest-es && vp staged
-
+cd _latest-es && bun run check

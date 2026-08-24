@@ -10,9 +10,9 @@
     "prebuild": "expo prebuild",
     "web": "expo start --web",
     "check-types": "tsc --noEmit",
-    "test:unit": "bun test ../../packages/learning-content/__tests__/native",
-    "test:e2e": "maestro test .maestro/web",
-    "test:e2e:native": "maestro test .maestro/materials.yaml"
+    "test:unit": "bun test ../../packages/learning-content/__tests__/unit",
+    "test:e2e:web": "maestro test --headless .maestro/web.yaml",
+    "test:e2e:android": "maestro test .maestro/android.yaml"
   },
   "dependencies": {
     "@_latest-es/auth": "workspace:*",

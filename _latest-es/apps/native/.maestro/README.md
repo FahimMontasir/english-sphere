@@ -1,16 +1,19 @@
-# Native E2E
+# Maestro E2E
 
-The web catalog and detail flows use the non-production `/api/test-auth` redirect to sign in the
-local bootstrap learner before asserting protected content. The root command starts
-PostgreSQL/pgvector, Redis, Garage, the API, and Expo web for you.
+The web and Android entry flows differ only by Maestro's required `url` or `appId` header. Both run
+the shared `flows/materials.yaml` scenario. The web entry uses the non-production `/api/test-auth`
+redirect; the Android branch signs in with the same local bootstrap learner.
 
 ```bash
-bun run test:e2e
+bun run test:e2e:web
+bun run test:e2e:android
 ```
 
-The credentials are the development-only `BOOTSTRAP_USER_*` values in `apps/server/.env`; they are
-never embedded in the app or supplied to Maestro. Install Maestro using its official Homebrew tap;
-Maestro downloads its managed Chromium browser on the first web run.
+Both root commands start infrastructure, apply the database schema, start the API, and start the
+required Expo target. The Android command starts a Maestro Android emulator when no Android device
+is connected, installs the Expo development build, and reverses port 3000 through ADB.
 
-The retained native flow requires a development build with app ID `com.englishsphere.mobile` on a
-booted simulator or connected device. Run it later with `bun run test:e2e:native`.
+The credentials are the development-only `BOOTSTRAP_USER_*` values in `apps/server/.env`; the runner
+passes them only to the temporary Android Expo process so the flow does not depend on emulator text
+injection. They are not committed or used by normal builds. Install Maestro using its official
+Homebrew tap. Maestro downloads managed Chromium on the first web run.

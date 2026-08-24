@@ -63,8 +63,9 @@ export const app = new Elysia()
         `\n\x1b[36m🪣 Private bucket:\x1b[0m ${env.S3_BUCKET} at ${env.S3_ENDPOINT}` +
         `\n\x1b[36m🧪 Test learner:\x1b[0m ${env.NODE_ENV === "production" ? "disabled" : env.BOOTSTRAP_USER_EMAIL}` +
         `\n\x1b[36m🧪 Unit tests:\x1b[0m bun run test:unit` +
-        `\n\x1b[36m🧪 Route tests:\x1b[0m bun run test:routes` +
-        `\n\x1b[36m🧭 Maestro web:\x1b[0m bun run test:e2e` +
+        `\n\x1b[36m🧪 Integration tests:\x1b[0m bun run test:integration` +
+        `\n\x1b[36m🧭 Maestro web:\x1b[0m bun run test:e2e:web` +
+        `\n\x1b[36m🤖 Maestro Android:\x1b[0m bun run test:e2e:android` +
         `\n\x1b[36m🧪 Complete suite:\x1b[0m bun run test:all`,
     );
   });

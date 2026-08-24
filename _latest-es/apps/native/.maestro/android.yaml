@@ -1,0 +1,5 @@
+appId: com.englishsphere.mobile
+---
+- launchApp:
+    clearState: true
+- runFlow: flows/materials.yaml
