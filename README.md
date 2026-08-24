@@ -2,44 +2,32 @@
 
 `English Sphere` is where you dive into English. Imagine it as your personal world where you're surrounded by the language. The tagline reminds you to make English a part of you, not just something you study occasionally. Like breathing, let it flow naturally. This makes your speaking strong and confident. So, adopt English every day, and soon, you'll be fluent and awesome!
 
+## Development status
+
+All previous application code is now **legacy**. The only active codebase is [`_latest-es/`](_latest-es/), where English Sphere is being rebuilt with the current Expo/React Native, Elysia, Better Auth, Drizzle, and PostgreSQL stack.
+
+Legacy application directories—including `englishSphere/`, `backend/`, `dashboard/`, `web/`, and `rse-shop/`—are retained only for historical reference and feature migration. New development must not be added to them. The `rse-shop` marketplace and all commerce features are excluded from the new English Sphere product.
+
+## Current plan
+
+- Rebuild the established English-learning, conversation, community, content, and administration features in `_latest-es/`.
+- Add privacy-conscious on-device English AI for conversation, dictation, speech-to-text, and text-to-speech using small, device-qualified models.
+- Add small-model server inference with evaluated English coaching, pronunciation, grammar, vocabulary, and conversation feedback.
+- Build permission-aware RAG over curated learning content and learner-approved history, with grounded answers and citations.
+- Provide a secured OAuth-based MCP service for compatible ChatGPT and Gemini clients.
+- Apply model evaluation, consent, privacy, safety, observability, licensing, and cost controls throughout the AI system.
+
+The detailed product requirements, AI research, architecture, and implementation roadmap are maintained in [`openspec/changes/document-product-and-ai-platform/`](openspec/changes/document-product-and-ai-platform/).
+
 [![](https://markdown-videos.vercel.app/youtube/JOazi1u6M7g)](https://youtu.be/JOazi1u6M7g)
 
-This app is still `in active development`.
+## Legacy product preview
 
-## `Features`
+![Legacy mobile app screens](assets/mobile-app-screens.png)
 
-1. 🗣️ **Realtime Audio Connect:** Seamlessly engage in live audio calls to instantly bridge language gaps and enrich your conversational prowess.
+Design reference: [Figma](https://www.figma.com/file/AAmi8RVuUCNjv4Yt4Q7Gs4/refactor-speaking?node-id=0%3A1)
 
-2. 🎥 **Live Language Streams:** Immerse yourself in dynamic live streams that empower you to practice language skills, learn from others, and interact within a vibrant community.
+### Contributors
 
-3. 📚 **Vocabulary and Grammar Boost:** Elevate your language finesse with captivating lessons, amplifying your vocabulary and refining your grammar for articulate expression.
-
-4. 💬 **Interactive Learning Chats:** Participate in lively discussions with fellow learners, sharing insights, cultural perspectives, and refining your language abilities.
-
-5. 📖 **Diverse Learning Resources:** Explore an extensive collection of tailored learning materials – articles, videos, and more – designed to align with your interests and proficiency level.
-
-6. 📚 **Curated Book Marketplace:** Immerse yourself in a marketplace tailored to language learners, offering a range of enriching materials including books that spark inspiration and fuel your language journey.
-
-## `Design File:` [FIGMA](https://www.figma.com/file/AAmi8RVuUCNjv4Yt4Q7Gs4/refactor-speaking?node-id=0%3A1)
-
-## `All Live Links`
-
-1. Mobile App
-   ![APP](assets/mobile-app-screens.png)
-1. [RSE: DASHBOARD](https://rse-dashboard-by-fahim-montasir.netlify.app/)
-1. [RSE: WEB](https://rse-by-fahim-montasir.netlify.app/)
-1. [RSE-SHOP: DASHBOARD](https://rse-shop-by-fahim-montasir.netlify.app/dashboard)
-1. [RSE-SHOP: WEB](https://rse-shop-by-fahim-montasir.netlify.app/)
-
-### [Contributors guide](https://docs.google.com/document/d/1-Az4toFIeWPUh8gmZ5NkNPGAcNj-npHkCqeZ994KrCo/edit?usp=sharing)
-
-<!-- ## Contributors -->
-
-<!-- to update contributors profile https://contrib.rocks/preview?repo=angular%2Fangular-ja -->
-<!-- <a href="https://github.com/FahimMontasir/english-sphere/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=FahimMontasir/english-sphere" />
-</a> -->
-
-# contributors list
-
+- [Contributors guide](https://docs.google.com/document/d/1-Az4toFIeWPUh8gmZ5NkNPGAcNj-npHkCqeZ994KrCo/edit?usp=sharing)
 - mahidul
