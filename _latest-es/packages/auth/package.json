@@ -1,0 +1,25 @@
+{
+  "name": "@_latest-es/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@_latest-es/db": "workspace:*",
+    "@_latest-es/env": "workspace:*",
+    "@better-auth/expo": "catalog:",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@_latest-es/config": "workspace:*",
+    "typescript": "^6.0.3"
+  }
+}

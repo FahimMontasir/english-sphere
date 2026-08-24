@@ -1,0 +1,23 @@
+name: _latest-es
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: _latest-es-postgres
+    environment:
+      POSTGRES_DB: _latest-es
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - _latest-es_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  _latest-es_postgres_data:
