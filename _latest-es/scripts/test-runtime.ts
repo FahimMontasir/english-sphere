@@ -120,7 +120,7 @@ async function runWebSuite() {
   ]);
   await Promise.all([
     run(["bun", "run", "test:integration:run"]),
-    run(["maestro", "test", "--headless", "apps/native/.maestro/web.yaml"]),
+    run(["maestro", "test", "apps/native/.maestro/web.yaml"]),
   ]);
 }
 
@@ -163,7 +163,7 @@ try {
       "apps/native",
       "web",
     ]);
-    await run(["maestro", "test", "--headless", "apps/native/.maestro/web.yaml"]);
+    await run(["maestro", "test", "apps/native/.maestro/web.yaml"]);
   }
 
   if (mode === "android") {
