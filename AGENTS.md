@@ -1,7 +1,7 @@
-# Workspace Directives
+# Workspace Router
 
-## Core Directive: Active Workspace Folder
+The active project is `_latest-es/`.
 
-- Always perform all active development, write code, run commands, and implement new features inside the `_latest-es/` directory.
-- All other top-level directories (e.g., `backend/`, `dashboard/`, `englishSphere/`, `rse-shop/`, `web/`) are for **legacy code only**.
-- Do not modify or write new code in legacy folders unless explicitly requested by the user. They may be used for reference or historical context.
+- Before doing any work in this repository, read and follow `_latest-es/AGENTS.md`. It is the authoritative instruction file for the active project.
+- Perform active development, commands, tests, and OpenSpec work inside `_latest-es/`.
+- Other top-level application directories are legacy code. Use them only as read-only references unless the user explicitly requests changes there.
