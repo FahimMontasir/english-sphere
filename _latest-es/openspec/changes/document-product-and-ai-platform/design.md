@@ -8,21 +8,21 @@ The active `_latest-es/` workspace is a modern TypeScript monorepo with Expo/Rea
 
 The non-shop legacy applications are feature references, not a single reliable implementation. The audit found:
 
-| Area | Evidence in legacy code | Migration interpretation |
-|---|---|---|
-| Identity | login/logout, token/session state, protected mobile/admin routes | Preserve behavior; replace legacy auth with Better Auth |
-| Profile | image, age, gender, country, skills/interests, FCM token | Preserve with privacy-sensitive optional fields |
-| Discovery | paginated search, filters, sorting, user detail, leaderboard | Preserve and complete privacy/abuse rules |
-| Reputation | votes and badges | Preserve only with transparent calculation and anti-abuse |
-| Chat | request, friend, conversation, presence/message UI and socket namespaces | Several routes/UI are disabled or mock data; treat as desired behavior, not complete code |
-| InstaTalk | instant partner UI and socket namespace | Preserve matching intent; redesign safety and fallback |
-| Calls | WebRTC controls and demo call screen | Rebuild against supported native real-time stack |
-| Live streams | host/participant UI and socket namespace | Preserve intent; enforce eligibility, moderation, and participant limits |
-| Materials | sections/cards/details plus dashboard material UI | Preserve educational content; several mobile lists are placeholders |
-| Notifications | push-token refresh, notification routing/logs, multicast/broadcast | Preserve with consent, delivery, and invalid-token hygiene |
-| Admin | login, users, materials, targeted messaging | Rebuild with RBAC and immutable audit events |
-| Localization | English and Bangla shell strings | Preserve shell localization; learning output remains English-focused |
-| Marketplace | root README claim and `rse-shop` links/code | Excluded in full |
+| Area          | Evidence in legacy code                                                  | Migration interpretation                                                                  |
+| ------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Identity      | login/logout, token/session state, protected mobile/admin routes         | Preserve behavior; replace legacy auth with Better Auth                                   |
+| Profile       | image, age, gender, country, skills/interests, FCM token                 | Preserve with privacy-sensitive optional fields                                           |
+| Discovery     | paginated search, filters, sorting, user detail, leaderboard             | Preserve and complete privacy/abuse rules                                                 |
+| Reputation    | votes and badges                                                         | Preserve only with transparent calculation and anti-abuse                                 |
+| Chat          | request, friend, conversation, presence/message UI and socket namespaces | Several routes/UI are disabled or mock data; treat as desired behavior, not complete code |
+| InstaTalk     | instant partner UI and socket namespace                                  | Preserve matching intent; redesign safety and fallback                                    |
+| Calls         | WebRTC controls and demo call screen                                     | Rebuild against supported native real-time stack                                          |
+| Live streams  | host/participant UI and socket namespace                                 | Preserve intent; enforce eligibility, moderation, and participant limits                  |
+| Materials     | sections/cards/details plus dashboard material UI                        | Preserve educational content; several mobile lists are placeholders                       |
+| Notifications | push-token refresh, notification routing/logs, multicast/broadcast       | Preserve with consent, delivery, and invalid-token hygiene                                |
+| Admin         | login, users, materials, targeted messaging                              | Rebuild with RBAC and immutable audit events                                              |
+| Localization  | English and Bangla shell strings                                         | Preserve shell localization; learning output remains English-focused                      |
+| Marketplace   | root README claim and `rse-shop` links/code                              | Excluded in full                                                                          |
 
 This distinction matters: “existing” means a product requirement discovered in code, README, route, or screen—not a claim that the current feature is production-ready.
 
@@ -93,12 +93,12 @@ Suggested domains are identity/profile, social graph, messaging, rooms, content,
 
 Do not define a device as simply “AI-capable.” Qualify independent capabilities:
 
-| Tier | Expected device | Default capabilities |
-|---|---|---|
-| A | low-memory/budget or constrained storage | VAD, platform TTS or small downloaded voice, deterministic exercises; server ASR/LLM only with consent |
-| B | typical recent mid-range | local VAD + English ASR + TTS; server conversation/feedback/RAG |
-| C | high-memory/high-performance | Tier B plus optional quantized local compact LLM and local embeddings |
-| Offline strict | any qualified device | only downloaded local capabilities; no practice payload leaves device |
+| Tier           | Expected device                          | Default capabilities                                                                                   |
+| -------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| A              | low-memory/budget or constrained storage | VAD, platform TTS or small downloaded voice, deterministic exercises; server ASR/LLM only with consent |
+| B              | typical recent mid-range                 | local VAD + English ASR + TTS; server conversation/feedback/RAG                                        |
+| C              | high-memory/high-performance             | Tier B plus optional quantized local compact LLM and local embeddings                                  |
+| Offline strict | any qualified device                     | only downloaded local capabilities; no practice payload leaves device                                  |
 
 Routing is per task and session. A learner can use local ASR with a server LLM, local TTS with server RAG, or fully local dictation. A signed model manifest controls availability by runtime, ABI, memory budget, and evaluation cohort. The app measures cold load, peak resident memory, tokens per second, speech real-time factor, battery drain, thermal throttling, and interruption behavior before expanding eligibility.
 
@@ -114,19 +114,19 @@ Alternatives considered:
 
 Candidate shortlists are deliberately replaceable:
 
-| Task | First candidate | Alternatives | Deployment decision |
-|---|---|---|---|
-| Endpoint/VAD | Silero VAD ONNX | native audio energy gate plus calibrated VAD | On device; tiny footprint and prevents unnecessary inference |
-| Mobile streaming ASR | compact English streaming Zipformer via sherpa-onnx | two-pass streaming recognizer + Whisper final pass | Prefer true streaming for live captions; validate accents/noise |
-| Mobile final ASR/dictation | Whisper `tiny.en` or `base.en` quantized | Moonshine Tiny/Base English | `tiny.en` is a strong compatibility baseline; Moonshine targets short-form edge speech and has an English Tiny artifact around 110 MB ([model card](https://huggingface.co/UsefulSensors/moonshine-tiny)) |
-| Mobile low-footprint TTS | Piper English ONNX voice | platform TTS | Piper medium English voices are roughly 63 MB each and MIT-licensed in the published voice repository ([voice artifact](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/hfc_male/medium/en_US-hfc_male-medium.onnx)); platform TTS is the zero-download fallback |
-| Higher-quality TTS | Kokoro-82M | server provider voice | Prefer server or qualified high-end local experiment; the model is 82M parameters and Apache-licensed, but artifact/runtime footprint is materially larger than Piper ([model card](https://huggingface.co/hexgrad/Kokoro-82M)) |
-| Mobile conversation LLM | SmolLM2-360M-Instruct for minimum tier; SmolLM2-1.7B-Instruct Q4 for high tier | LFM2-350M/700M, Gemma 3 1B, Qwen small variants | SmolLM2 primarily understands/generates English, has 135M/360M/1.7B sizes, Apache 2.0, and is explicitly positioned for on-device use ([official model card](https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct)); select only after real-device pedagogy bake-off |
-| Server conversation/feedback | SmolLM2-1.7B adapted baseline | SmolLM3-3B, Phi-4-mini (~3.8B), Qwen 3-class 4B | Keep default self-hosted candidates at or below roughly 4B; use a stronger fallback only if explicitly approved and costed |
-| English embeddings | BGE-small-en-v1.5 | all-MiniLM-L6-v2 | BGE is English, MIT, 384-dimensional and has ONNX availability; tune thresholds on project data because absolute cosine values are not probabilities ([model card](https://huggingface.co/BAAI/bge-small-en-v1.5)) |
-| English reranking | cross-encoder/ms-marco-MiniLM-L-6-v2 | BGE reranker base on server | Start with the smaller cross-encoder; graduate only if evaluation gain justifies latency |
-| Pronunciation evidence | English wav2vec2/CTC phoneme alignment plus GOP-like calibrated features | server forced aligner and pronunciation-specific model | Server first; never substitute ASR transcript confidence for phoneme accuracy |
-| Grammar/style | deterministic English rules plus structured small-LLM review | LanguageTool-compatible server rules, specialized classifiers | Rules supply explainability; LLM handles context and prioritization |
+| Task                         | First candidate                                                                | Alternatives                                                  | Deployment decision                                                                                                                                                                                                                                                             |
+| ---------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Endpoint/VAD                 | Silero VAD ONNX                                                                | native audio energy gate plus calibrated VAD                  | On device; tiny footprint and prevents unnecessary inference                                                                                                                                                                                                                    |
+| Mobile streaming ASR         | compact English streaming Zipformer via sherpa-onnx                            | two-pass streaming recognizer + Whisper final pass            | Prefer true streaming for live captions; validate accents/noise                                                                                                                                                                                                                 |
+| Mobile final ASR/dictation   | Whisper `tiny.en` or `base.en` quantized                                       | Moonshine Tiny/Base English                                   | `tiny.en` is a strong compatibility baseline; Moonshine targets short-form edge speech and has an English Tiny artifact around 110 MB ([model card](https://huggingface.co/UsefulSensors/moonshine-tiny))                                                                       |
+| Mobile low-footprint TTS     | Piper English ONNX voice                                                       | platform TTS                                                  | Piper medium English voices are roughly 63 MB each and MIT-licensed in the published voice repository ([voice artifact](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/hfc_male/medium/en_US-hfc_male-medium.onnx)); platform TTS is the zero-download fallback |
+| Higher-quality TTS           | Kokoro-82M                                                                     | server provider voice                                         | Prefer server or qualified high-end local experiment; the model is 82M parameters and Apache-licensed, but artifact/runtime footprint is materially larger than Piper ([model card](https://huggingface.co/hexgrad/Kokoro-82M))                                                 |
+| Mobile conversation LLM      | SmolLM2-360M-Instruct for minimum tier; SmolLM2-1.7B-Instruct Q4 for high tier | LFM2-350M/700M, Gemma 3 1B, Qwen small variants               | SmolLM2 primarily understands/generates English, has 135M/360M/1.7B sizes, Apache 2.0, and is explicitly positioned for on-device use ([official model card](https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct)); select only after real-device pedagogy bake-off      |
+| Server conversation/feedback | SmolLM2-1.7B adapted baseline                                                  | SmolLM3-3B, Phi-4-mini (~3.8B), Qwen 3-class 4B               | Keep default self-hosted candidates at or below roughly 4B; use a stronger fallback only if explicitly approved and costed                                                                                                                                                      |
+| English embeddings           | BGE-small-en-v1.5                                                              | all-MiniLM-L6-v2                                              | BGE is English, MIT, 384-dimensional and has ONNX availability; tune thresholds on project data because absolute cosine values are not probabilities ([model card](https://huggingface.co/BAAI/bge-small-en-v1.5))                                                              |
+| English reranking            | cross-encoder/ms-marco-MiniLM-L-6-v2                                           | BGE reranker base on server                                   | Start with the smaller cross-encoder; graduate only if evaluation gain justifies latency                                                                                                                                                                                        |
+| Pronunciation evidence       | English wav2vec2/CTC phoneme alignment plus GOP-like calibrated features       | server forced aligner and pronunciation-specific model        | Server first; never substitute ASR transcript confidence for phoneme accuracy                                                                                                                                                                                                   |
+| Grammar/style                | deterministic English rules plus structured small-LLM review                   | LanguageTool-compatible server rules, specialized classifiers | Rules supply explainability; LLM handles context and prioritization                                                                                                                                                                                                             |
 
 Approximate quantized LLM files can range from hundreds of MB for ~350M models to roughly 1 GB or more for ~1.7B models; runtime memory also includes context/KV cache and native overhead. Exact budgets must come from produced artifacts and target-device measurements, not parameter count alone.
 

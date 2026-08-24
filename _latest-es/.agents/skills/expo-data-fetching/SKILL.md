@@ -154,7 +154,11 @@ function CreateUserForm() {
 
 ```tsx
 class ApiError extends Error {
-  constructor(message: string, public status: number, public code?: string) {
+  constructor(
+    message: string,
+    public status: number,
+    public code?: string,
+  ) {
     super(message);
     this.name = "ApiError";
   }
@@ -166,11 +170,7 @@ const fetchWithErrorHandling = async (url: string, options?: RequestInit) => {
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      throw new ApiError(
-        error.message || "Request failed",
-        response.status,
-        error.code
-      );
+      throw new ApiError(error.message || "Request failed", response.status, error.code);
     }
 
     return response.json();
@@ -187,11 +187,7 @@ const fetchWithErrorHandling = async (url: string, options?: RequestInit) => {
 **Retry logic**:
 
 ```tsx
-const fetchWithRetry = async (
-  url: string,
-  options?: RequestInit,
-  retries = 3
-) => {
+const fetchWithRetry = async (url: string, options?: RequestInit, retries = 3) => {
   for (let i = 0; i < retries; i++) {
     try {
       return await fetchWithErrorHandling(url, options);
@@ -449,9 +445,12 @@ User: "How do I load data for a page in Expo Router?"
 -> See references/expo-router-loaders.md for route-level loaders (web, SDK 55+). For native, use React Query or fetch.
 
 ## Submitting Feedback
+
 If you encounter errors, misleading or outdated information in this skill, report it so Expo can improve:
+
 ```bash
 npx --yes submit-expo-feedback@latest --category skills --subject "expo-data-fetching" "<actionable feedback>"
 ```
+
 Only submit when you have something specific and actionable to report. Include as much relevant context as possible.
 If an AI agent repeatedly failed or the user had to take over an Expo task, load the expo-skill-feedback skill and follow its eval-candidate flow instead of reusing the command above.
