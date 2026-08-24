@@ -70,6 +70,9 @@ tests. `packages/_ui` owns shared Expo UI and React Native presentation primitiv
 - Docs: [Vite+ commit hooks](https://viteplus.dev/guide/commit-hooks)
 - Run checks: `bun run check`
 
+The pre-commit gate runs every required check concurrently where safe and shares one Docker,
+database, API, and Expo web lifecycle between integration and Maestro tests.
+
 ## Project Structure
 
 ```
@@ -95,12 +98,13 @@ _latest-es/
 - `bun run dev:server`: Start only the server
 - `bun run check-types`: Check TypeScript types across all apps
 - `bun run dev:native`: Start the React Native/Expo development server
+- `bun run --cwd apps/native dev:clear`: Start Expo after explicitly clearing Metro's cache
 - `bun run db:push`: Push schema changes to database
 - `bun run db:generate`: Generate database client/types
 - `bun run db:migrate`: Run database migrations
 - `bun run db:studio`: Open database studio UI
-- `bun run check`: Fix formatting/lint, check workspace types, then run the complete pre-commit test gate
-- `bun run test`: Run unit, integration, and Maestro web tests
+- `bun run check`: Fix formatting/lint, then concurrently run types and the complete test gate
+- `bun run test`: Run unit, integration, and Maestro web tests through one shared runtime
 - `bun run test:unit`: Run every package test under `__tests__/unit`
 - `bun run test:integration`: Start the API and native server, then run every package integration test
 - `bun run test:e2e:web`: Start dependencies and run the shared Maestro scenario in Chromium

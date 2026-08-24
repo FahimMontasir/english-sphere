@@ -1,13 +1,19 @@
 import { dirname } from "node:path";
 
-type TestMode = "android" | "integration" | "web";
+type TestMode = "android" | "check" | "integration" | "test" | "web";
 
 const workspace = dirname(import.meta.dir);
 const mode = Bun.argv[2] as TestMode | undefined;
 const children = new Set<Bun.Subprocess>();
 
-if (mode !== "android" && mode !== "integration" && mode !== "web") {
-  throw new Error("Expected a test mode: integration, web, or android");
+if (
+  mode !== "android" &&
+  mode !== "check" &&
+  mode !== "integration" &&
+  mode !== "test" &&
+  mode !== "web"
+) {
+  throw new Error("Expected a test mode: check, test, integration, web, or android");
 }
 
 function start(command: string[], cwd = workspace, environment: Record<string, string> = {}) {
@@ -81,6 +87,49 @@ function maestroE2EArguments() {
   return ["-e", `E2E_EMAIL=${email}`, "-e", `E2E_PASSWORD=${password}`];
 }
 
+async function prepareInfrastructure() {
+  await run(["bun", "run", "dkr:start"]);
+  await run(["bun", "run", "db:push"]);
+}
+
+async function prepareApi() {
+  await prepareInfrastructure();
+  await ensureService("http://localhost:3000/health", "API server", ["bun", "run", "dev:server"]);
+}
+
+async function runIntegrationSuite() {
+  await prepareApi();
+  await ensureService("http://localhost:8081/status", "Expo native server", [
+    "bun",
+    "run",
+    "--cwd",
+    "apps/native",
+    "start",
+  ]);
+  await run(["bun", "run", "test:integration:run"]);
+}
+
+async function runWebSuite() {
+  await prepareApi();
+  await ensureService("http://localhost:8081/materials", "Expo web app", [
+    "bun",
+    "run",
+    "--cwd",
+    "apps/native",
+    "web",
+  ]);
+  await Promise.all([
+    run(["bun", "run", "test:integration:run"]),
+    run(["maestro", "test", "--headless", "apps/native/.maestro/web.yaml"]),
+  ]);
+}
+
+async function runCombinedSuite(includeTypeChecks: boolean) {
+  const localChecks = [run(["bun", "run", "test:unit"]), runWebSuite()];
+  if (includeTypeChecks) localChecks.push(run(["bun", "run", "check-types"]));
+  await Promise.all(localChecks);
+}
+
 function cleanup() {
   for (const child of children) {
     if (child.exitCode === null) child.kill();
@@ -97,29 +146,28 @@ process.on("SIGTERM", () => {
 });
 
 try {
-  await ensureService("http://localhost:3000/health", "API server", ["bun", "run", "dev:server"]);
+  if (mode === "check" || mode === "test") {
+    await runCombinedSuite(mode === "check");
+  }
 
   if (mode === "integration") {
-    await ensureService("http://localhost:8081/status", "Expo native server", [
-      "bun",
-      "run",
-      "dev:native",
-    ]);
-    await run(["bun", "run", "test:integration:run"]);
+    await runIntegrationSuite();
   }
 
   if (mode === "web") {
+    await prepareApi();
     await ensureService("http://localhost:8081/materials", "Expo web app", [
       "bun",
       "run",
-      "dev:native",
-      "--",
-      "--web",
+      "--cwd",
+      "apps/native",
+      "web",
     ]);
     await run(["maestro", "test", "--headless", "apps/native/.maestro/web.yaml"]);
   }
 
   if (mode === "android") {
+    await prepareApi();
     await run(["maestro", "start-device", "--platform", "android"]);
     await run(["adb", "reverse", "tcp:3000", "tcp:3000"]);
     const native = start(["bun", "run", "--cwd", "apps/native", "android"]);
