@@ -1,11 +1,23 @@
 import { treaty } from "@elysiajs/eden";
+import { Platform } from "react-native";
 
+import { authClient } from "@_latest-es/auth/native/client";
 import { SERVER_URL } from "@_latest-es/env/native";
 
 import type { LearningContentApi } from "../../server/controllers/routes";
 import type { LearningMaterial, MaterialCollection } from "../types";
 
-const learningContentApi = treaty<LearningContentApi>(`${SERVER_URL}/api/v1`);
+const learningContentApi = treaty<LearningContentApi>(`${SERVER_URL}/api/v1`, {
+  fetch: {
+    credentials: Platform.OS === "web" ? "include" : "omit",
+  },
+  headers: () => {
+    if (Platform.OS === "web") return {};
+
+    const cookie = authClient.getCookie();
+    return cookie ? { cookie } : {};
+  },
+});
 
 function requireData<T>(result: { data: T | null; error: unknown }, message: string): T {
   if (result.error || result.data === null) {

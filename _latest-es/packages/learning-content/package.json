@@ -15,6 +15,7 @@
     "test:unit": "bun test __tests__/unit"
   },
   "dependencies": {
+    "@_latest-es/auth": "workspace:*",
     "@_latest-es/env": "workspace:*",
     "@_latest-es/ui": "workspace:*",
     "@elysiajs/eden": "catalog:",

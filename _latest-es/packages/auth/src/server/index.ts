@@ -1,6 +1,7 @@
 import { expo } from "@better-auth/expo";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { openAPI } from "better-auth/plugins";
 
 import { createDb } from "@_latest-es/db";
 import * as schema from "@_latest-es/db/schema/auth";
@@ -21,15 +22,20 @@ export function createAuth() {
     },
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
-    advanced: {
-      defaultCookieAttributes: {
-        sameSite: "none",
-        secure: true,
-        httpOnly: true,
-      },
-    },
-    plugins: [expo()],
+    advanced:
+      env.NODE_ENV === "production"
+        ? {
+            defaultCookieAttributes: {
+              sameSite: "none",
+              secure: true,
+              httpOnly: true,
+            },
+          }
+        : undefined,
+    plugins: [expo(), openAPI()],
   });
 }
 
 export const auth = createAuth();
+
+export const authHandler = (request: Request) => auth.handler(request);

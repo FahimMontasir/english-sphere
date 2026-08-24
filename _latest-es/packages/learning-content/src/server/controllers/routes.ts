@@ -1,15 +1,20 @@
-import { Elysia } from "elysia";
+import { secureAPI } from "@_latest-es/auth/server/secure-api";
 
 import { ENDPOINTS_PATH } from "../helpers/path";
 import { findPublishedMaterial, listPublishedMaterials } from "../services/materials";
 import { LearningContentSchema } from "../validators";
 
-export const LearningContentRoutes = new Elysia({
+export const LearningContentRoutes = secureAPI({
   name: "LearningContent",
   prefix: ENDPOINTS_PATH.prefix,
 })
   .get(ENDPOINTS_PATH.materials, () => ({ data: listPublishedMaterials() }), {
-    detail: { tags: ["Learning content"], summary: "List published learning materials" },
+    detail: {
+      tags: ["Learning content"],
+      summary: "List published learning materials",
+      security: [{ cookieAuth: [] }],
+    },
+    authorize: true,
     response: LearningContentSchema.MaterialsResponse,
   })
   .get(
@@ -24,7 +29,12 @@ export const LearningContentRoutes = new Elysia({
       return { data: material };
     },
     {
-      detail: { tags: ["Learning content"], summary: "Get a published learning material" },
+      detail: {
+        tags: ["Learning content"],
+        summary: "Get a published learning material",
+        security: [{ cookieAuth: [] }],
+      },
+      authorize: true,
       params: LearningContentSchema.MaterialId,
       response: {
         200: LearningContentSchema.MaterialResponse,

@@ -10,7 +10,9 @@ This project is a modern TypeScript stack that combines React Native, Expo, Elys
 - **Elysia** - Type-safe, high-performance framework
 - **Bun** - Runtime environment
 - **Drizzle** - TypeScript-first ORM
-- **PostgreSQL** - Database engine
+- **PostgreSQL + pgvector** - Transactional data and the vector foundation for RAG
+- **Redis** - Password-protected cache/queue infrastructure
+- **Garage** - Private S3-compatible storage with a local administration panel
 - **Authentication** - Better-Auth
 - **Modular backend** - Thin Elysia composition with PMH-style feature packages
 - **Typed native API** - Eden Treaty contracts with TanStack Query server-state management
@@ -25,28 +27,33 @@ First, install the dependencies:
 bun install
 ```
 
-## Database Setup
+## Local Development
 
-This project uses PostgreSQL with Drizzle ORM.
-
-1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/server/.env` file with your PostgreSQL connection details.
-
-3. Apply the schema to your database:
-
-```bash
-bun run db:push
-```
-
-Then, run the development server:
+Copy `apps/server/.env.example` to `apps/server/.env`, then run:
 
 ```bash
 bun run dev
 ```
 
+The command waits for PostgreSQL/pgvector, Redis, Garage, and Garage WebUI, applies the Drizzle
+schema, then starts the API, Expo, and Drizzle Studio in parallel. Local defaults avoid common port
+collisions: PostgreSQL `5433`, Redis `6380`, Garage S3/admin APIs `3900`-`3903`, and Garage WebUI
+`3909`.
+
 Use an Expo development build for native development. Expo Go is not the target runtime because the
 planned on-device AI adapters require native modules.
-The API is running at [http://localhost:3000](http://localhost:3000).
+
+Developer endpoints:
+
+- API: [http://localhost:3000](http://localhost:3000)
+- API reference: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+- Better Auth reference: [http://localhost:3000/api/auth/reference](http://localhost:3000/api/auth/reference)
+- Drizzle Studio: [https://local.drizzle.studio](https://local.drizzle.studio)
+- Storage administration: [http://localhost:3909](http://localhost:3909)
+
+All `/api/v1` domain routes require a Better Auth session. Development and tests idempotently create
+the local `BOOTSTRAP_USER_*` learner; bootstrap creation and the Maestro sign-in helper are disabled
+in production.
 
 Native public configuration uses `EXPO_PUBLIC_*` values from `apps/native/.env`. Bun loads server
 configuration from `apps/server/.env` automatically. Never place secrets in `EXPO_PUBLIC_*` values.
@@ -94,7 +101,10 @@ _latest-es/
 - `bun run db:studio`: Open database studio UI
 - `bun run check`: Run Vite+ format/lint checks and workspace TypeScript checks
 - `bun run test`: Run Bun unit and HTTP route tests
-- `bun run test:e2e`: Run the Maestro web smoke flow against Expo web and the API
+- `bun run test:routes`: Start infrastructure, apply the schema, and run authenticated route tests
+- `bun run test:e2e`: Start dependencies and run authenticated Maestro web flows
+- `bun run test:all`: Run unit, authenticated route, and Maestro web suites
+- `bun run dkr:start` / `dkr:stop` / `dkr:down`: Manage the complete local service stack
 - `bun run test:e2e:native`: Run the retained native Maestro flow against an installed build
 - `bun run lint`: Run Vite+ lint checks
 - `bun run format`: Run Vite+ formatting

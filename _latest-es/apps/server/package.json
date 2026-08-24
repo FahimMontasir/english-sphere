@@ -8,14 +8,18 @@
     "build": "vp pack",
     "check-types": "tsc -b",
     "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
-    "dev": "bun run --hot src/index.ts",
-    "start": "bun run dist/index.mjs"
+    "dev": "bun --env-file=.env run --hot src/index.ts",
+    "start": "bun --env-file=.env run dist/index.mjs",
+    "dkr:start": "docker compose --env-file .env up -d --wait",
+    "dkr:stop": "docker compose --env-file .env stop",
+    "dkr:down": "docker compose --env-file .env down"
   },
   "dependencies": {
     "@_latest-es/auth": "workspace:*",
     "@_latest-es/env": "workspace:*",
     "@_latest-es/learning-content": "workspace:*",
     "@_latest-es/shared": "workspace:*",
+    "@elysia/openapi": "^1.4.15",
     "@elysiajs/cors": "^1.4.2",
     "elysia": "^1.4.29"
   },

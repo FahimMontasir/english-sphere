@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import { AuthGate } from "@_latest-es/auth/native/auth-gate";
 import { QueryProvider } from "@_latest-es/shared/native/query-provider";
 import { NAV_THEME } from "@_latest-es/ui/native/theme";
 import { useColorScheme } from "@_latest-es/ui/native/use-color-scheme";
@@ -36,14 +37,16 @@ export default function RootLayout() {
         <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
           <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
           <GestureHandlerRootView style={styles.container}>
-            <Stack>
-              <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-              <Stack.Screen
-                name="materials/[materialId]"
-                options={{ title: "Learning material" }}
-              />
-              <Stack.Screen name="modal" options={{ title: "Modal", presentation: "modal" }} />
-            </Stack>
+            <AuthGate>
+              <Stack>
+                <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="materials/[materialId]"
+                  options={{ title: "Learning material" }}
+                />
+                <Stack.Screen name="modal" options={{ title: "Modal", presentation: "modal" }} />
+              </Stack>
+            </AuthGate>
           </GestureHandlerRootView>
         </ThemeProvider>
       </QueryProvider>

@@ -1,13 +1,31 @@
-import { describe, expect, test } from "bun:test";
+import { beforeAll, describe, expect, test } from "bun:test";
 import { treaty } from "@elysiajs/eden";
 import { Elysia } from "elysia";
 
+import { getBootstrapUserSession } from "@_latest-es/auth/server/bootstrap-user";
 import { LearningContentRoutes } from "../../src/server/controllers/routes";
 
-const api = treaty(new Elysia({ prefix: "/api/v1" }).use(LearningContentRoutes));
+const routes = new Elysia({ prefix: "/api/v1" }).use(LearningContentRoutes);
+const publicApi = treaty(routes);
+let api: ReturnType<typeof treaty<typeof routes>>;
+
+beforeAll(async () => {
+  const { headers } = await getBootstrapUserSession();
+  api = treaty(routes, { headers });
+});
 
 describe("learning content controller routes", () => {
-  test("returns important and recent materials through the public route", async () => {
+  test("rejects an unauthenticated request", async () => {
+    const result = await publicApi.api.v1["learning-content"].materials.get();
+
+    expect(result.status).toBe(401);
+    expect(result.error?.value).toEqual({
+      code: "UNAUTHORIZED",
+      message: "Authentication is required",
+    });
+  });
+
+  test("returns important and recent materials through an authenticated route", async () => {
     const { data, error, status } = await api.api.v1["learning-content"].materials.get();
 
     expect(status).toBe(200);

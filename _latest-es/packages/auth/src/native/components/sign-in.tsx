@@ -109,6 +109,7 @@ function SignIn() {
               <form.Field name="email">
                 {(field) => (
                   <TextInput
+                    testID="sign-in-email"
                     style={[
                       styles.input,
                       {
@@ -136,6 +137,7 @@ function SignIn() {
               <form.Field name="password">
                 {(field) => (
                   <TextInput
+                    testID="sign-in-password"
                     style={[
                       styles.input,
                       {
@@ -161,6 +163,7 @@ function SignIn() {
               </form.Field>
 
               <TouchableOpacity
+                testID="sign-in-submit"
                 onPress={form.handleSubmit}
                 disabled={isSubmitting}
                 style={[

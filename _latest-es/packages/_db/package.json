@@ -12,15 +12,12 @@
     }
   },
   "scripts": {
+    "dev": "bun --bun --env-file=../../apps/server/.env drizzle-kit studio --config=drizzle.config.ts --host=0.0.0.0 --port=4983",
     "db:push": "bun --bun --env-file=../../apps/server/.env drizzle-kit push --config=drizzle.config.ts",
     "db:generate": "bun --bun --env-file=../../apps/server/.env drizzle-kit generate --config=drizzle.config.ts",
     "db:migrate:deploy": "bun --bun --env-file=../../apps/server/.env drizzle-kit migrate --config=drizzle.config.ts",
     "db:studio": "bun --bun --env-file=../../apps/server/.env drizzle-kit studio --config=drizzle.config.ts",
-    "db:migrate": "bun --bun --env-file=../../apps/server/.env drizzle-kit migrate --config=drizzle.config.ts",
-    "db:start": "docker compose up -d",
-    "db:watch": "docker compose up",
-    "db:stop": "docker compose stop",
-    "db:down": "docker compose down"
+    "db:migrate": "bun --bun --env-file=../../apps/server/.env drizzle-kit migrate --config=drizzle.config.ts"
   },
   "dependencies": {
     "@_latest-es/env": "workspace:*",
