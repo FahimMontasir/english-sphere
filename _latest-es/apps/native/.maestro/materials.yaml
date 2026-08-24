@@ -1,0 +1,16 @@
+appId: com.englishsphere.mobile
+name: Learning materials smoke test
+tags:
+  - smoke
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: "materials-tab"
+- assertVisible: "Basic English for Speaking"
+- assertVisible: "Important Materials"
+- tapOn:
+    id: "material-card-basic-speaking-starters"
+- assertVisible:
+    id: "material-detail"
+- assertVisible: "Start short everyday conversations with practical greetings and responses."

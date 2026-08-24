@@ -1,0 +1,11 @@
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import type { ComponentProps } from "react";
+
+type FontAwesomeProps = ComponentProps<typeof FontAwesome>;
+
+export const TabBarIcon = (props: {
+  name: FontAwesomeProps["name"];
+  color: FontAwesomeProps["color"];
+}) => {
+  return <FontAwesome size={24} style={{ marginBottom: -3 }} {...props} />;
+};

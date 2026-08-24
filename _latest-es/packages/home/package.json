@@ -1,0 +1,25 @@
+{
+  "name": "@_latest-es/home",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./native/home-screen": "./src/native/screens/home-screen.tsx"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@_latest-es/ui": "workspace:*",
+    "@expo/ui": "~57.0.12"
+  },
+  "devDependencies": {
+    "@_latest-es/config": "workspace:*",
+    "@types/react": "~19.2.18",
+    "typescript": "~6.0.3"
+  },
+  "peerDependencies": {
+    "react": "19.2.3",
+    "react-native": "0.86.2"
+  }
+}

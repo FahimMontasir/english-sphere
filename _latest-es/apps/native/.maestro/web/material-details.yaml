@@ -1,0 +1,12 @@
+url: http://localhost:8081/materials/basic-speaking-starters
+name: Learning material web details
+tags:
+  - smoke
+  - web
+---
+- launchApp:
+    clearState: true
+- assertVisible:
+    id: "material-detail"
+- assertVisible: "Basic English for Speaking"
+- assertVisible: "Start short everyday conversations with practical greetings and responses."

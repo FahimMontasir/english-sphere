@@ -75,6 +75,13 @@ Primary product metrics are successful spoken minutes per weekly active learner,
 
 The product API remains an Elysia modular monolith in `_latest-es/apps/server`, backed by shared domain packages and PostgreSQL. CPU/GPU-heavy ingestion, speech, embedding, reranking, and LLM inference run behind queue-backed worker or inference interfaces. This keeps transactions and authorization simple while allowing AI workloads to scale independently.
 
+Domain packages are vertical slices: a domain that has both API and mobile behavior owns them together
+under `src/server` and `src/native`, including its contracts, Eden/TanStack Query client, native
+screens/components, helpers, and tests. `apps/server` and `apps/native/src/app` are composition roots,
+not feature containers. Shared Expo/React Native presentation primitives live in `packages/_ui`, and
+cross-domain runtime infrastructure lives in the appropriate underscored infrastructure package.
+This keeps one domain cohesive without coupling unrelated domains through an application folder.
+
 Alternatives considered:
 
 - Immediate microservices: rejected for the first release because the operational and identity complexity exceeds current product scale.

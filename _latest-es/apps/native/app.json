@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "_latest-es",
-    "slug": "_latest-es",
+    "name": "English Sphere",
+    "slug": "english-sphere",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "_latest-es",
+    "scheme": "english-sphere",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.-latest-es"
+      "bundleIdentifier": "com.englishsphere.mobile"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +19,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.x_latestes"
+      "package": "com.englishsphere.mobile"
     },
     "web": {
       "output": "static",

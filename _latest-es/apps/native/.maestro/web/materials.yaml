@@ -1,0 +1,13 @@
+url: http://localhost:8081/materials
+name: Learning materials web catalog
+tags:
+  - smoke
+  - web
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Basic English for Speaking"
+- assertVisible: "Important Materials"
+- assertVisible: "Recent Materials"
+- assertVisible:
+    id: "material-card-basic-speaking-starters"

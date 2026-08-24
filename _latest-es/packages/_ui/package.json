@@ -1,0 +1,33 @@
+{
+  "name": "@_latest-es/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./native/container": "./src/native/components/container.tsx",
+    "./native/header-button": "./src/native/components/header-button.tsx",
+    "./native/modal-screen": "./src/native/screens/modal-screen.tsx",
+    "./native/not-found-screen": "./src/native/screens/not-found-screen.tsx",
+    "./native/tabbar-icon": "./src/native/components/tabbar-icon.tsx",
+    "./native/theme": "./src/native/theme.ts",
+    "./native/use-color-scheme": "./src/native/use-color-scheme.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@expo/ui": "~57.0.12",
+    "@expo/vector-icons": "^15.1.1",
+    "expo-router": "~57.0.15",
+    "react-native-safe-area-context": "~5.7.0"
+  },
+  "devDependencies": {
+    "@_latest-es/config": "workspace:*",
+    "@types/react": "~19.2.18",
+    "typescript": "~6.0.3"
+  },
+  "peerDependencies": {
+    "react": "19.2.3",
+    "react-native": "0.86.2"
+  }
+}

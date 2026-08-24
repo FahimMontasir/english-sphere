@@ -1,0 +1,19 @@
+{
+  "name": "@_latest-es/env",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./native": "./src/native.ts",
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "test:unit": "bun test __tests__/unit"
+  },
+  "devDependencies": {
+    "@_latest-es/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "typescript": "^6.0.3"
+  }
+}

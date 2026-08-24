@@ -1,0 +1,30 @@
+{
+  "name": "@_latest-es/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./common/*": "./src/common/*.ts",
+    "./native/query-client": "./src/native/query-client.ts",
+    "./native/query-provider": "./src/native/query-provider.tsx",
+    "./server/*": "./src/server/*.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "test:unit": "bun test __tests__/unit"
+  },
+  "dependencies": {
+    "@react-native-community/netinfo": "catalog:",
+    "@tanstack/react-query": "catalog:"
+  },
+  "devDependencies": {
+    "@_latest-es/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "@types/react": "~19.2.18",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "react": "19.2.3",
+    "react-native": "0.86.2"
+  }
+}

@@ -11,7 +11,7 @@ export default defineConfig({
       "apps/native/ios/**",
       "apps/native/android/**",
       "apps/server/dist/**",
-      "packages/db/dist/**",
+      "packages/_db/dist/**",
     ],
     options: {
       typeAware: false,
@@ -28,7 +28,7 @@ export default defineConfig({
       "apps/native/ios/**",
       "apps/native/android/**",
       "apps/server/dist/**",
-      "packages/db/dist/**",
+      "packages/_db/dist/**",
     ],
     singleQuote: false,
     semi: true,
